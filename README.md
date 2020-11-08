@@ -22,3 +22,10 @@ then create symlinks for the different dotfiles :
 
 ## bash/
 Contains bashrc and bash_profile
+
+## tmux/
+tmux config file
+
+## vim/
+contains vimrc
+
