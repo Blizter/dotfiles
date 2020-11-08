@@ -1,0 +1,8 @@
+#! /bin/bash
+
+alias bashconfig="vim ~/.bashrc"
+alias ohmybash="vim ~/.oh-my-bash"
+alias sudapt="sudo apt "
+alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
+alias reload="source ~/.bashrc"
+alias mkd="mkdir -pv"
