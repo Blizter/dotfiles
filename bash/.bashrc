@@ -91,7 +91,14 @@ source $OSH/oh-my-bash.sh
 # For a full list of active aliases, run `alias`.
 #
 # Aliases
-source $SPLIT_FILES/aliases
+
+alias bashconfig="vim ~/.bashrc"
+alias ohmybash="vim ~/.oh-my-bash"
+alias sa="sudo apt"
+alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
+alias reload="source ~/.bashrc"
+alias mkd="mkdir -pv"
+
 #autocd
 shopt -s autocd
 

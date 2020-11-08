@@ -10,6 +10,7 @@ First, install the following packages/libraries :
   -  (oh-my-bash)[https://github.com/ohmybash/oh-my-bash]
 
 then create symlinks for the different dotfiles :
+
 ```bash
 
     ln -sv ~/Projects/dotfiles/bash/.bash_profile ~
