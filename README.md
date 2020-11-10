@@ -7,10 +7,9 @@ set of dotfiles to configure my environments
 First, install the following packages/libraries : 
   -  tmux
   -  vim
-  -  [oh-my-bash)(https://github.com/ohmybash/oh-my-bash)
+  -  [oh-my-bash](https://github.com/ohmybash/oh-my-bash)
 
 then create symlinks for the different dotfiles :
-
 ```bash
 
     ln -sv ~/Projects/dotfiles/bash/.bash_profile ~
@@ -20,12 +19,12 @@ then create symlinks for the different dotfiles :
 
 ```
 
-## bash/
+## Bash
 Contains bashrc and `bash_profile`
 
 ## tmux/
 tmux config file
 
 ## vim/
-contains vimrc
+contains vimrc and a script to install plugins using vim8+ native plugin flow
 
