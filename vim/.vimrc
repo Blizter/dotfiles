@@ -118,10 +118,10 @@ set mouse=a
 set showmatch
 
 " Enable line wrapping
-set wrap
+"set wrap
 
 " Wrap on column 80
-set textwidth=79
+"set textwidth=79
 
 " Disable preview window on completion
 set completeopt=longest,menuone
