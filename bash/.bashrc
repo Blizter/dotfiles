@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # Path to your oh-my-bash installation.
 export OSH=/home/eric/.dotfiles/oh-my-bash
 
@@ -98,6 +100,8 @@ alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ~/.bashrc"
 alias mkd="mkdir -pv"
+alias vim_plUgins_update="ls ~/.vim/pack/plugins/start | xargs -I{} git pull {}"
+
 
 #autocd
 shopt -s autocd
