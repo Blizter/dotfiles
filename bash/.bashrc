@@ -102,7 +102,6 @@ alias reload="source ~/.bashrc"
 alias mkd="mkdir -pv"
 alias vim_plugins_update="ls ~/.vim/pack/plugins/start | xargs -I{} git pull {}"
 
-
 #autocd
 shopt -s autocd
 
