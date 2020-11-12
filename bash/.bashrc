@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Path to your oh-my-bash installation.
-export OSH=/home/eric/.dotfiles/oh-my-bash
+export OSH=~/.dotfiles/oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -100,7 +100,7 @@ alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ~/.bashrc"
 alias mkd="mkdir -pv"
-alias vim_plUgins_update="ls ~/.vim/pack/plugins/start | xargs -I{} git pull {}"
+alias vim_plugins_update="ls ~/.vim/pack/plugins/start | xargs -I{} git pull {}"
 
 
 #autocd
@@ -108,6 +108,9 @@ shopt -s autocd
 
 #autojump
 . /usr/share/autojump/autojump.sh
+
+# local bin path
+export PATH=$PATH:~/.local/bin
 
 # go environment variables
 export PATH=$PATH:/usr/local/go/bin
