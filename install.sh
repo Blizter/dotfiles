@@ -7,7 +7,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 sudo apt install curl wget git vim tmux autojump fonts-powerline
 
 ## install python tools
-sudo apt install python3-dev python-pip
+sudo apt install python3-dev python3-pip
 pip3 install bpytop
 
 # installing vim plugins
