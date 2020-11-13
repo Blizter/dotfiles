@@ -16,9 +16,13 @@
 "  https://github.com/Chewie/configs
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
+" General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins loading
 packloadall
+
+" Welcome to the future
+set nocompatible
 
 " Enable filetype detection for plugins and indentation options
 filetype plugin indent on
@@ -53,7 +57,6 @@ set term=xterm-256color
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " User interface
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
 " Make backspace behave as expected
 set backspace=eol,indent,start
 
@@ -72,17 +75,6 @@ set number relativenumber
 
 " Always show status line
 set laststatus=2
-
-" Set up vim-arline and vim-airline-theme
-let g:airline_theme='luna'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'default'
-
-" Format the status line
-" This status line comes from Pierre Bourdon's vimrc
-"set statusline=%f\ %l\|%c\ %m%=%p%%\ (%Y%R)
 
 " Enhance command line completion
 set wildmenu
@@ -105,33 +97,64 @@ set listchars=tab:>─,eol:¬,trail:\ ,nbsp:¤
 
 set fillchars=vert:│
 
-" Enables syntax highlighting
+" Enables syntax highlighting in the editor and netrw
 syntax on
+syntax enable
 
 " Enable Doxygen highlighting
 let g:load_doxygen_syntax=1
 
-" Allow mouse use in vim
-set mouse=a
-
 " Briefly show matching braces, parens, etc
 set showmatch
-
-" Enable line wrapping
-set wrap
-
-" Wrap on column 80
-set textwidth=79
 
 " Disable preview window on completion
 set completeopt=longest,menuone
 
-" Highlight current line
-set cursorline
+" color theme Palette for text editor
+colors deus
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" Set up vim-arline and vim-airline-theme
+let g:airline_theme='deus'
+let g:airline#extensions#tabline#enabled = 1
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Search options
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" allows search into subfolders
+set path+=**
 
 " Ignore case on search
 set ignorecase
@@ -145,7 +168,6 @@ set incsearch
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Indentation options
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
 " The length of a tab
 " This is for documentation purposes only,
 " do not change the default value of 8, ever.
