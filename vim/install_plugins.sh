@@ -8,4 +8,5 @@ mkdir -p ~/.vim/{colors,pack/plugins/start}
 git clone --depth=1 git@github.com:vim-airline/vim-airline.git ~/.vim/pack/plugins/start/airline
 git clone --depth=1 git@github.com:vim-airline/vim-airline-themes.git ~/.vim/pack/plugins/start/airline-themes
 git clone --depth=1 git@github.com:ajmwagar/vim-deus.git ~/.vim/pack/plugins/start/vim-deus
+git clone --depth=1 git@github.com:sheerun/vim-polyglot.git ~/.vim/pack/plugins/start/vim-polyglot
 
