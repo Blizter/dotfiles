@@ -86,10 +86,9 @@ set wildmode=longest:full,list:full
 set visualbell
 set t_vb=
 
-" Color the column after textwidth, usually the 80th
-if version >= 703
-  set colorcolumn=+1
-endif
+" highlight characters after 80th
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
 " Display whitespace characters
 set list
