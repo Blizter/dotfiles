@@ -88,8 +88,7 @@ set t_vb=
 
 " Display whitespace characters
 set list
-set listchars=tab:>─,eol:¬,trail:\ ,nbsp:¤
-
+set listchars=tab:>─,eol:¬,trail:·,nbsp:¤,space:·,precedes:«,extends:»
 set fillchars=vert:│
 
 " Enables syntax highlighting in the editor and netrw
@@ -111,6 +110,10 @@ colors deus
 " Highlight characters after 80th column
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
+
+" Cursorline as highlight instead of underline 
+set cursorline
+hi CursorLine term=bold cterm=bold 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Airline Settings
