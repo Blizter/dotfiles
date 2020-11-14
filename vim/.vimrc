@@ -108,7 +108,7 @@ set completeopt=longest,menuone
 colors deus
 
 " Highlight characters after 80th column
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+highlight OverLength term=bold cterm=bold
 match OverLength /\%81v.\+/
 
 " Cursorline as highlight instead of underline 
