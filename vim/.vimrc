@@ -86,10 +86,6 @@ set wildmode=longest:full,list:full
 set visualbell
 set t_vb=
 
-" highlight characters after 80th
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
-
 " Display whitespace characters
 set list
 set listchars=tab:>─,eol:¬,trail:\ ,nbsp:¤
@@ -111,6 +107,10 @@ set completeopt=longest,menuone
 
 " color theme Palette for text editor
 colors deus
+
+" Highlight characters after 80th column
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Airline Settings
