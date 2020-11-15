@@ -4,7 +4,7 @@
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
 ## install the different tools
-sudo apt install curl wget git vim tmux autojump fonts-powerline
+sudo apt install curl wget git vim tmux autojump parallel fonts-powerline
 
 ## install python tools
 sudo apt install python3-dev python3-pip
