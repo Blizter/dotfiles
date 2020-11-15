@@ -1,5 +1,8 @@
 #! /bin/bash
 
+set -ex
+set -o pipefail
+
 #update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
@@ -13,10 +16,10 @@ pip3 install bpytop
 # installing vim plugins
 ## creating vim plugins folders
 rm -rf ~/.vim/pack/
-mkdir -p ~/.vim/{colors,pack/plugins/start}
+mkdir -p ~/.vim/pack/plugins/start
 
 ## prallilize plugins repo cloning
-parallel -a vim/plugins.sh
+parallel -a ./vim/plugins.sh
 
 ## installing other software or packges
 
