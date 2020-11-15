@@ -15,14 +15,13 @@ pip3 install bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ~/.vim/pack/
-mkdir -p ~/.vim/pack/plugins/start
+rm -rf ~/.vim/pack/ &&\
+    mkdir -p ~/.vim/pack/plugins/start
 
 ## prallilize plugins repo cloning
 parallel -a ./vim/plugins.sh
 
 ## installing other software or packges
-
 #Spotify
 curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
