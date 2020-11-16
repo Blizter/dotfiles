@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -exo pipefail
+
 ## Vim plugins cloning
 git clone --depth=1 git@github.com:vim-airline/vim-airline.git ~/.vim/pack/plugins/start/airline
 git clone --depth=1 git@github.com:vim-airline/vim-airline-themes.git ~/.vim/pack/plugins/start/airline-themes
@@ -16,6 +18,3 @@ git clone --depth=1 git@github.com:iamcco/markdown-preview.nvim.git ~/.vim/pack/
 ## Helptags generation for the different plugins
 vim -u NONE -c "helpztags ~/.vim/pack/plugins/start/vim-fugitive" -c q
 vim -u NONE -c "helpztags ~/.vim/pack/plugins/start/vim-gitgutter" -c q
-
-# installing markdown preview
-cd ~/.vim/pack/plugins/start/markdown-preview && yarn install && cd ~
