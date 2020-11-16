@@ -86,15 +86,9 @@ set wildmode=longest:full,list:full
 set visualbell
 set t_vb=
 
-" Color the column after textwidth, usually the 80th
-if version >= 703
-  set colorcolumn=+1
-endif
-
 " Display whitespace characters
 set list
-set listchars=tab:>─,eol:¬,trail:\ ,nbsp:¤
-
+set listchars=tab:>─,eol:¬,trail:·,nbsp:¤,space:·,precedes:«,extends:»
 set fillchars=vert:│
 
 " Enables syntax highlighting in the editor and netrw
@@ -112,6 +106,14 @@ set completeopt=longest,menuone
 
 " color theme Palette for text editor
 colors deus
+
+" Highlight characters after 80th column
+highlight OverLength term=bold cterm=bold
+match OverLength /\%81v.\+/
+
+" Cursorline as highlight instead of underline 
+set cursorline
+hi CursorLine term=bold cterm=bold 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Airline Settings

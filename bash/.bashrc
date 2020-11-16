@@ -100,7 +100,15 @@ alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ~/.bashrc"
 alias mkd="mkdir -pv"
-alias vim_plugins_update="ls ~/.vim/pack/plugins/start | xargs -I{} git pull {}"
+
+# Functions
+vim_plugins_updates () {
+    # installing vim plugins
+    ## creating vim plugins folders
+    rm -rf ~/.vim/pack/ &&\
+        mkdir -p ~/.vim/pack/plugins/start
+    parallel -a ~/Projects/dotfiles/vim/plugins.sh
+}
 
 #autocd
 shopt -s autocd
