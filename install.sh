@@ -6,8 +6,14 @@ set -o pipefail
 #update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
+## adding repos for YARN
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update
+
 ## install the different tools
-sudo apt install -y curl wget git vim tmux autojump parallel universal-ctags gnome-tweaks fonts-powerline
+sudo apt install -y curl wget git vim tmux yarn \
+    autojump parallel universal-ctags gnome-tweaks fonts-powerline
 
 ## install python tools
 sudo apt install python3-dev python3-pip
