@@ -7,7 +7,7 @@ set -o pipefail
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
 ## install the different tools
-sudo apt install y curl wget git vim tmux autojump parallel universal-ctags gnome-tweaks fonts-powerline
+sudo apt install -y curl wget git vim tmux autojump parallel universal-ctags gnome-tweaks fonts-powerline
 
 ## install python tools
 sudo apt install python3-dev python3-pip
