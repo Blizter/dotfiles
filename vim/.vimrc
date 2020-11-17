@@ -194,4 +194,21 @@ set autoindent
 
 " This one is complicated. See :help cinoptions-values for details
 set cinoptions=(0,u0,U0,t0,g0,N-s
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Netrw options
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove banner from netrw
+let g:netrw_banner = 0
+
+" Tree style list file display
+let g:netrw_liststyle = 3
+
+" open file in the same window, type :h g:netrw_browse_split
+let g:netrw_browse_split = 0
+
+" Change fron left splitting to right splitting
+let g:netrw_altv = 1
+
+" let opened winows take 5% of screen width
+let g:netrw_winsize = 90
 
