@@ -36,6 +36,9 @@ set autowrite
 " Disable backups, we have source control for that
 set nobackup
 
+" Use the clipboard as default register
+set clipboard=unnamed
+
 " Force encoding to utf-8, for systems where this is not the default (windows
 " comes to mind)
 set encoding=utf-8
