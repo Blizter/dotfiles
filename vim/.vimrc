@@ -57,6 +57,9 @@ set updatetime=500
 " automatically detected "rxvt-unicode-256color" doesn't work.
 set term=xterm-256color
 
+" appending paths to tags for
+set tags+=.git/tags
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " User interface
 """"""""""""""""""""""""""""""""""""""""""""""""""
