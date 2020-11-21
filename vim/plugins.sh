@@ -14,6 +14,8 @@ git clone --depth=1 git@github.com:preservim/tagbar.git ~/.vim/pack/plugins/star
 git clone --depth=1 git@github.com:plasticboy/vim-markdown.git ~/.vim/pack/plugins/start/vim-markdown
 git clone --depth=1 git@github.com:iamcco/markdown-preview.nvim.git ~/.vim/pack/plugins/start/markdown-preview
 #git clone --depth=1 git@github.com:jmcantrell/vim-virtualenv.git ~/.vim/pack/plugins/start/vim-virtualenv
+git clone --depth 1 git@github.com:dense-analysis/ale.git ~/.vim/pack/plugins/start/ale
+
 
 ## Helptags generation for the different plugins
 vim -u NONE -c "helpztags ~/.vim/pack/plugins/start/vim-fugitive" -c q
