@@ -25,12 +25,9 @@ pip3 install bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ~/.vim/pack/ &&\
-    mkdir -p ~/.vim/pack/plugins/start
+rm -rf ~/.vim/ &&\
+    mkdir -p ~/.vim/pack/{interface,colors,vc,md,nav,md}/start
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
-
-# installing markdown previewi packages through yarn
-cd ~/.vim/pack/plugins/start/markdown-preview && yarn install && cd ~
 
