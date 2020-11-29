@@ -2,8 +2,11 @@
 
 # Preferred editor for local and remote sessions
 
+# set main editor
 export EDITOR="vim"
-
-if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
-fi
+# local bin path
+export PATH=$PATH:~/.local/bin
+# go binary variables
+export PATH=$PATH:/usr/local/go/bin
+#pyenv python binaries
+export PATH="$HOME/.pyenv/bin:$PATH"

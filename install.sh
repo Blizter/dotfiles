@@ -17,9 +17,12 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt update
 
 ## install the different tools
-sudo apt install -y curl wget git vim tmux yarn \
-    autojump parallel universal-ctags gnome-tweaks fonts-powerline \
-    spotify-client python3-dev python3-pip
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+    libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
+    wget git vim tmux yarn autojump parallel universal-ctags gnome-tweaks \
+    fonts-powerline spotify-client python3-dev python3-pip \
+
 
 pip3 install bpytop
 
@@ -31,3 +34,4 @@ rm -rf ~/.vim/ &&\
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
 
+curl https://pyenv.run | bash

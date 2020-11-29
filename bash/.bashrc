@@ -112,12 +112,13 @@ vim_plugins_updates () {
 
 #autocd
 shopt -s autocd
-
 #autojump
 . /usr/share/autojump/autojump.sh
+# sourcing bash_profile
+source ~/.bash_profile
 
-# local bin path
-export PATH=$PATH:~/.local/bin
+#pyenv functionning
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-# go environment variables
-export PATH=$PATH:/usr/local/go/bin
+
