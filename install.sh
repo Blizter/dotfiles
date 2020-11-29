@@ -23,6 +23,8 @@ sudo apt install -y make build-essential libssl-dev zlib1g-dev \
     wget git vim tmux yarn autojump parallel universal-ctags gnome-tweaks \
     fonts-powerline spotify-client python3-dev python3-pip \
 
+curl https://pyenv.run | bash
+source ~/.bashrc
 
 pip3 install bpytop
 
