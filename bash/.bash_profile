@@ -10,3 +10,7 @@ export PATH=$PATH:~/.local/bin
 export PATH=$PATH:/usr/local/go/bin
 #pyenv python binaries
 export PATH="$HOME/.pyenv/bin:$PATH"
+
+if [ -f $HOME/.bashrc ]; then
+    source $HOME/.bashrc
+fi

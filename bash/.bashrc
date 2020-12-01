@@ -116,9 +116,6 @@ shopt -s autocd
 #autojump
 . /usr/share/autojump/autojump.sh
 
-# sourcing bash_profile
-source ~/.bash_profile
-
 #pyenv functionning
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
