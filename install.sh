@@ -23,7 +23,11 @@ sudo apt install -y make build-essential libssl-dev zlib1g-dev \
     wget git vim tmux yarn autojump parallel universal-ctags gnome-tweaks \
     fonts-powerline spotify-client python3-dev python3-pip \
 
-curl https://pyenv.run | bash
+[ ! -d "/home/eric/.pyenv" ] && curl https://pyenv.run | bash
+
+wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ~/Downloads/ &&\
+    sudo tar -C /usr/local -xzf ~/Downloads/go1.15.6.linux-amd64.tar.gz
+
 source ~/.bashrc
 
 pip3 install bpytop
@@ -36,4 +40,4 @@ rm -rf ~/.vim/ &&\
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
 
-curl https://pyenv.run | bash
+echo "The system is yours to use, The world is within finger tips grasp!" && exit 0;
