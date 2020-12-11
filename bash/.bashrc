@@ -96,9 +96,9 @@ source $OSH/oh-my-bash.sh
 
 alias bashconfig="vim ~/.bashrc"
 alias ohmybash="vim ~/.oh-my-bash"
-alias sa="sudo apt"
-alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
-alias reload="source ~/.bashrc"
+alias sd="sudo dnf"
+alias update="sudo dnf update"
+alias reload="source ~/.bash_profile"
 alias mkd="mkdir -pv"
 
 # Functions
@@ -114,8 +114,7 @@ vim_plugins_updates () {
 shopt -s autocd
 
 #autojump
-. /usr/share/autojump/autojump.sh
-
+. /usr/share/autojump/autojump.bash
 #pyenv functionning
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"

@@ -3,34 +3,37 @@
 set -exo pipefail
 
 #update the system
-sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
+sudo dnf update
 
-## adding repos for YARN
+## additional package repositories
+# rpm fusion non-free and free
+sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-# Yarn repo
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-# Spotify repo
-curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+#yarn
+curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 
-sudo apt update
 
 ## install the different tools
-sudo apt install -y make build-essential libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
-    libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
-    wget git vim tmux yarn autojump parallel universal-ctags gnome-tweaks \
-    fonts-powerline spotify-client python3-dev python3-pip \
+sudo dnf module install -y nodejs:12
+sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate
 
-[ ! -d "/home/eric/.pyenv" ] && curl https://pyenv.run | bash
+sudo updatedb
+
+# pyenv requirements
+sudo dnf groupinstall -y 'Development Tools'
+sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel sqlite \
+    sqlite-devel openssl-devel xz xz-devel libffi-devel findutils
+
+[ ! -d "/home/eric/.pyenv" ] || curl https://pyenv.run | bash
 
 wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ~/Downloads/ &&\
     sudo tar -C /usr/local -xzf ~/Downloads/go1.15.6.linux-amd64.tar.gz
 
 source ~/.bashrc
 
-pip3 install bpytop
+sudo dnf install -y python3-devel.x86_64 python3-pip python3-wheel
+python3 -m pip install bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
@@ -39,5 +42,4 @@ rm -rf ~/.vim/ &&\
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
-
-echo "The system is yours to use, The world is within finger tips grasp!" && exit 0;
+echo "The system is yours to use, The world is within finger tips grasp!" 
