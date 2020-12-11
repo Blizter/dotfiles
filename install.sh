@@ -16,7 +16,13 @@ curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yu
 
 ## install the different tools
 sudo dnf module install -y nodejs:12
-sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate
+sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate fedora-workstation-repositories 
+
+# enable third-party
+sudo dnf config-manager --set-enabled google-chrome
+
+# install third party
+sudo dnf install -y google-chrome-stable
 
 sudo updatedb
 
