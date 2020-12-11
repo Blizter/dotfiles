@@ -7,7 +7,9 @@ set -exo pipefail
 git clone --depth=1 git@github.com:vim-airline/vim-airline.git ~/.vim/pack/interface/start/airline
 git clone --depth=1 git@github.com:vim-airline/vim-airline-themes.git ~/.vim/pack/interface/start/airline-themes
 # colors
-git clone --depth=1 git@github.com:ajmwagar/vim-deus.git ~/.vim/pack/colors/start/vim-deus
+
+git clone --depth=1 git@github.com:axvr/photon.vim.git ~/.vim/pack/colors/start/photon
+#git clone --depth=1 git@github.com:ajmwagar/vim-deus.git ~/.vim/pack/colors/start/vim-deus
 git clone --depth=1 git@github.com:sheerun/vim-polyglot.git ~/.vim/pack/colors/start/vim-polyglot
 # Version control management
 git clone --depth=1 git@github.com:tpope/vim-fugitive.git ~/.vim/pack/vc/start/vim-fugitive
