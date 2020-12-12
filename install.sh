@@ -16,26 +16,31 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 sudo apt update
 
-## install the different tools
-sudo apt install -y make build-essential libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
-    libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
-    wget git vim tmux yarn autojump parallel universal-ctags gnome-tweaks \
-    fonts-powerline spotify-client python3-dev python3-pip \
+# install the base
+sudo apt install -y build-essentials make wget curl vim git tmux autojump universal-ctags\
+    gnome-tweaks spotify-client yarn parallel llvm
 
-[ ! -d "/home/eric/.pyenv" ] && curl https://pyenv.run | bash
+# install pyenv requirements
+if [ ! -d "/home/eric/.pyenv" ];
+then
+    sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
+        libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
+        libffi-dev liblzma-dev python-openssl &&\
+        curl https://pyenv.run | bash
+fi
 
 wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ~/Downloads/ &&\
     sudo tar -C /usr/local -xzf ~/Downloads/go1.15.6.linux-amd64.tar.gz
 
-source ~/.bashrc
+source ~/.bash_profile
 
-pip3 install bpytop
+sudo apt install -y python3-dev python3-pip
+
+python3 -m pip install bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ~/.vim/ &&\
-    mkdir -p ~/.vim/pack/{interface,colors,vc,md,nav,md}/start
+rm -rf ~/.vim/ && mkdir -p ~/.vim/pack/{interface,colors,vc,md,nav,md}/start
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
