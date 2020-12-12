@@ -48,7 +48,7 @@ rm -rf ${HOME}/.vim/ && mkdir -pv ${HOME}/.vim/pack/{interface,colors,vc,md,nav,
 parallel -a ./vim/plugins.sh
 
 # powerline fonts 
-git clone https://github.com/powerline/fonts.git --depth=1 && ./fonts/install.sh &&\
+git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/install.sh &&\
     fc-cache -vf && rm -rf fonts/
 
 printf "The system is yours to use, The world is within finger tips grasp!" 

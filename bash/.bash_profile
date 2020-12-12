@@ -5,10 +5,10 @@
 # set main editor
 export EDITOR="vim"
 # local bin path
-export PATH=$PATH:~/.local/bin
+export PATH=${PATH}:${HOME}/.local/bin
 # go binary variables
-export PATH=$PATH:/usr/local/go/bin
+export PATH=${PATH}:/usr/local/go/bin
 #pyenv python binaries
-export PATH="$HOME/.pyenv/bin:$PATH"
+export PATH="${HOME}/.pyenv/bin:${PATH}"
 
-[ -f $HOME/.bashrc ] && source $HOME/.bashrc && echo "config reloaded"
+[ -f ${HOME}/.bashrc ] && source ${HOME}/.bashrc && echo "config reloaded"
