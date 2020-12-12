@@ -98,6 +98,7 @@ alias bashconfig="vim ${HOME}/.bashrc"
 alias ohmybash="vim ${HOME}/.oh-my-bash"
 alias sd="sudo dnf"
 alias reload="source ${HOME}/.bash_profile"
+alias vim="vim -u ${HOME}/.vimrc "
 alias mkd="mkdir -pv "
 
 # Functions
