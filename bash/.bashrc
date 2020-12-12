@@ -97,7 +97,6 @@ source $OSH/oh-my-bash.sh
 alias bashconfig="vim ~/.bashrc"
 alias ohmybash="vim ~/.oh-my-bash"
 alias sd="sudo dnf"
-alias update="sudo dnf update"
 alias reload="source ~/.bash_profile"
 alias mkd="mkdir -pv"
 
