@@ -12,8 +12,6 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 
 #yarn
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-
-
 ## install the different tools
 sudo dnf module install -y nodejs:12
 sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate fedora-workstation-repositories powerline-fonts 
@@ -33,22 +31,24 @@ sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel sqlite \
 
 [ ! -d "/home/eric/.pyenv" ] || curl https://pyenv.run | bash
 
-wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ~/Downloads/ &&\
-    sudo tar -C /usr/local -xzf ~/Downloads/go1.15.6.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
+    sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz &&\
+    rm ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz
 
-source ~/.bash_profile
+source ${HOME}/.bash_profile
 
 sudo dnf install -y python3-devel.x86_64 python3-pip python3-wheel
 python3 -m pip install bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ~/.vim/ && mkdir -pv ~/.vim/pack/{interface,colors,vc,md,nav,md}/start
+rm -rf ${HOME}/.vim/ && mkdir -pv ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md}/start
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
 
-# clean up
-rm ~/Downloads/go1.15.6.linux-amd64.tar.gz
+# powerline fonts 
+git clone https://github.com/powerline/fonts.git --depth=1 && ./fonts/install.sh &&\
+    fc-cache -vf && rm -rf fonts/
 
 printf "The system is yours to use, The world is within finger tips grasp!" 

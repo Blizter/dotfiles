@@ -124,7 +124,6 @@ hi CursorLine term=bold cterm=bold
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Airline settings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'minimalist'
 let g:airline#extentions#tabline#formatter = 'unique_tail_improved'
