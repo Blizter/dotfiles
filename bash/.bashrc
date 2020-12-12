@@ -98,7 +98,7 @@ alias bashconfig="vim ~/.bashrc"
 alias ohmybash="vim ~/.oh-my-bash"
 alias sd="sudo dnf"
 alias reload="source ~/.bash_profile"
-alias mkd="mkdir -pv"
+alias mkd="mkdir -pv "
 
 # Functions
 vim_plugins_updates () {

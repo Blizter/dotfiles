@@ -16,7 +16,7 @@ curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yu
 
 ## install the different tools
 sudo dnf module install -y nodejs:12
-sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate fedora-workstation-repositories 
+sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate fedora-workstation-repositories powerline-fonts 
 
 # enable third-party
 sudo dnf config-manager --set-enabled google-chrome
@@ -43,16 +43,10 @@ python3 -m pip install bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ~/.vim/ &&\
-    mkdir -p ~/.vim/pack/{interface,colors,vc,md,nav,md}/start
+rm -rf ~/.vim/ && mkdir -pv ~/.vim/pack/{interface,colors,vc,md,nav,md}/start
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
-
-# set up font
-[ ! -d "${HOME}/.local/share/fonts" ] && mkd ${HOME}/.local/share/fonts &&\
-    [ ! -f "${HOME}/.local/share/fonts/Inconsolata.otf" ] && curl https://levien.com/type/myfonts/Inconsolata.otf \
-    --output ${HOME}/.local/share/fonts/Inconsolata.otf && fc-cache -v
 
 # clean up
 rm ~/Downloads/go1.15.6.linux-amd64.tar.gz
