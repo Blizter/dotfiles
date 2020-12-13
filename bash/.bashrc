@@ -93,12 +93,12 @@ source $OSH/oh-my-bash.sh
 # For a full list of active aliases, run `alias`.
 #
 # Aliases
-
+alias vim="vim -u ${HOME}/.vimrc"
 alias bashconfig="vim ~/.bashrc"
 alias ohmybash="vim ~/.oh-my-bash"
 alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
-alias reload="source ~/.bashrc"
+alias reload="source ~/.bash_profile"
 alias mkd="mkdir -pv"
 
 # Functions
