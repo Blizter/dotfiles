@@ -27,7 +27,7 @@ ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
 ```
 
 ## Bash
-Contains `.bashrc` and and `.profile`
+Contains `.bashrc` and `.profile`
 
 ## tmux/
 tmux config file
