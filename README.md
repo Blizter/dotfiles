@@ -13,11 +13,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master
 
 create symlinks for the different dotfiles :
 ```bash
+mkdir -p ~/bin
 rm ~/.profile
+rm ~/bin/.profile
 rm ~/.bashrc
 rm ~/.tmux.conf
 rm ~/.vimrc
 ln -sfv ~/Projects/dotfiles/bash/.profile ~
+ln -sfv ~/Projects/dotfiles/bash/.profile ~/bin
 ln -sfv ~/Projects/dotfiles/bash/.bashrc ~
 ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~
 ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
