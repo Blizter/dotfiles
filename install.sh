@@ -26,11 +26,13 @@ sudo updatedb
 
 # pyenv requirements
 sudo dnf groupinstall -y 'Development Tools'
-sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel sqlite \
+
+if [ ! -d "/home/eric/.pyenv" ];
+then
+    sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel sqlite \
     sqlite-devel openssl-devel xz xz-devel libffi-devel findutils
-
-[ ! -d "/home/eric/.pyenv" ] || curl https://pyenv.run | bash
-
+    curl https://pyenv.run | bash
+fi
 wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
     sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz &&\
     rm ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz
