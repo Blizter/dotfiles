@@ -35,8 +35,7 @@ wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ~/Downloads/ &&\
 source ~/.bash_profile
 
 sudo apt install -y python3-dev python3-pip
-
-python3 -m pip install bpytop
+python3 -m pip install --upgrapde bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
