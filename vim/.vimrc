@@ -111,7 +111,7 @@ set showmatch
 set completeopt=longest,menuone
 
 " color theme Palette for text editor
-colors deus
+colorscheme photon
 
 " Highlight characters after 80th column
 highlight OverLength term=bold cterm=bold

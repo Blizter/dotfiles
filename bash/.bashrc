@@ -93,12 +93,12 @@ source $OSH/oh-my-bash.sh
 # For a full list of active aliases, run `alias`.
 #
 # Aliases
-
+alias vim="vim -u ${HOME}/.vimrc"
 alias bashconfig="vim ~/.bashrc"
 alias ohmybash="vim ~/.oh-my-bash"
 alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
-alias reload="source ~/.bashrc"
+alias reload="source ~/.bash_profile"
 alias mkd="mkdir -pv"
 
 # Functions
@@ -116,8 +116,6 @@ shopt -s autocd
 #autojump
 . /usr/share/autojump/autojump.sh
 
-# local bin path
-export PATH=$PATH:~/.local/bin
-
-# go environment variables
-export PATH=$PATH:/usr/local/go/bin
+#pyenv functionning
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

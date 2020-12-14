@@ -2,6 +2,9 @@
 Set of dotfiles to configure my environments. This repo is part of my decision to go further with my terminal-based wrkflow as explained in this [article](https://erichammel.xyz/posts/going-terminal-based/) on my blog.
 
 ## Pre-req
+
+install [inconsolata](https://levien.com/type/myfonts/inconsolata.html) font
+
 `install.sh` will install packages, once done install oh-my-bash this way:
 ```bash
 export OSH="$HOME/.dotfiles/oh-my-bash" &&\

@@ -16,21 +16,33 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 sudo apt update
 
-## install the different tools
-sudo apt install -y curl wget git vim tmux yarn \
-    autojump parallel universal-ctags gnome-tweaks fonts-powerline \
-    spotify-client python3-dev python3-pip
+# install the base
+sudo apt install -y build-essential make wget curl vim git tmux autojump universal-ctags\
+    gnome-tweaks spotify-client yarn parallel llvm
 
-pip3 install bpytop
+# install pyenv requirements
+if [ ! -d "${HOME}/.pyenv" ]; then
+    echo "Installing pyenv"
+    sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
+        libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
+        libffi-dev liblzma-dev python-openssl
+    curl https://pyenv.run | bash
+fi
+
+wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
+    sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz &&\
+    rm ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz
+
+source ${HOME}/.bash_profile
+
+sudo apt install -y python3-dev python3-pip
+python3 -m pip install --upgrade bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ~/.vim/pack/ &&\
-    mkdir -p ~/.vim/pack/plugins/start
+rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md}/start
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
 
-# installing markdown previewi packages through yarn
-cd ~/.vim/pack/plugins/start/markdown-preview && yarn install && cd ~
-
+echo "The system is yours to use, The world is within finger tips grasp!"
