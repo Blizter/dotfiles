@@ -33,7 +33,7 @@ wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
     sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz &&\
     rm ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz
 
-source ${HOME}/.bash_profile
+source ${HOME}/.profile
 
 sudo apt install -y python3-dev python3-pip
 python3 -m pip install --upgrade bpytop

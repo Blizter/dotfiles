@@ -13,18 +13,21 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master
 
 create symlinks for the different dotfiles :
 ```bash
-ln -sv ~/Projects/dotfiles/bash/.bash_profile ~
-ln -sv ~/Projects/dotfiles/bash/.bashrc ~
-ln -sv ~/Projects/dotfiles/tmux/.tmux.conf ~
-ln -sv ~/Projects/dotfiles/vim/.vimrc ~
+rm ~/.profile
+rm ~/.bashrc
+rm ~/.tmux.conf
+rm ~/.vimrc
+ln -sfv ~/Projects/dotfiles/bash/.profile ~
+ln -sfv ~/Projects/dotfiles/bash/.bashrc ~
+ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~
+ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
 ```
 
 ## Bash
-Contains `.bashrc` and and `.bash_profile`
+Contains `.bashrc` and and `.profile`
 
 ## tmux/
 tmux config file
 
 ## vim/
 contains `.vimrc` and a script that pulls plugins from github.
-
