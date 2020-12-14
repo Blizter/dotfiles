@@ -5,15 +5,13 @@ set -exo pipefail
 #update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
-## adding repos for YARN
-
+## adding repos
 # Yarn repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 # Spotify repo
 curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-
 sudo apt update
 
 # install the base
@@ -44,5 +42,6 @@ rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{interface,colors,vc,md,nav,m
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
+
 
 echo "The system is yours to use, The world is within finger tips grasp!"
