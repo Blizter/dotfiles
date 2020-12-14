@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -exo pipefail
+set -euxo pipefail
 
 #update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
@@ -43,5 +43,9 @@ rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{interface,colors,vc,md,nav,m
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
 
+git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/install.sh &&\
+    fc-cache -vf && rm -rf fonts/
+
+sudo apt autoclean autoremove
 
 echo "The system is yours to use, The world is within finger tips grasp!"
