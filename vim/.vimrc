@@ -21,6 +21,9 @@
 " Plugins loading
 packloadall
 
+" Load all help tags
+silent! helptags ALL
+
 " Welcome to the future
 set nocompatible
 
@@ -217,4 +220,8 @@ let g:netrw_altv = 1
 
 " let opened winows take 5% of screen width
 let g:netrw_winsize = 90
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
