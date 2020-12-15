@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -exo pipefail
+set -xo pipefail
 
 #update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
