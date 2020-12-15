@@ -224,4 +224,9 @@ let g:netrw_winsize = 90
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ALE configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" Disable linting on file opening
+let g:ale_lint_on_enter = 0
+
+" Lint on save
+let g:ale_lint_on_save = 1
 
