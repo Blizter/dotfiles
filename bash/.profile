@@ -1,4 +1,5 @@
 #! /bin/bash
+
 # Preferred editor for local and remote sessions
 # export /bin and /usr/bin to PATH in order to avoid unwanted errors
 export PATH="/usr/bin:/bin:${PATH}"
@@ -14,5 +15,5 @@ export PATH="/usr/bin:/bin:${PATH}"
 export EDITOR="vim -u ~/.vimrc"
 # if running bash
 [ -n "$BASH_VERSION" ] &&\
-    { [ -f "${HOME}/.bashrc" ] && source "${HOME}/.bashrc"; } &&\
+    { [ -f "${HOME}/.bashrc" ] && source "${HOME}/.bashrc"; } ;\
     { [ -a "${HOME}/.work_specific" ] && source "${HOME}/.work_specific" || true ; }

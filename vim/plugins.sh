@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -exo pipefail
+set -xo pipefail
 
 ## Vim plugins cloning
 # interface
