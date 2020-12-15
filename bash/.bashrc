@@ -116,7 +116,7 @@ vim_plugins_updates () {
 shopt -s autocd
 
 #autojump
-. /usr/share/autojump/autojump.sh
+source /usr/share/autojump/autojump.sh
 
 #pyenv functionning
 eval "$(pyenv init -)"

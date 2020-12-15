@@ -21,6 +21,9 @@
 " Plugins loading
 packloadall
 
+set nocp
+set nocompatible
+
 " Load all help tags
 silent! helptags ALL
 
