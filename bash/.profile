@@ -13,6 +13,11 @@ export PATH="/usr/bin:/bin:${PATH}"
 [ -d "${HOME}/.pyenv/bin" ] && PATH="${HOME}/.pyenv/bin:${PATH}"
 # set main editor
 export EDITOR="vim -u ~/.vimrc"
+
+# Nvidia cuda cli tool
+export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
 # if running bash
 [ -n "$BASH_VERSION" ] &&\
     { [ -f "${HOME}/.bashrc" ] && source "${HOME}/.bashrc"; } ;\

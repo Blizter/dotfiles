@@ -16,7 +16,8 @@ sudo apt update
 
 # install the base
 sudo apt install -y build-essential make wget curl vim git tmux autojump universal-ctags\
-    gnome-tweaks spotify-client yarn parallel llvm
+    gnome-tweaks spotify-client yarn parallel llvm g++ freeglut3-dev build-essential libx11-dev \
+    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
 
 # install pyenv requirements
 if [ ! -d "${HOME}/.pyenv" ]; then
@@ -44,6 +45,8 @@ rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{interface,colors,vc,md,nav,m
 parallel -a ./vim/plugins.sh
 
 git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/install.sh && fc-cache -vf && rm -rf fonts/
+
+
 
 sudo apt autoclean autoremove
 
