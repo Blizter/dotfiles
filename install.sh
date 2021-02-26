@@ -17,7 +17,7 @@ sudo apt update
 # install the base
 sudo apt install -y build-essential make wget curl vim git tmux autojump universal-ctags\
     gnome-tweaks spotify-client yarn parallel llvm g++ freeglut3-dev build-essential libx11-dev \
-    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
+    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev libfreeimage3 libfreeimage-dev
 
 # install pyenv requirements
 if [ ! -d "${HOME}/.pyenv" ]; then
