@@ -14,7 +14,8 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 ## install the different tools
 sudo dnf module install -y nodejs:12
-sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate fedora-workstation-repositories powerline-fonts 
+sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate fedora-workstation-repositories powerline-fonts freeglut-devel libX11-devel libXi-devel libXmu-devel make mesa-libGLU-devel
+ 
 
 # enable third-party
 sudo dnf config-manager --set-enabled google-chrome
