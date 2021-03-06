@@ -227,9 +227,30 @@ let g:netrw_winsize = 90
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ALE configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""
+"" Setting up linting Options
 " Disable linting on file opening
 let g:ale_lint_on_enter = 0
-
 " Lint on save
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
+
+"" Stting up visuals for erros and warnings
+" guter open to show errors
+let g:ale_sign_column_always = 1
+" errors signs
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? 'OK' : printf(
+        \   '%d⨉ %d⚠ ',
+        \   all_non_errors,
+        \   all_errors
+        \)
+endfunction
+set statusline+=%=
+set statusline+=\ %{LinterStatus()}
 
