@@ -106,7 +106,7 @@ vim_plugins_updates () {
     # installing vim plugins
     ## creating vim plugins folders
     rm -rf ${HOME}/.vim/ &&\
-        mkdir -p ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md,ide}/start
+        mkdir -p ${HOME}/.vim/pack/{colors/start, start}
     parallel -a ${HOME}/Projects/dotfiles/vim/plugins.sh
 }
 
