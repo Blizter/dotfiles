@@ -19,7 +19,7 @@ git clone --depth=1 git@github.com:iamcco/markdown-preview.nvim.git ~/.vim/pack/
 git clone --depth=1 git@github.com:tpope/vim-vinegar.git ~/.vim/pack/nav/start/vim-vinegar
 git clone --depth=1 git@github.com:preservim/tagbar.git ~/.vim/pack/nav/start/tagbar
 # IDE-like features (linting)
-#git clone --depth 1 git@github.com:dense-analysis/ale.git ~/.vim/pack/ide/start/ale
+git clone --depth 1 git@github.com:dense-analysis/ale.git ~/.vim/pack/ide/start/ale
 
 ## Helptags generation
 vim -u NONE -c 'helpztags ~/.vim/pack/vc/start/vim-fugitive' '+q!' > /dev/null

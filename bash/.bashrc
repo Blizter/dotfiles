@@ -105,8 +105,9 @@ alias mkd="mkdir -pv "
 vim_plugins_updates () {
     # installing vim plugins
     ## creating vim plugins folders
-    rm -rf ${HOME}/.vim/pack/ &&\
-        mkdir -p ${HOME}/.vim/pack/plugins/start
+    rm -rf ${HOME}/.vim/ &&\
+      mkdir -pv ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md,ide}/start
+
     parallel -a ${HOME}/Projects/dotfiles/vim/plugins.sh
 }
 

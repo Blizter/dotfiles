@@ -45,7 +45,7 @@ python3 -m pip install bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ${HOME}/.vim/ && mkdir -pv ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md}/start
+rm -rf ${HOME}/.vim/ && mkdir -pv ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md,ide}/start
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
