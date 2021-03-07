@@ -39,14 +39,12 @@ python3 -m pip install --upgrade bpytop
 
 # installing vim plugins
 ## creating vim plugins folders
-rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md}/start
+rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{interface,colors,vc,md,nav,md,ide}/start
 
 ## vim plugins repo cloning as a parallel process
 parallel -a ./vim/plugins.sh
 
 git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/install.sh && fc-cache -vf && rm -rf fonts/
-
-
 
 sudo apt autoclean autoremove
 

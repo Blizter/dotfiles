@@ -20,12 +20,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins loading
 packloadall
+" Load all help tags
+silent! helptags ALL
 
 set nocp
 set nocompatible
-
-" Load all help tags
-silent! helptags ALL
 
 " Welcome to the future
 set nocompatible
