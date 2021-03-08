@@ -20,8 +20,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins loading
 packloadall
+
 " Load all help tags
 silent! helptags ALL
+
 " Welcome to the future
 set nocompatible
 
@@ -222,21 +224,28 @@ let g:netrw_winsize = 90
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " ALE configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""
+
 "" Setting up linting Options
+
 " Disable linting on file opening
 let g:ale_lint_on_enter = 0
+
 " Lint on save
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 
+" airline extensions
+let g:airline#extensions#ale#enabled = 1
+
 "" Visuals for erros and warnings
+
 " gutter open to show errors
 let g:ale_sign_column_always = 1
+
 " errors signs
 let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '>'
+let g:ale_sign_warning = '--'
 
-let g:airline#extensions#ale#enabled = 1
 " Linters config
 let g:ale_linters = {
   \ 'python': ['pydocstyle'],
