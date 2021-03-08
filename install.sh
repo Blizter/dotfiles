@@ -48,4 +48,14 @@ git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/insta
 
 sudo apt autoclean autoremove
 
+if [ ! -d "$HOME/.dotfiles/oh-my-bash"]; then
+    export OSH="$HOME/.dotfiles/oh-my-bash"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+fi
+
+ln -sfv ~/Projects/dotfiles/bash/.profile ~
+ln -sfv ~/Projects/dotfiles/bash/.bashrc ~
+ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~
+ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
+
 echo "The system is yours to use, The world is within finger tips grasp!"

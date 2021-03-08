@@ -234,7 +234,20 @@ let g:ale_lint_on_save = 1
 let g:ale_sign_column_always = 1
 " errors signs
 let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_sign_warning = '>'
+
+let g:airline#extensions#ale#enabled = 1
+" Linters config
+let g:ale_linters = {
+  \ 'python': ['pydocstyle'],
+  \ 'markdown' : ['markdownlint']
+  \ }
+
+" Fixers config
+let g:ale_fixers = {
+  \ 'python' : ['autopep8', 'isort'],
+  \ '*': ['remove_trailing_lines', 'trim_whitespace']
+  \ }
 
 "function! LinterStatus() abort
 "    let l:counts = ale#statusline#Count(bufnr(''))
