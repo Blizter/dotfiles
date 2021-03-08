@@ -22,10 +22,6 @@
 packloadall
 " Load all help tags
 silent! helptags ALL
-
-set nocp
-set nocompatible
-
 " Welcome to the future
 set nocompatible
 
@@ -42,7 +38,7 @@ set autowrite
 set nobackup
 
 " Use the clipboard as default register
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Force encoding to utf-8, for systems where this is not the default (windows
 " comes to mind)
@@ -233,8 +229,8 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 
-"" Stting up visuals for erros and warnings
-" guter open to show errors
+"" Visuals for erros and warnings
+" gutter open to show errors
 let g:ale_sign_column_always = 1
 " errors signs
 let g:ale_sign_error = '>>'
@@ -250,6 +246,3 @@ let g:ale_sign_warning = '--'
 "        \   all_errors
 "        \)
 "endfunction
-"set statusline+=%=
-"set statusline+=\ %{LinterStatus()}
-
