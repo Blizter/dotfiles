@@ -254,7 +254,7 @@ let g:ale_linters = {
 
 " Fixers config
 let g:ale_fixers = {
-  \ 'python' : ['autopep8', 'isort'],
+  \ 'python' : ['black','autopep8','isort'],
   \ '*': ['remove_trailing_lines', 'trim_whitespace']
   \ }
 
