@@ -12,12 +12,19 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 # Spotify repo
 curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+# Hashicorp tools
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
 sudo apt update
 
 # install the base
 sudo apt install -y build-essential make wget curl vim-gtk3 git tmux autojump universal-ctags\
-    gnome-tweaks spotify-client yarn parallel llvm g++ freeglut3-dev build-essential libx11-dev \
-    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev libfreeimage3 libfreeimage-dev
+    gnome-tweaks spotify-client yarn parallel llvm g++ freeglut3-dev libx11-dev \
+    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev libfreeimage3 libfreeimage-dev \
+    terraform nomad packer
+
+terraform -install-autocomplete
 
 # install pyenv requirements
 if [ ! -d "${HOME}/.pyenv" ]; then

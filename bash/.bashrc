@@ -100,6 +100,7 @@ alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.profile"
 alias mkd="mkdir -pv"
+alias tf="terraform "
 
 # Functions
 vim_plugins_updates () {
@@ -110,8 +111,6 @@ vim_plugins_updates () {
     parallel -a ${HOME}/Projects/dotfiles/vim/plugins.sh
 }
 
-
-
 #autocd
 shopt -s autocd
 
@@ -121,3 +120,5 @@ source /usr/share/autojump/autojump.sh
 #pyenv functionning
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+complete -C /usr/bin/terraform terraform
