@@ -1,5 +1,4 @@
 #! /bin/bash
-
 set -xo pipefail
 
 #update the system
@@ -19,12 +18,9 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt update
 
 # install the base
-sudo apt install -y build-essential make wget curl vim-gtk3 git tmux autojump universal-ctags\
+sudo apt install -y build-essential make wget curl vim-gtk3 git tmux autojump universal-ctags \
     gnome-tweaks spotify-client yarn parallel llvm g++ freeglut3-dev libx11-dev \
-    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev libfreeimage3 libfreeimage-dev \
-    terraform nomad packer
-
-terraform -install-autocomplete
+    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev libfreeimage3 libfreeimage-dev
 
 # install pyenv requirements
 if [ ! -d "${HOME}/.pyenv" ]; then
@@ -35,14 +31,17 @@ if [ ! -d "${HOME}/.pyenv" ]; then
     curl https://pyenv.run | bash
 fi
 
-wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
-    sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz &&\
-    rm ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.17.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
+    sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.17.linux-amd64.tar.gz &&\
+    rm ${HOME}/Downloads/go1.17.linux-amd64.tar.gz
 
 source ${HOME}/.profile
 
+go get -u github.com/posener/complete/gocomplete
+gocomplete -install
+
 sudo apt install -y python3-dev python3-pip
-python3 -m pip install --upgrade bpytop
+python3 -m pip install --upgrade bpytop pip
 
 # installing vim plugins
 ## creating vim plugins folders
@@ -55,7 +54,7 @@ git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/insta
 
 sudo apt autoclean autoremove
 
-if [ ! -d "$HOME/.dotfiles/oh-my-bash"]; then
+if [ ! -d "$HOME/.dotfiles/oh-my-bash" ]; then
     export OSH="$HOME/.dotfiles/oh-my-bash"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 fi
