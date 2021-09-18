@@ -19,6 +19,7 @@ export PATH="/usr/bin:/bin:${PATH}"
 #pyenv python binaries
 [ -d "${HOME}/.pyenv/bin" ] && PATH="${HOME}/.pyenv/bin:${PATH}"; \
                                 eval "$(pyenv init --path)" ; \
+                                eval "$(pyenv init -)" ; \
                                 eval "$(pyenv virtualenv-init -)"
 
  set main editor
