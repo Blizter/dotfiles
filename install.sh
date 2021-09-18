@@ -11,9 +11,6 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 # Spotify repo
 curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-# Hashicorp tools
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 sudo apt update
 
@@ -61,7 +58,7 @@ fi
 
 # PODMAN Install
 . /etc/os-release
-if [[ "$VERSION_ID" != "20.1*" ]] 
+if [[ "$VERSION_ID" != "20.1*" ]]
 then
     echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
     curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
@@ -72,6 +69,8 @@ sudo apt-get -y install podman
 wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 -P ${HOME}/Downloads/ &&\
     sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 &&\
     sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint &&\
+
+git clone https://github.com/jonmosco/kube-tmux.git ${HOME}/.tmux
 
 ln -sfv ~/Projects/dotfiles/bash/.profile ~
 ln -sfv ~/Projects/dotfiles/bash/.bashrc ~
