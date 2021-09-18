@@ -100,6 +100,7 @@ alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.profile"
 alias mkd="mkdir -pv"
+alias docker="podman "
 
 # Functions
 vim_plugins_updates () {

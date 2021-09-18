@@ -59,6 +59,20 @@ if [ ! -d "$HOME/.dotfiles/oh-my-bash" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 fi
 
+# PODMAN Install
+. /etc/os-release
+if [[ "$VERSION_ID" != "20.1*" ]] 
+then
+    echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+    curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
+fi
+sudo apt-get update && sudo apt upgrade -y
+sudo apt-get -y install podman
+
+wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 -P ${HOME}/Downloads/ &&\
+    sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 &&\
+    sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint &&\
+
 ln -sfv ~/Projects/dotfiles/bash/.profile ~
 ln -sfv ~/Projects/dotfiles/bash/.bashrc ~
 ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~

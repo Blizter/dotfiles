@@ -3,10 +3,10 @@
 # Preferred editor for local and remote sessions
 
 # export /bin and /usr/bin to PATH in order to avoid unwanted errors
-export PATH="/usr/bin:/bin:${PATH}"
+export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 
 # set PATH so it includes user's private bin if it exists
-[ -d "${HOME}/bin" ] && PATH="/usr/bin:/bin:${HOME}/bin:${PATH}"
+[ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
 
 # set PATH so it includes user's private bin if it exists
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
