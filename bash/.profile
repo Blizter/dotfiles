@@ -15,7 +15,6 @@ export PATH="/usr/bin:/bin:${PATH}"
 [ -d "/usr/local/go/bin" ] && GOPATH="${HOME}/go"; \
                                 PATH="/usr/local/go/bin:${PATH}"
 
-
 #pyenv python binaries
 [ -d "${HOME}/.pyenv/bin" ] && PATH="${HOME}/.pyenv/bin:${PATH}"; \
                                 eval "$(pyenv init --path)" ; \
