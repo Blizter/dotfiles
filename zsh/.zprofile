@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/zsh
 
 # Preferred editor for local and remote sessions
 
@@ -21,7 +21,7 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
                                 eval "$(pyenv init -)" ; \
                                 eval "$(pyenv virtualenv-init -)"
 
- set main editor
+# set main editor
 export EDITOR="vim -u ~/.vimrc"
 
 # Nvidia cuda cli tool
@@ -29,6 +29,6 @@ export PATH=/usr/local/cuda-11.3/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 # if running bash
-[ -n "$BASH_VERSION" ] &&\
-    { [ -f "${HOME}/.bashrc" ] && source "${HOME}/.bashrc"; } ;\
-    { [ -a "${HOME}/.work_specific" ] && source "${HOME}/.work_specific" || true ; }
+[ -n "$ZSH_VERSION" ] &&\
+    { [ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"; }
+    # && { [ -a "${HOME}/.work_specific" ] && source "${HOME}/.work_specific" || true ; }

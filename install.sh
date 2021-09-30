@@ -15,7 +15,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt update
 
 # install the base
-sudo apt install -y build-essential make wget curl vim-gtk3 git tmux autojump universal-ctags \
+sudo apt install -y zsh build-essential make wget curl vim-gtk3 git tmux autojump universal-ctags \
     gnome-tweaks spotify-client yarn parallel llvm g++ freeglut3-dev libx11-dev \
     libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev libfreeimage3 libfreeimage-dev
 
@@ -32,7 +32,7 @@ wget https://golang.org/dl/go1.17.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
     sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.17.linux-amd64.tar.gz &&\
     rm ${HOME}/Downloads/go1.17.linux-amd64.tar.gz
 
-source ${HOME}/.profile
+source ${PWD}/zsh/.zprofile
 
 go get -u github.com/posener/complete/gocomplete
 gocomplete -install
@@ -70,10 +70,10 @@ wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linu
     sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 &&\
     sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint &&\
 
-git clone https://github.com/jonmosco/kube-tmux.git ${HOME}/.tmux
 
-ln -sfv ~/Projects/dotfiles/bash/.profile ~
-ln -sfv ~/Projects/dotfiles/bash/.bashrc ~
+
+ln -sfv ~/Projects/dotfiles/zsh/.zprofile ~
+ln -sfv ~/Projects/dotfiles/zsh/.zshrc ~
 ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~
 ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
 
