@@ -127,3 +127,4 @@ setopt autocd
 #autojump
 source /usr/share/autojump/autojump.sh
 autoload -Uz bashcompinit && bashcompinit
+autoload -U compinit && compinit

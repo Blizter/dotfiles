@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/zsh
 set -xo pipefail
 
 #update the system
@@ -34,7 +34,7 @@ wget https://golang.org/dl/go1.17.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
 
 source ${PWD}/zsh/.zprofile
 
-go get -u github.com/posener/complete/gocomplete
+go install gocomplete
 gocomplete -install
 
 sudo apt install -y python3-dev python3-pip
@@ -51,9 +51,8 @@ git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/insta
 
 sudo apt autoclean autoremove
 
-if [ ! -d "$HOME/.dotfiles/oh-my-bash" ]; then
-    export OSH="$HOME/.dotfiles/oh-my-bash"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # PODMAN Install
@@ -63,6 +62,7 @@ then
     echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
     curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
 fi
+
 sudo apt-get update && sudo apt upgrade -y
 sudo apt-get -y install podman
 
@@ -70,11 +70,14 @@ wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linu
     sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 &&\
     sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint &&\
 
-
-
 ln -sfv ~/Projects/dotfiles/zsh/.zprofile ~
 ln -sfv ~/Projects/dotfiles/zsh/.zshrc ~
 ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~
 ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
+
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+
+
+chsh -s $(which zsh)
 
 echo "The system is yours to use, The world is within finger tips grasp!"
