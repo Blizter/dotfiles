@@ -6,7 +6,7 @@
 export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 
 # set PATH so it includes user's private bin if it exists
-[ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
+[ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${HOME}/.local/bin${PATH}"
 
 # set PATH so it includes user's private bin if it exists
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
