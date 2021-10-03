@@ -120,9 +120,9 @@ colorscheme photon
 highlight OverLength term=bold cterm=bold
 match OverLength /\%81v.\+/
 
-" Cursorline as highlight instead of underline 
+" Cursorline as highlight instead of underline
 set cursorline
-hi CursorLine term=bold cterm=bold 
+hi CursorLine term=bold cterm=bold
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Airline Settings
@@ -237,14 +237,14 @@ let g:ale_lint_on_save = 1
 " airline extensions
 let g:airline#extensions#ale#enabled = 1
 
-"" Visuals for erros and warnings
+" Visuals for errors and warnings
 
 " gutter open to show errors
 let g:ale_sign_column_always = 1
 
 " errors signs
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_sign_error = 'err->'
+let g:ale_sign_warning = 'warn->'
 
 " Linters config
 let g:ale_linters = {
@@ -257,4 +257,3 @@ let g:ale_fixers = {
   \ 'python' : ['black','autopep8','isort'],
   \ '*': ['remove_trailing_lines', 'trim_whitespace']
   \ }
-

@@ -131,7 +131,7 @@ setopt autocd
 
 #autojump
 source /usr/share/autojump/autojump.sh
+complete -o nospace -C /home/eric/go/bin/gocomplete go
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
-complete -o nospace -C /home/eric/go/bin/gocomplete go
