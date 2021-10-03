@@ -28,17 +28,24 @@ if [ ! -d "${HOME}/.pyenv" ]; then
     curl https://pyenv.run | bash
 fi
 
-wget https://golang.org/dl/go1.17.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
-    sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.17.linux-amd64.tar.gz &&\
-    rm ${HOME}/Downloads/go1.17.linux-amd64.tar.gz
+# install poetry
+sudo apt install -y python3-dev python3-pip
+python3 -m pip install --upgrade bpytop pip
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+
+#install go and go shell completion
+sudo rm -rf /usr/local/go \
+    && wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz -P ${HOME}/Downloads/ \
+    && sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz \
+    && rm ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz
+    && go install
 
 source ${PWD}/zsh/.zprofile
 
-go install gocomplete
+go install github.com/posener/complete@latest
 gocomplete -install
 
-sudo apt install -y python3-dev python3-pip
-python3 -m pip install --upgrade bpytop pip
 
 # installing vim plugins
 ## creating vim plugins folders
@@ -76,7 +83,6 @@ ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~
 ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
 
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
-
 
 chsh -s $(which zsh)
 
