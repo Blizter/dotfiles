@@ -61,8 +61,10 @@ export UPDATE_ZSH_DAYS=7
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-HISTSIZE= HISTFILESIZE=
+HIST_STAMPS="yyyy-mm-dd"
+HISTSIZE=1000000000
+SAVEHIST=$HISTSIZE
+HISTFILESIZE=${HOME}/.history
 
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -76,7 +78,10 @@ HISTSIZE= HISTFILESIZE=
 plugins=(
     git
     autojump
-    )
+    zsh-completions
+    python
+    poetry
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,5 +131,7 @@ setopt autocd
 
 #autojump
 source /usr/share/autojump/autojump.sh
-autoload -Uz bashcompinit && bashcompinit
+
 autoload -U compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+complete -o nospace -C /home/eric/go/bin/gocomplete go

@@ -6,20 +6,23 @@
 export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 
 # set PATH so it includes user's private bin if it exists
-[ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${HOME}/.local/bin${PATH}"
+[ -d "${HOME}/bin" ] && PATH="${HOME}/bin:${PATH}"
 
 # set PATH so it includes user's private bin if it exists
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
 # go binary variables
-[ -d "/usr/local/go/bin" ] && GOPATH="${HOME}/go"; \
-                                PATH="/usr/local/go/bin:${PATH}"
+[ -d "/usr/local/go/bin" ] && GOPATH="${HOME}/go/"; \
+                              GOBIN="${GOPATH}/bin"; \
+                              PATH="/usr/local/go/bin/:${GOPATH}:${GOBIN}:${PATH}"; \
 
 #pyenv python binaries
 [ -d "${HOME}/.pyenv/bin" ] && PATH="${HOME}/.pyenv/bin:${PATH}"; \
                                 eval "$(pyenv init --path)" ; \
                                 eval "$(pyenv init -)" ; \
                                 eval "$(pyenv virtualenv-init -)"
+
+[ -d "${HOME}/.poetry/bin" ] && PATH="$HOME/.poetry/bin:$PATH"
 
 # set main editor
 export EDITOR="vim -u ~/.vimrc"
@@ -28,7 +31,4 @@ export EDITOR="vim -u ~/.vimrc"
 export PATH=/usr/local/cuda-11.3/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
-# if running bash
-[ -n "$ZSH_VERSION" ] &&\
-    { [ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"; }
-    # && { [ -a "${HOME}/.work_specific" ] && source "${HOME}/.work_specific" || true ; }
+[ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc";
