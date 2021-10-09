@@ -1,5 +1,5 @@
 #! /bin/zsh
-set -xo pipefail
+set -o pipefail errexit nounset
 
 #update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
@@ -8,8 +8,6 @@ sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 # Yarn repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-sudo apt update
 
 # install the base
 sudo apt update && sudo apt install -y build-essential make wget curl vim-gtk3 \
@@ -42,7 +40,7 @@ sudo rm -rf /usr/local/go \
 source ${PWD}/zsh/.zprofile
 
 go install github.com/posener/complete@latest
-gocomplete -install
+gocomplete -install < "yes"
 
 # installing vim plugins
 ## creating vim plugins folders
@@ -69,6 +67,16 @@ sudo apt-get update && sudo apt upgrade -y && sudo apt-get -y install podman
 wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 -P ${HOME}/Downloads/ \
     && sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 \
     && sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint 
+
+if [ ! -d ${HOME}/.config/coc/extensions ]
+then
+    mkdir -p ${HOME}/.config/coc/extensions \
+        && cd ${HOME}/.config/coc/extensions \
+        && ln -sfv ${HOME}/Project/dotfiles/vim/package.json ${HOME}/.config/coc/extensions/package.json \
+        && npm install coc-snippets --global-style --ignore-scripts \
+            --no-bin-links --no-package-lock --only=prod \
+        && cd ${HOME}
+fi
 
 ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
