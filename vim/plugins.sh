@@ -13,7 +13,6 @@ git clone --depth=1 git@github.com:tpope/vim-fugitive.git ~/.vim/pack/plugins/st
 git clone --depth=1 git@github.com:airblade/vim-gitgutter.git ~/.vim/pack/plugins/start/vim-gitgutter
 
 # Markdown preview
-git clone --depth=1 git@github.com:plasticboy/vim-markdown.git ~/.vim/pack/plugins/start/vim-markdown
 git clone --depth=1 git@github.com:iamcco/markdown-preview.nvim.git ~/.vim/pack/plugins/start/markdown-preview && cd ~/.vim/pack/plugins/start/markdown-preview && yarn install > /dev/null && cd ~
 
 #Navigation
