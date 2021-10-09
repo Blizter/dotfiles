@@ -1,7 +1,3 @@
-#! /bin/bash
-
-set -xo pipefail
-
 ## Vim plugins cloning
 
 # interface
@@ -24,8 +20,9 @@ git clone --depth=1 git@github.com:iamcco/markdown-preview.nvim.git ~/.vim/pack/
 git clone --depth=1 git@github.com:tpope/vim-vinegar.git ~/.vim/pack/plugins/start/vim-vinegar
 git clone --depth=1 git@github.com:preservim/tagbar.git ~/.vim/pack/plugins/start/tagbar
 
-# IDE-like features (linting)
+# IDE-like features (linting) with 
 git clone --depth 1 git@github.com:dense-analysis/ale.git ~/.vim/pack/plugins/start/ale
+git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1 ~/.vim/pack/plugins/start/coc.nvim
 
 # Helptags generation
 vim -u NONE -c 'helpztags ~/.vim/pack/plugins/start/vim-fugitive' '+q!' > /dev/null

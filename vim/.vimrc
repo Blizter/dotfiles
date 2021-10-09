@@ -119,7 +119,7 @@ colorscheme photon
 " Highlight characters after 80th column
 highlight OverLength term=bold cterm=bold
 match OverLength /\%81v.\+/
-
+set colorcolumn=81
 " Cursorline as highlight instead of underline
 set cursorline
 hi CursorLine term=bold cterm=bold
@@ -243,12 +243,12 @@ let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
 
 " errors signs
-let g:ale_sign_error = 'err->'
-let g:ale_sign_warning = 'warn->'
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
 
 " Linters config
 let g:ale_linters = {
-  \ 'python': ['pydocstyle'],
+  \ 'python': ['flake8'],
   \ 'markdown' : ['markdownlint']
   \ }
 
@@ -257,3 +257,5 @@ let g:ale_fixers = {
   \ 'python' : ['black','autopep8','isort'],
   \ '*': ['remove_trailing_lines', 'trim_whitespace']
   \ }
+
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']

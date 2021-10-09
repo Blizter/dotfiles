@@ -135,3 +135,5 @@ complete -o nospace -C /home/eric/go/bin/gocomplete go
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
+
+export PATH="$HOME/.poetry/bin:$PATH"

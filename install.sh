@@ -8,16 +8,14 @@ sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 # Yarn repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-# Spotify repo
-curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 
 sudo apt update
 
 # install the base
-sudo apt install -y zsh build-essential make wget curl vim-gtk3 git tmux autojump universal-ctags \
-    gnome-tweaks spotify-client yarn parallel llvm g++ freeglut3-dev libx11-dev \
-    libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev libfreeimage3 libfreeimage-dev
+sudo apt update && sudo apt install -y build-essential make wget curl vim-gtk3 \
+    git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm g++ nodejs \
+    freeglut3-dev libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev \
+    libfreeimage3 libfreeimage-dev
 
 # install pyenv requirements
 if [ ! -d "${HOME}/.pyenv" ]; then
@@ -29,16 +27,16 @@ if [ ! -d "${HOME}/.pyenv" ]; then
 fi
 
 # install poetry
-sudo apt install -y python3-dev python3-pip
-python3 -m pip install --upgrade bpytop pip
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+sudo apt install -y python3-dev python3-pip \
+    && python3 -m pip install --upgrade bpytop pip \
+    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - \
+    && poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 
 #install go and go shell completion
 sudo rm -rf /usr/local/go \
     && wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz -P ${HOME}/Downloads/ \
     && sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz \
-    && rm ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz
+    && rm ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz \
     && go install
 
 source ${PWD}/zsh/.zprofile
@@ -46,21 +44,17 @@ source ${PWD}/zsh/.zprofile
 go install github.com/posener/complete@latest
 gocomplete -install
 
-
 # installing vim plugins
 ## creating vim plugins folders
 rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{plugins,colors}/start
 
 ## vim plugins repo cloning as a parallel process
-parallel -a ./vim/plugins.sh
+parallel -a ./vim/plugins.sh && mkdir -p ${HOME}/.config/coc/extensions
 
-git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/install.sh && fc-cache -vf && rm -rf fonts/
+git clone https://github.com/powerline/fonts.git --depth=1 \
+    && source fonts/install.sh && fc-cache -vf && rm -rf fonts/
 
 sudo apt autoclean autoremove
-
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
 
 # PODMAN Install
 . /etc/os-release
@@ -70,20 +64,18 @@ then
     curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
 fi
 
-sudo apt-get update && sudo apt upgrade -y
-sudo apt-get -y install podman
+sudo apt-get update && sudo apt upgrade -y && sudo apt-get -y install podman
 
-wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 -P ${HOME}/Downloads/ &&\
-    sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 &&\
-    sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint &&\
+wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 -P ${HOME}/Downloads/ \
+    && sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 \
+    && sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint 
 
-ln -sfv ~/Projects/dotfiles/zsh/.zprofile ~
-ln -sfv ~/Projects/dotfiles/zsh/.zshrc ~
-ln -sfv ~/Projects/dotfiles/tmux/.tmux.conf ~
-ln -sfv ~/Projects/dotfiles/vim/.vimrc ~
+ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
+    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
+    && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ~ \
+    && ln -sfv ${HOME}/Projects/dotfiles/vim/.vimrc ~ \
+    && ln -sfv ${HOME}/Project/dotfiles/vim/package.json ${HOME}/.config/coc/extensions/package.json
 
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
-
-chsh -s $(which zsh)
 
 echo "The system is yours to use, The world is within finger tips grasp!"
