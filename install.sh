@@ -42,10 +42,6 @@ source ${PWD}/zsh/.zprofile
 
 go install github.com/posener/complete@latest && gocomplete -install < "yes"
 
-# installing vim plugins
-## creating vim plugins folders
-rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{plugins,colors}/start
-
 git clone https://github.com/powerline/fonts.git --depth=1 \
     && source fonts/install.sh && fc-cache -vf && rm -rf fonts/
 
