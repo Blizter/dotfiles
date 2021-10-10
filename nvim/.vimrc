@@ -16,6 +16,33 @@
 "  https://github.com/Chewie/configs
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" install vim plug and plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'git@github.com:axvr/photon.vim.git'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'tpope/vim-vinegar'
+Plug 'majutsushi/tagbar'
+Plug 'dense-analysis/ale'
+
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins loading
@@ -55,10 +82,6 @@ set hidden
 " Set the time (in milliseconds) spent idle until various actions occur
 " In this configuration, it is particularly useful for the tagbar plugin
 set updatetime=500
-
-" For some stupid reason, vim requires the term to begin with "xterm", so the
-" automatically detected "rxvt-unicode-256color" doesn't work.
-set term=xterm-256color
 
 " appending paths to tags for
 set tags+=.git/tags

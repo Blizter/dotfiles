@@ -117,15 +117,6 @@ alias reload="source ${HOME}/.zprofile"
 alias mkd="mkdir -pv"
 alias docker="podman "
 
-# Functions
-# vim_plugins_updates () {
-#     # installing vim plugins
-#     ## creating vim plugins folders
-#     rm -rf ${HOME}/.vim/ &&\
-#         mkdir -p ${HOME}/.vim/pack/{plugins,colors}/start
-#     parallel -a ${HOME}/Projects/dotfiles/vim/plugins.sh
-# }
-
 #autocd
 setopt autocd
 
