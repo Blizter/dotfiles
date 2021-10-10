@@ -25,7 +25,7 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 [ -d "${HOME}/.poetry/bin" ] && PATH="$HOME/.poetry/bin:$PATH"
 
 # set main editor
-export EDITOR="vim -u ~/.vimrc"
+export EDITOR="nvim"
 
 # Nvidia cuda cli tool
 export PATH=/usr/local/cuda-11.3/bin${PATH:+:${PATH}}

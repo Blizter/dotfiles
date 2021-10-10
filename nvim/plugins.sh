@@ -20,8 +20,8 @@ git clone --depth=1 git@github.com:tpope/vim-vinegar.git ~/.vim/pack/plugins/sta
 git clone --depth=1 git@github.com:preservim/tagbar.git ~/.vim/pack/plugins/start/tagbar
 
 # IDE-like features (linting) with 
-git clone --depth 1 git@github.com:dense-analysis/ale.git ~/.vim/pack/plugins/start/ale
-curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz --output - | tar xzfv - -C ~/.vim/pack/plugins/start/
+#git clone --depth 1 git@github.com:dense-analysis/ale.git ~/.vim/pack/plugins/start/ale
+#curl --fail -L https://github.com/neoclide/coc.nvim/archive/release.tar.gz --output - | tar xzfv - -C ~/.vim/pack/plugins/start/
 
 # Helptags generation
 vim -u NONE -c 'helpztags ~/.vim/pack/plugins/start/vim-fugitive' '+q!' > /dev/null

@@ -108,9 +108,9 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias vim="vim -u ${HOME}/.vimrc"
-alias zshconfig="vim -u ${HOME}/.vimrc ${HOME}/.zshrc"
-alias ohmyzsh="vim -u ${HOME}/.vimrc ${HOME}/.oh-my-zsh"
+alias vim="nvim"
+alias zshconfig="nvim ${HOME}/.zshrc"
+alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
 alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.zprofile"
@@ -118,13 +118,13 @@ alias mkd="mkdir -pv"
 alias docker="podman "
 
 # Functions
-vim_plugins_updates () {
-    # installing vim plugins
-    ## creating vim plugins folders
-    rm -rf ${HOME}/.vim/ &&\
-        mkdir -p ${HOME}/.vim/pack/{plugins,colors}/start
-    parallel -a ${HOME}/Projects/dotfiles/vim/plugins.sh
-}
+# vim_plugins_updates () {
+#     # installing vim plugins
+#     ## creating vim plugins folders
+#     rm -rf ${HOME}/.vim/ &&\
+#         mkdir -p ${HOME}/.vim/pack/{plugins,colors}/start
+#     parallel -a ${HOME}/Projects/dotfiles/vim/plugins.sh
+# }
 
 #autocd
 setopt autocd

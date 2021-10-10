@@ -10,10 +10,13 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # install the base
-sudo apt update && sudo apt install -y build-essential make wget curl vim-gtk3 \
+sudo apt update && sudo apt install -y build-essential make wget curl neovim\
     git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm g++ nodejs \
     freeglut3-dev libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev \
     libfreeimage3 libfreeimage-dev
+
+[ ! -d ${HOME}/.config/nvim ] && mkdir -p ${HOME}/.config/nvim
+[ ! -d ${ZSH_CUSTOM}/plugins/zsh-completions ] git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
 
 # install pyenv requirements
 if [ ! -d "${HOME}/.pyenv" ]; then
@@ -66,24 +69,12 @@ sudo apt-get update && sudo apt upgrade -y && sudo apt-get -y install podman
 
 wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 -P ${HOME}/Downloads/ \
     && sudo chmod +x ${HOME}/Downloads/hadolint-Linux-x86_64 \
-    && sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint 
-
-if [ ! -d ${HOME}/.config/coc/extensions ]
-then
-    mkdir -p ${HOME}/.config/coc/extensions \
-        && cd ${HOME}/.config/coc/extensions \
-        && ln -sfv ${HOME}/Project/dotfiles/vim/package.json ${HOME}/.config/coc/extensions/package.json \
-        && npm install coc-snippets --global-style --ignore-scripts \
-            --no-bin-links --no-package-lock --only=prod \
-        && cd ${HOME}
-fi
+    && sudo mv ${HOME}/Downloads/hadolint-Linux-x86_64 /usr/local/bin/hadolint
 
 ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/vim/.vimrc ~ \
-    && ln -sfv ${HOME}/Project/dotfiles/vim/package.json ${HOME}/.config/coc/extensions/package.json
-
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ~/.config/nvim \
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ~
 
 echo "The system is yours to use, The world is within finger tips grasp!"
