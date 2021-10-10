@@ -33,12 +33,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'git@github.com:axvr/photon.vim.git'
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
+Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'tpope/vim-vinegar'
-Plug 'majutsushi/tagbar'
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale' | Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
