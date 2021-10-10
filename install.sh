@@ -34,23 +34,17 @@ sudo apt install -y python3-dev python3-pip \
     && poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 
 #install go and go shell completion
-sudo rm -rf /usr/local/go \
-    && wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz -P ${HOME}/Downloads/ \
-    && sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz \
-    && rm ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz \
+sudo rm -rf /usr/local/go
+wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz -P ${HOME}/Downloads/ --output - | sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.17.1.linux-amd64.tar.gz \
     && go install
 
 source ${PWD}/zsh/.zprofile
 
-go install github.com/posener/complete@latest
-gocomplete -install < "yes"
+go install github.com/posener/complete@latest && gocomplete -install < "yes"
 
 # installing vim plugins
 ## creating vim plugins folders
 rm -rf ${HOME}/.vim/ && mkdir -p ${HOME}/.vim/pack/{plugins,colors}/start
-
-## vim plugins repo cloning as a parallel process
-parallel -a ./vim/plugins.sh && mkdir -p ${HOME}/.config/coc/extensions
 
 git clone https://github.com/powerline/fonts.git --depth=1 \
     && source fonts/install.sh && fc-cache -vf && rm -rf fonts/
