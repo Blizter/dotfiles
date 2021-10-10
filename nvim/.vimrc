@@ -36,7 +36,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'dense-analysis/ale' | Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale' 
 
 call plug#end()
 
@@ -45,6 +45,9 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins loading
 packloadall
+
+"Removes delay when changing mode 
+set timeoutlen=1000 ttimeoutlen=0
 
 " Load all help tags
 silent! helptags ALL
@@ -280,3 +283,4 @@ let g:ale_fixers = {
   \ }
 
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+
