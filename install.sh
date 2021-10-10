@@ -18,6 +18,9 @@ sudo apt update && sudo apt install -y build-essential make wget curl neovim\
 [ ! -d ${HOME}/.config/nvim ] && mkdir -p ${HOME}/.config/nvim
 [ ! -d ${ZSH_CUSTOM}/plugins/zsh-completions ] git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 # install pyenv requirements
 if [ ! -d "${HOME}/.pyenv" ]; then
     echo "Installing pyenv"
