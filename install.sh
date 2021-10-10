@@ -11,7 +11,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 
 # install the base
 sudo apt update && sudo apt install -y build-essential make wget curl neovim\
-    git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm g++ nodejs \
+    git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm g++ node \
     freeglut3-dev libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev \
     libfreeimage3 libfreeimage-dev
 

@@ -26,6 +26,7 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 
 # set main editor
 export EDITOR="nvim"
+export MYVIMRC=${HOME}/.config/nvim
 
 # Nvidia cuda cli tool
 export PATH=/usr/local/cuda-11.3/bin${PATH:+:${PATH}}
