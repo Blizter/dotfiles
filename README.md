@@ -9,7 +9,12 @@ Set of dotfiles to configure my environments. This repo is part of my decision t
         && chsh -s $(which zsh)
     ```
 
-2. Run `install.sh` will install the packages, cli tools, and create links for the different dotfiles
+2. [Install oh-my-sh](https://github.com/ohmyzsh/ohmyzsh#basic-installation):
+ ```bash
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+3. Run `install.sh` will install the packages, cli tools, and create links for the different dotfiles
 
 ## Bash
 Contains `.zshrc` and `.zprofile`
@@ -17,5 +22,5 @@ Contains `.zshrc` and `.zprofile`
 ## tmux
 tmux config files
 
-## vim
-contains `.vimrc` and an install script for plugins from GitHub.
+## Neovim
+contains `init.vim` and `.vimrc` that configures vim environment .
