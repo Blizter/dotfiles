@@ -6,10 +6,10 @@
 "   Blizter
 "
 " Complete_version:
-"   This config file is based on the following :
-"       You can find the complete configuration,
-"       including all the plugins used, here:
-"       https://github.com/Chewie/configs
+"    This config file is based on the following :
+"        You can find the complete configuration,
+"        including all the plugins used, here:
+"        https://github.com/Chewie/configs
 "
 " Acknowledgements:
 "  this config file is based on this guy's work :
@@ -36,7 +36,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'dense-analysis/ale' 
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -46,7 +46,7 @@ call plug#end()
 " Plugins loading
 packloadall
 
-"Removes delay when changing mode 
+"Removes delay when changing mode
 set timeoutlen=1000 ttimeoutlen=0
 
 " Load all help tags
@@ -283,4 +283,3 @@ let g:ale_fixers = {
   \ }
 
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
-
