@@ -29,7 +29,7 @@ sudo apt update && sudo apt install -y build-essential make wget curl neovim \
 
 # Install go and go shell completion
 sudo rm -rf /usr/local/go \
-    && wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
+    && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
 
 [ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
 
@@ -40,12 +40,16 @@ TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $
 [ ! -d ${HOME}/.poetry ] && sudo apt install -y python3-dev python3-pip; \
                             python3 -m pip install --upgrade bpytop pip; \
                             curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
-                            poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+                            poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry || poetry self update
 
 git clone https://github.com/powerline/fonts.git --depth=1 \
-    && source fonts/install.sh && fc-cache -vf && rm -rf fonts/
+    && source fonts/install.sh \
+    && fc-cache -vf \
+    && rm -rf fonts
 
-wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 -P ${HOME}/Downloads/ -O /usr/local/bin/hadolint \
+wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
+        -P ${HOME}/Downloads/ \
+        -O /usr/local/bin/hadolint \
     && sudo chmod +x /usr/local/bin/hadolint
 
 # PODMAN Install
@@ -64,4 +68,4 @@ ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ~/.config/nvim/init.vim \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ~
 
-echo "The system is yours to use, The world is within finger tips grasp!"
+echo "Done"
