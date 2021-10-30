@@ -16,7 +16,7 @@ curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 sudo apt update && sudo apt install -y build-essential make wget curl neovim \
         nodejs git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm \
         g++ freeglut3-dev libx11-dev libxmu-dev libxi-dev libglu1-mesa \
-        libglu1-mesa-dev libfreeimage3 libfreeimage-dev
+        timewarrior libglu1-mesa-dev libfreeimage3 libfreeimage-dev
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
