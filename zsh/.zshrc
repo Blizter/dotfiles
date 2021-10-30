@@ -85,9 +85,14 @@ HISTFILESIZE=${HOME}/.history
 plugins=(
     git
     autojump
+    dotenv
     zsh-completions
     python
     poetry
+    kubectl
+    terraform
+    golang
+
 )
 
 source $ZSH/oh-my-zsh.sh
