@@ -15,12 +15,18 @@ Set of dotfiles to configure my environments. This repo is part of my decision t
 ```
 
 3. Run `install.sh` will install the packages, cli tools, and create links for the different dotfiles
+4. [install Nerd Font Caskaydia](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip)
 
-## Bash
-Contains `.zshrc` and `.zprofile`
+## Zsh
+Contains :
+- `.zshrc`
+- `.zprofile`
+- `.p10k.zsh`
+- `.inputrc`
 
 ## tmux
-tmux config files
+- `.tmux.conf`
 
 ## Neovim
-contains `init.vim` and `.vimrc` that configures vim environment .
+- `init.vim`
+- `.vimrc`
