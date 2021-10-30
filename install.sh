@@ -1,6 +1,5 @@
-#! /bin/bash
-
-set -exo pipefail
+#! /bin/zsh
+set -euo pipefail
 
 #update the system
 sudo dnf update
@@ -13,45 +12,49 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 #yarn
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 ## install the different tools
-sudo dnf module install -y nodejs:12
-sudo dnf install -y lpf-spotify-client wget curl tmux vim autojump parallel gnome-tweak-tool tree mlocate fedora-workstation-repositories powerline-fonts freeglut-devel libX11-devel libXi-devel libXmu-devel make mesa-libGLU-devel
- 
-
-# enable third-party
 sudo dnf config-manager --set-enabled google-chrome
-
-# install third party
-sudo dnf install -y google-chrome-stable
-
+sudo dnf groupinstall "Development Tools" "Development Libraries"
+sudo dnf install -y wget curl neovim tree mlocate git tmux autojump make\
+                    ctags gnome-tweak-tool parallel llvm fedora-workstation-repositories \
+                    powerline-fonts freeglut-devel libX11-devel libXi-devel libXmu-devel \
+                    mesa-libGLU-devel google-chrome-stable podman
+sudo npm install yarn -g
 sudo updatedb
 
-# pyenv requirements
-sudo dnf groupinstall -y 'Development Tools'
+[ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
+[ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
+    git clone https://github.com/zsh-users/zsh-completions \
+    ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions
 
-if [ ! -d "/home/eric/.pyenv" ];
-then
-    sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel sqlite \
-    sqlite-devel openssl-devel xz xz-devel libffi-devel findutils
-    curl https://pyenv.run | bash
-fi
-wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P ${HOME}/Downloads/ &&\
-    sudo tar -C /usr/local -xzf ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz &&\
-    rm ${HOME}/Downloads/go1.15.6.linux-amd64.tar.gz
+[ ! -d "/home/eric/.pyenv" ] && sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel \
+                                    sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel \
+                                    findutils; curl https://pyenv.run | bash || pyenv update
 
-source ${HOME}/.bash_profile
+sudo rm -rf /usr/local/go \
+    && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz -P ${HOME}/Downloads/ -O - | \
+            sudo tar -C /usr/local -xzf -
 
-sudo dnf install -y python3-devel.x86_64 python3-pip python3-wheel
-python3 -m pip install bpytop
+[ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
 
-# installing vim plugins
-## creating vim plugins folders
-rm -rf ${HOME}/.vim/ && mkdir -pv ${HOME}/.vim/pack/{plugins,colors}/start
+TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/zsh/.zshrc)
+[ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
 
-## vim plugins repo cloning as a parallel process
-parallel -a ./vim/plugins.sh
+sudo dnf install -y python3-devel.x86_64 python3-pip
+python3 -m pip install --upgrade bpytop pip; \
 
-# powerline fonts 
-git clone https://github.com/powerline/fonts.git --depth=1 && source fonts/install.sh &&\
-    fc-cache -vf && rm -rf fonts/
+# install poetry
+[ ! -d ${HOME}/.poetry ] &&
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.3; \
+    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry || poetry self update 1.1.3
 
-printf "The system is yours to use, The world is within finger tips grasp!" 
+wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
+        -P ${HOME}/Downloads/ -O /usr/local/bin/hadolint \
+        && sudo chmod +x /usr/local/bin/hadolint
+
+ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
+    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
+    && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ~ \
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ~/.config/nvim/init.vim \
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ~
+
+echo "Done"

@@ -6,20 +6,51 @@
 "   Blizter
 "
 " Complete_version:
-"   This config file is based on the following :
-"       You can find the complete configuration,
-"       including all the plugins used, here:
-"       https://github.com/Chewie/configs
+"    This config file is based on the following :
+"        You can find the complete configuration,
+"        including all the plugins used, here:
+"        https://github.com/Chewie/configs
 "
 " Acknowledgements:
 "  this config file is based on this guy's work :
 "  https://github.com/Chewie/configs
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" install vim plug and plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'git@github.com:axvr/photon.vim.git'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
+Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'dense-analysis/ale'
+
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins loading
 packloadall
+
+"Removes delay when changing mode
+set timeoutlen=1000 ttimeoutlen=0
+
+" Load all help tags
+silent! helptags ALL
 
 " Welcome to the future
 set nocompatible
@@ -37,7 +68,7 @@ set autowrite
 set nobackup
 
 " Use the clipboard as default register
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Force encoding to utf-8, for systems where this is not the default (windows
 " comes to mind)
@@ -52,11 +83,6 @@ set hidden
 " Set the time (in milliseconds) spent idle until various actions occur
 " In this configuration, it is particularly useful for the tagbar plugin
 set updatetime=500
-
-" For some stupid reason, vim requires the term to begin with "xterm", so the
-" automatically detected "rxvt-unicode-256color" doesn't work.
-set term=xterm-256color
-set t_Co=256
 
 " appending paths to tags for
 set tags+=.git/tags
@@ -117,10 +143,10 @@ colorscheme photon
 " Highlight characters after 80th column
 highlight OverLength term=bold cterm=bold
 match OverLength /\%81v.\+/
-
-" Cursorline as highlight instead of underline 
+set colorcolumn=81
+" Cursorline as highlight instead of underline
 set cursorline
-hi CursorLine term=bold cterm=bold 
+hi CursorLine term=bold cterm=bold
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Airline settings
@@ -218,3 +244,41 @@ let g:netrw_altv = 1
 " let opened winows take 5% of screen width
 let g:netrw_winsize = 90
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"" Setting up linting Options
+
+" Disable linting on file opening
+let g:ale_lint_on_enter = 0
+
+" Lint on save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+
+" airline extensions
+let g:airline#extensions#ale#enabled = 1
+
+" Visuals for errors and warnings
+
+" gutter open to show errors
+let g:ale_sign_column_always = 1
+
+" errors signs
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+" Linters config
+let g:ale_linters = {
+  \ 'python': ['flake8'],
+  \ 'markdown' : ['markdownlint']
+  \ }
+
+" Fixers config
+let g:ale_fixers = {
+  \ 'python' : ['black','autopep8','isort'],
+  \ '*': ['remove_trailing_lines', 'trim_whitespace']
+  \ }
+
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
