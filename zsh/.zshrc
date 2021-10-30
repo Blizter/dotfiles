@@ -135,7 +135,7 @@ alias docker="podman "
 setopt autocd
 
 #autojump
-source /usr/share/autojump/autojump.bash
+source /usr/share/autojump/autojump.zsh
 complete -o nospace -C /home/eric/go/bin/gocomplete go
 
 autoload -U compinit && compinit

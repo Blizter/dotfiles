@@ -13,7 +13,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 
 sudo dnf groupinstall -y "Development Tools" "Development Libraries"
 
-sudo dnf install -y wget curl neovim tree mlocate git tmux autojump make ctags gnome-tweak-tool \
+sudo dnf install -y wget curl neovim tree mlocate git tmux autojump-zsh make ctags gnome-tweak-tool \
                     parallel llvm fedora-workstation-repositories powerline-fonts freeglut-devel \
                     libX11-devel libXi-devel libXmu-devel mesa-libGLU-devel podman
 
