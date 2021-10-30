@@ -9,17 +9,18 @@ sudo dnf update
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-#yarn
-curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 ## install the different tools
 sudo dnf config-manager --set-enabled google-chrome
+
 sudo dnf groupinstall "Development Tools" "Development Libraries"
-sudo dnf install -y wget curl neovim tree mlocate git tmux autojump make\
-                    ctags gnome-tweak-tool parallel llvm fedora-workstation-repositories \
-                    powerline-fonts freeglut-devel libX11-devel libXi-devel libXmu-devel \
-                    mesa-libGLU-devel google-chrome-stable podman
-sudo npm install yarn -g
-sudo updatedb
+
+sudo dnf install -y wget curl neovim tree mlocate git tmux autojump make ctags gnome-tweak-tool \
+                    parallel llvm fedora-workstation-repositories powerline-fonts freeglut-devel \
+                    libX11-devel libXi-devel libXmu-devel mesa-libGLU-devel podman
+
+sudo npm install yarn -g \
+    && sudo updatedb \
+    && sudo dnf install -y google-chrome-stable
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
