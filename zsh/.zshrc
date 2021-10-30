@@ -92,7 +92,6 @@ plugins=(
     kubectl
     terraform
     golang
-
 )
 
 source $ZSH/oh-my-zsh.sh

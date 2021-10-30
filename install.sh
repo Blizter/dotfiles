@@ -37,11 +37,10 @@ sudo npm install yarn -g \
     curl https://pyenv.run | bash || ${HOME}/.pyenv/bin/pyenv update
 
 sudo rm -rf /usr/local/go \
-    && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz \
+    && wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz \
             -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf -
 
-[ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && \
-    go install github.com/posener/complete@latest
+go install github.com/posener/complete/gocomplete@latest
 
 TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/zsh/.zshrc)
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && \
