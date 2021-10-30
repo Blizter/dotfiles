@@ -71,6 +71,7 @@ sudo apt autoclean autoremove \
 
 ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
+    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.p10k.zsh ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ~/.config/nvim/init.vim \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ~
