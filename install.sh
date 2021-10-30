@@ -44,10 +44,12 @@ TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
 
 # install poetry
-[ ! -d ${HOME}/.poetry ] && sudo apt install -y python3-dev python3-pip; \
-                            python3 -m pip install --upgrade bpytop pip; \
-                            curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
-                            poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry || poetry self update
+[ ! -d ${HOME}/.poetry ] && \
+    sudo apt install -y python3-dev python3-pip; \
+        python3 -m pip install --upgrade bpytop pip; \
+        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
+    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
+    poetry config virtualenvs.in-project true || poetry self update
 
 git clone https://github.com/powerline/fonts.git --depth=1 \
     && source fonts/install.sh \
