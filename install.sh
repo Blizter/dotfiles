@@ -11,7 +11,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 
 ## install the different tools
 
-sudo dnf groupinstall "Development Tools" "Development Libraries"
+sudo dnf groupinstall -y "Development Tools" "Development Libraries"
 
 sudo dnf install -y wget curl neovim tree mlocate git tmux autojump make ctags gnome-tweak-tool \
                     parallel llvm fedora-workstation-repositories powerline-fonts freeglut-devel \
@@ -27,9 +27,13 @@ sudo npm install yarn -g \
     git clone https://github.com/zsh-users/zsh-completions \
     ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions
 
+[ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k" ] && \
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+    ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
+
 [ ! -d "/home/eric/.pyenv" ] && sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel \
-                                    sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel \
-                                    findutils; curl https://pyenv.run | bash || ${HOME}/.pyenv/bin/pyenv update
+                                    sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils; \
+                                curl https://pyenv.run | bash || ${HOME}/.pyenv/bin/pyenv update
 
 sudo rm -rf /usr/local/go \
     && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz -P ${HOME}/Downloads/ -O - | \
@@ -50,8 +54,8 @@ python3 -m pip install --upgrade bpytop pip; \
     ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry || ${HOME}/.poetry/bin/poetry self update 1.1.3
 
 sudo wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
-	-P ${HOME}/Downloads/ -O /usr/local/bin/hadolint \
-        && sudo chmod +x /usr/local/bin/hadolint
+        -P ${HOME}/Downloads/ -O /usr/local/bin/hadolint \
+    && sudo chmod +x /usr/local/bin/hadolint
 
 ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ${HOME} \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ${HOME} \
