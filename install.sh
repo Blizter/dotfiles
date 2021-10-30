@@ -51,11 +51,6 @@ TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $
     poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
     poetry config virtualenvs.in-project true || poetry self update
 
-git clone https://github.com/powerline/fonts.git --depth=1 \
-    && source fonts/install.sh \
-    && fc-cache -vf \
-    && rm -rf fonts
-
 wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
         -P ${HOME}/Downloads/ \
         -O /usr/local/bin/hadolint \
