@@ -55,8 +55,8 @@ python3 -m pip install --upgrade bpytop pip; \
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.3; \
     mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/; \
     touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry; \
-    ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry \
-    || ${HOME}/.poetry/bin/poetry self update 1.1.3
+    ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
+    poetry config virtualenvs.in-project true || ${HOME}/.poetry/bin/poetry self update 1.1.3
 
 sudo wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
         -P ${HOME}/Downloads/ -O /usr/local/bin/hadolint \
