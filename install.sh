@@ -59,6 +59,7 @@ sudo wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint
 
 ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ${HOME} \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ${HOME} \
+    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.p10k.zsh ${HOME} \
     && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ${HOME} \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ${HOME}/.config/nvim/init.vim \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ${HOME}
