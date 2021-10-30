@@ -10,7 +10,6 @@ sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-r
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 ## install the different tools
-sudo dnf config-manager --set-enabled google-chrome
 
 sudo dnf groupinstall "Development Tools" "Development Libraries"
 
@@ -20,6 +19,7 @@ sudo dnf install -y wget curl neovim tree mlocate git tmux autojump make ctags g
 
 sudo npm install yarn -g \
     && sudo updatedb \
+    && sudo dnf config-manager --set-enabled google-chrome
     && sudo dnf install -y google-chrome-stable
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
