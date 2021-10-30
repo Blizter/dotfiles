@@ -19,7 +19,7 @@ sudo dnf install -y wget curl neovim tree mlocate git tmux autojump make ctags g
 
 sudo npm install yarn -g \
     && sudo updatedb \
-    && sudo dnf config-manager --set-enabled google-chrome
+    && sudo dnf config-manager --set-enabled google-chrome \
     && sudo dnf install -y google-chrome-stable
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
@@ -29,7 +29,7 @@ sudo npm install yarn -g \
 
 [ ! -d "/home/eric/.pyenv" ] && sudo dnf install -y zlib-devel bzip2 bzip2-devel readline-devel \
                                     sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel \
-                                    findutils; curl https://pyenv.run | bash || pyenv update
+                                    findutils; curl https://pyenv.run | bash || ${HOME}/.pyenv/bin/pyenv update
 
 sudo rm -rf /usr/local/go \
     && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz -P ${HOME}/Downloads/ -O - | \
@@ -46,16 +46,17 @@ python3 -m pip install --upgrade bpytop pip; \
 # install poetry
 [ ! -d ${HOME}/.poetry ] &&
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.3; \
-    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry || poetry self update 1.1.3
+    mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/; touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ \
+    ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry || ${HOME}/.poetry/bin/poetry self update 1.1.3
 
-wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
-        -P ${HOME}/Downloads/ -O /usr/local/bin/hadolint \
+sudo wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
+	-P ${HOME}/Downloads/ -O /usr/local/bin/hadolint \
         && sudo chmod +x /usr/local/bin/hadolint
 
-ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ~/.config/nvim/init.vim \
-    && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ~
+ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ${HOME} \
+    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ${HOME} \
+    && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ${HOME} \
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ${HOME}/.config/nvim/init.vim \
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ${HOME}
 
 echo "Done"
