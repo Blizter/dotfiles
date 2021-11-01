@@ -16,7 +16,8 @@ curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 sudo apt update && sudo apt install -y build-essential make wget curl neovim \
         nodejs git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm \
         g++ freeglut3-dev libx11-dev libxmu-dev libxi-dev libglu1-mesa \
-        timewarrior libglu1-mesa-dev libfreeimage3 libfreeimage-dev
+        timewarrior libglu1-mesa-dev libfreeimage3 libfreeimage-dev \
+        apt-transport-https ca-certificates gnupg software-properties-common
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
@@ -36,7 +37,8 @@ sudo apt update && sudo apt install -y build-essential make wget curl neovim \
 
 # Install go and go shell completion
 sudo rm -rf /usr/local/go \
-    && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
+    && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz \
+        -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
 
 [ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
 
@@ -56,21 +58,51 @@ wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linu
         -O /usr/local/bin/hadolint \
     && sudo chmod +x /usr/local/bin/hadolint
 
-# PODMAN Install
+# PODMAN signing keys
 source /etc/os-release
 [ "$VERSION_ID" != "20.1*" ] && echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list ;\
                                 curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
 
+# Kubectl signing keys
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+# Terraform signing keys
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+# Microsoft sning keys
+curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | \
+    sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+AZ_REPO=$(lsb_release -cs)
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ \
+    $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+
+# install
 sudo apt autoclean autoremove \
     && sudo apt-get update \
     && sudo apt upgrade -y \
-    && sudo apt-get -y install podman
+    && sudo apt-get -y install podman kubectl terraform azure-cli
+
+# AWS cli version 2 Install
+[ ! -d "/usr/local/aws-cli/v2/" ] && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" \
+        -o "${HOME}/Downloads/awscliv2.zip" \
+    && unzip ${HOME}/Downloads/awscliv2.zip -d ${HOME}/Downloads/\
+    && sudo ${HOME}/Downloads/aws/install \
+    && rm -rf ${HOME}/Downloads/awscliv2.zip ${HOME}/Downloads/aws
+
+# Install KinD
+curl -Lo ${HOME}/.local/bin/kind \
+    https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
+    && chmod +x ${HOME}/.local/bin/kind
 
 ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.p10k.zsh ~ \
     && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim ~/.config/nvim/init.vim \
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim \
+        ~/.config/nvim/init.vim \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ~
 
 echo "Done"

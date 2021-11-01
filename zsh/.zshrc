@@ -125,13 +125,26 @@ alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.zprofile"
 alias mkd="mkdir -pv"
 alias docker="podman "
+alias k=kubectl
+alias tf=terraform
 
 #autocd
 setopt autocd
 
-#autojump
+#autojump autocomplete
 source /usr/share/autojump/autojump.sh
 complete -o nospace -C /home/eric/go/bin/gocomplete go
+
+#kubectl autocomplete
+source <(kubectl completion zsh)
+complete -F __start_kubectl k
+
+# Terraform autocomplete
+complete -o nospace -C /usr/bin/terraform terraform
+complete -o nospace -C /usr/bin/terraform tf
+
+# aws autocomplete
+complete -C '/usr/local/bin/aws_completer' aws
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
