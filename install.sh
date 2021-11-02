@@ -17,7 +17,7 @@ sudo apt update && sudo apt install -y build-essential make wget curl neovim \
         nodejs git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm \
         g++ freeglut3-dev libx11-dev libxmu-dev libxi-dev libglu1-mesa \
         timewarrior libglu1-mesa-dev libfreeimage3 libfreeimage-dev \
-        apt-transport-https ca-certificates gnupg software-properties-common
+        apt-transport-https ca-certificates gnupg software-properties-common fzf
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
