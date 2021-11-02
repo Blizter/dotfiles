@@ -84,6 +84,26 @@ sudo apt autoclean autoremove \
     && sudo apt upgrade -y \
     && sudo apt-get -y install podman kubectl terraform azure-cli
 
+# Download Kubectx
+[ ! -f "${HOME}/.local/bin/kubectx" ] && \
+    wget https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx \
+        -O ${HOME}/.local/bin/kubectx; \
+    chmod +x ${HOME}/.local/bin/kubectx
+
+# Download Kubens
+[ ! -f "${HOME}/.local/bin/kubens" ] && \
+    wget https://github.com/ahmetb/kubens/releases/download/v0.9.4/kubens \
+        -O ${HOME}/.local/bin/kubens; \
+    chmod +x ${HOME}/.local/bin/kubens
+# Kubens and kubectx zsh completion
+[ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
+    mkdir -p ${HOME}/.oh-my-zsh/completions; \
+    chmod -R 755 ${HOME}/.oh-my-zsh/completions; \
+    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubectx.zsh \
+        -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh; \
+    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.zsh \
+        -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh; \
+
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" \
@@ -97,12 +117,12 @@ curl -Lo ${HOME}/.local/bin/kind \
     https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
     && chmod +x ${HOME}/.local/bin/kind
 
-ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.p10k.zsh ~ \
-    && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ~ \
+ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ${HOME} \
+    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ${HOME} \
+    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.p10k.zsh ${HOME} \
+    && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ${HOME} \
     && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim \
-        ~/.config/nvim/init.vim \
-    && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ~
+        ${HOME}/.config/nvim/init.vim \
+    && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ${HOME}
 
 echo "Done"

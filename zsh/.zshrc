@@ -127,6 +127,8 @@ alias mkd="mkdir -pv"
 alias docker="podman "
 alias k=kubectl
 alias tf=terraform
+alias kns=kubens
+alias kcx=kubectx
 
 #autocd
 setopt autocd
