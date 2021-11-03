@@ -37,7 +37,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=7
+export UPDATE_ZSH_DAYS=5
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -139,7 +139,9 @@ complete -o nospace -C /home/eric/go/bin/gocomplete go
 
 #kubectl autocomplete
 source <(kubectl completion zsh)
+complete -F __start_kubectl kubectl
 complete -F __start_kubectl k
+
 
 # Terraform autocomplete
 complete -o nospace -C /usr/bin/terraform terraform
@@ -147,6 +149,9 @@ complete -o nospace -C /usr/bin/terraform tf
 
 # aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
+
+# KinD autocomplete
+source <(kind completion zsh)
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit

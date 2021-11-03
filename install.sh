@@ -95,6 +95,7 @@ sudo apt autoclean autoremove \
     wget https://github.com/ahmetb/kubens/releases/download/v0.9.4/kubens \
         -O ${HOME}/.local/bin/kubens; \
     chmod +x ${HOME}/.local/bin/kubens
+
 # Kubens and kubectx zsh completion
 [ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
     mkdir -p ${HOME}/.oh-my-zsh/completions; \
@@ -115,7 +116,10 @@ sudo apt autoclean autoremove \
 # Install KinD
 curl -Lo ${HOME}/.local/bin/kind \
     https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
-    && chmod +x ${HOME}/.local/bin/kind
+    && chmod +x ${HOME}/.local/bin/kind \
+    && ${HOME}/.local/bin/kind completion zsh >| \
+        ${HOME}/.oh-my-zsh/completions/_kind \
+    && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
 
 ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ${HOME} \
     && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ${HOME} \
