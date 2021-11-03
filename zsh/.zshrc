@@ -150,9 +150,6 @@ complete -o nospace -C /usr/bin/terraform tf
 # aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
 
-# KinD autocomplete
-source <(kind completion zsh)
-
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
