@@ -80,9 +80,15 @@ sudo wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint
         -P ${HOME}/Downloads/ -O ${HOME}/.local/bin/hadolint \
     && sudo chmod +x ${HOME}/.local/bin/hadolint
 
+# Download Kubectx
+[ ! -f "${HOME}/.local/bin/kubectx" ] && \
+    wget https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx \
+        -O ${HOME}/.local/bin/kubectx; \
+    chmod +x ${HOME}/.local/bin/kubectx
+
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    wget https://github.com/ahmetb/kubens/releases/download/v0.9.4/kubens \
+    wget https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens \
         -O ${HOME}/.local/bin/kubens; \
     chmod +x ${HOME}/.local/bin/kubens
 
