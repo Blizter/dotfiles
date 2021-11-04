@@ -10,18 +10,16 @@ sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-r
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 ## install the different tools
-
-sudo dnf groupinstall -y "Development Tools" "Development Libraries"
-
-sudo dnf install -y wget curl neovim tree mlocate git tmux autojump-zsh make ctags gnome-tweak-tool \
+sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
+&& sudo dnf install -y wget curl neovim tree mlocate git tmux autojump-zsh make ctags gnome-tweak-tool \
                     parallel llvm fedora-workstation-repositories powerline-fonts freeglut-devel \
                     libX11-devel libXi-devel libXmu-devel mesa-libGLU-devel podman timew stow stacer
                     dnf-plugins-core \
 && sudo npm install yarn -g \
 && sudo updatedb
 
-
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
+
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
     git clone https://github.com/zsh-users/zsh-completions \
         ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions
@@ -44,12 +42,13 @@ TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && \
     gocomplete -install -y
 
-sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install --upgrade bpytop pip; \
+sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install --upgrade bpytop pip
+
 # poetry
 [ ! -d ${HOME}/.poetry ] &&
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.3; \
-    mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/; \
-    touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry; \
+    mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
+    touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
     ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
     poetry config virtualenvs.in-project true || ${HOME}/.poetry/bin/poetry self update 1.1.3
 
@@ -57,10 +56,9 @@ mkdir -p ${HOME}/.local/bin
 
 # Kubectl signing keys
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-
 echo "$(<kubectl.sha256) kubectl" | sha256sum --check && \
-sudo chmod +x kubectl; \
-sudo mv kubectl ${HOME}/.local/bin
+    sudo chmod +x kubectl; \
+    sudo mv kubectl ${HOME}/.local/bin
 
 # Terraform signing keys
 sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
