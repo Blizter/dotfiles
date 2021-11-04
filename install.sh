@@ -113,6 +113,7 @@ curl -Lo ${HOME}/.local/bin/kind \
 
 stow zsh \
     && stow tmux \
-    && stow nvim
+    && stow nvim \
+    && stow urxvt
 
 echo "Done"
