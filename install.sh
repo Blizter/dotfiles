@@ -58,7 +58,8 @@ mkdir -p ${HOME}/.local/bin
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
 echo "$(<kubectl.sha256) kubectl" | sha256sum --check && \
-    chmod 755 kubectl && mv kubectl ${HOME}/.local/bin
+    chmod 755 kubectl && mv kubectl ${HOME}/.local/bin \
+    && rm kubectl
 
 # Terraform signing keys
 sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
