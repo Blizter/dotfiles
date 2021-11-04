@@ -93,13 +93,12 @@ sudo wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint
     chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
-[ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
-    mkdir -p ${HOME}/.oh-my-zsh/completions; \
-    chmod -R 755 ${HOME}/.oh-my-zsh/completions; \
-    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh \
-        -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh; \
-    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
-        -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh; \
+mkdir -p ${HOME}/.oh-my-zsh/completions; \
+chmod -R 755 ${HOME}/.oh-my-zsh/completions; \
+wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh \
+    -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh; \
+wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
+    -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh; \
 
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
