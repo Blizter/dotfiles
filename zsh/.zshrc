@@ -125,6 +125,7 @@ alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.zprofile"
 alias mkd="mkdir -pv"
 alias docker="podman "
+alias watch="watch -n 1 "
 alias k=kubectl
 alias tf=terraform
 alias kns=kubens
@@ -139,7 +140,6 @@ complete -o nospace -C /home/eric/go/bin/gocomplete go
 
 #kubectl autocomplete
 source <(kubectl completion zsh)
-complete -F __start_kubectl kubectl
 complete -F __start_kubectl k
 
 
