@@ -115,6 +115,6 @@ curl -Lo ${HOME}/.local/bin/kind \
         ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
 
-stow -d .dotfiles -t ${HOME}
+stow --target=${HOME} dotfiles
 
 echo "Done"
