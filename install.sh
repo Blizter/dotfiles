@@ -47,7 +47,7 @@ sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install -
 # poetry
 [ ! -d ${HOME}/.poetry ] &&
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.3; \
-    mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
+   mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
     touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
     ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
     poetry config virtualenvs.in-project true || ${HOME}/.poetry/bin/poetry self update 1.1.3
@@ -57,8 +57,7 @@ mkdir -p ${HOME}/.local/bin
 # Kubectl signing keys
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod 755 kubectl \
-&& mv kubectl ${HOME}/.local/bin \
-&& rm kubectl
+&& mv kubectl ${HOME}/.local/bin 
 
 # Terraform signing keys
 sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
