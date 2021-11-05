@@ -57,7 +57,7 @@ mkdir -p ${HOME}/.local/bin
 # Kubectl signing keys
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod 755 kubectl \
-&& mv kubectl ${HOME}/.local/bin 
+&& mv kubectl ${HOME}/.local/bin
 
 # Terraform signing keys
 sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
@@ -115,9 +115,6 @@ curl -Lo ${HOME}/.local/bin/kind \
         ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
 
-stow zsh \
-    && stow tmux \
-    && stow nvim \
-    && stow urxvt
+stow .dotfiles
 
 echo "Done"
