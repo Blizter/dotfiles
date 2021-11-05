@@ -38,7 +38,7 @@ sudo rm -rf /usr/local/go \
             -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
     && go install github.com/posener/complete/gocomplete@latest
 
-TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/zsh/.zshrc)
+TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/.dotfiles/.zshrc)
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && \
     gocomplete -install -y
 
