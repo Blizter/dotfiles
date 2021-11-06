@@ -1,6 +1,16 @@
 #! /bin/zsh
 set -euo pipefail
 
+# Function download latest release from github api
+# https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
+github_dl(){
+    curl -s https://api.github.com/repos/$1/releases/lastest \
+        | grep -i "browser_download_url$2" \
+        | grep $3 \
+        | cut -d '"' -f 4 \
+        | wget -i - -O $4
+}
+
 # Update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
@@ -13,18 +23,20 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
 # Install base packages
-sudo apt update && sudo apt install -y build-essential make wget curl neovim \
-        nodejs git tmux autojump universal-ctags gnome-tweaks yarn parallel llvm \
-        g++ freeglut3-dev libx11-dev libxmu-dev libxi-dev libglu1-mesa \
-        timewarrior libglu1-mesa-dev libfreeimage3 libfreeimage-dev \
-        apt-transport-https ca-certificates gnupg software-properties-common fzf
+sudo apt update && \
+sudo apt install -y git wget curl tmux autojump parallel apt-transport-https \
+                    ca-certificates gnupg fzf neovim universal-ctags \
+                    gnome-tweaks vlc stacer notepadqq virtualbox timewarrior stow \
+                    software-properties-common build-essential \
+                    g++ gcc llvm make yarn nodejs \
+                    libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
+                    libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
+
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
-
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
     git clone https://github.com/zsh-users/zsh-completions \
         ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions
-
 [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ] && \
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
         ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -33,12 +45,11 @@ sudo apt update && sudo apt install -y build-essential make wget curl neovim \
 [ ! -d "${HOME}/.pyenv" ] && sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
                                 libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
                                 libffi-dev liblzma-dev python-openssl; \
-                            curl https://pyenv.run | bash || pyenv update
+                            curl https://pyenv.run | bash || pyenv self update 1.1.3
 
 # Install go and go shell completion
 sudo rm -rf /usr/local/go \
-    && wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz \
-        -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
+&& wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz  -O - | sudo tar -C /usr/local -xzf -
 
 [ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
 
@@ -53,10 +64,13 @@ TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $
     poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
     poetry config virtualenvs.in-project true || poetry self update
 
-wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
-        -P ${HOME}/Downloads/ \
-        -O /usr/local/bin/hadolint \
+github_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
     && sudo chmod +x /usr/local/bin/hadolint
+
+github_dl app-outlet/app-outlet ".*deb" "linux64" ${HOME}/Downloads \
+    && sudo dpkg -i {HOME}/Downloads/app-outlet_2.0.2_amd64.deb \
+    && rm -f {HOME}/Downloads/app-outlet_2.0.2_amd64.deb
+
 
 # PODMAN signing keys
 source /etc/os-release
@@ -75,8 +89,8 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | \
     sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
 AZ_REPO=$(lsb_release -cs)
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ \
-    $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+    sudo tee /etc/apt/sources.list.d/azure-cli.list
 
 # install
 sudo apt autoclean autoremove \
@@ -86,24 +100,21 @@ sudo apt autoclean autoremove \
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    wget https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx \
-        -O ${HOME}/.local/bin/kubectx; \
-    chmod +x ${HOME}/.local/bin/kubectx
-
+    github_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx ;\
+        chmod +x ${HOME}/.local/bin/kubectx
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    wget https://github.com/ahmetb/kubens/releases/download/v0.9.4/kubens \
-        -O ${HOME}/.local/bin/kubens; \
-    chmod +x ${HOME}/.local/bin/kubens
+    github_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx ;\
+        chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
 [ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
-    mkdir -p ${HOME}/.oh-my-zsh/completions; \
-    chmod -R 755 ${HOME}/.oh-my-zsh/completions; \
+    mkdir -p ${HOME}/.oh-my-zsh/completions && \
+    chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
     wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh \
-        -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh; \
+        -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
     wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
-        -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh; \
+        -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh && \
 
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
@@ -121,12 +132,8 @@ curl -Lo ${HOME}/.local/bin/kind \
         ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
 
-ln -sfv ${HOME}/Projects/dotfiles/zsh/.zprofile ${HOME} \
-    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.zshrc ${HOME} \
-    && ln -sfv ${HOME}/Projects/dotfiles/zsh/.p10k.zsh ${HOME} \
-    && ln -sfv ${HOME}/Projects/dotfiles/tmux/.tmux.conf ${HOME} \
-    && ln -sfv ${HOME}/Projects/dotfiles/nvim/init.vim \
-        ${HOME}/.config/nvim/init.vim \
-    && ln -sfv ${HOME}/Projects/dotfiles/nvim/.vimrc ${HOME}
+stow --target=${HOME} zsh
+stow --target=${HOME} tmux
+stow --target=${HOME} nvim
 
 echo "Done"
