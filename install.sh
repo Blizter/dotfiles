@@ -45,7 +45,15 @@ sudo apt install -y git wget curl tmux autojump parallel apt-transport-https \
 [ ! -d "${HOME}/.pyenv" ] && sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
                                 libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
                                 libffi-dev liblzma-dev python-openssl; \
-                            curl https://pyenv.run | bash || pyenv self update 1.1.3
+                            curl https://pyenv.run | bash || pyenv update
+
+# install poetry
+[ ! -d ${HOME}/.poetry ] && \
+    sudo apt install -y python3-dev python3-pip; \
+        python3 -m pip install --upgrade bpytop pip; \
+        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
+    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
+    poetry config virtualenvs.in-project true || poetry self update 1.1.3
 
 # Install go and go shell completion
 sudo rm -rf /usr/local/go \
@@ -56,13 +64,6 @@ sudo rm -rf /usr/local/go \
 TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/zsh/.zshrc)
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
 
-# install poetry
-[ ! -d ${HOME}/.poetry ] && \
-    sudo apt install -y python3-dev python3-pip; \
-        python3 -m pip install --upgrade bpytop pip; \
-        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
-    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
-    poetry config virtualenvs.in-project true || poetry self update
 
 github_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
     && sudo chmod +x /usr/local/bin/hadolint
@@ -70,7 +71,6 @@ github_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
 github_dl app-outlet/app-outlet ".*deb" "linux64" ${HOME}/Downloads \
     && sudo dpkg -i {HOME}/Downloads/app-outlet_2.0.2_amd64.deb \
     && rm -f {HOME}/Downloads/app-outlet_2.0.2_amd64.deb
-
 
 # PODMAN signing keys
 source /etc/os-release
@@ -100,12 +100,12 @@ sudo apt autoclean autoremove \
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    github_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx ;\
-        chmod +x ${HOME}/.local/bin/kubectx
+    github_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx \
+    && chmod +x ${HOME}/.local/bin/kubectx
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    github_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx ;\
-        chmod +x ${HOME}/.local/bin/kubens
+    github_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx \
+    && chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
 [ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
@@ -118,18 +118,15 @@ sudo apt autoclean autoremove \
 
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" \
-        -o "${HOME}/Downloads/awscliv2.zip" \
-    && unzip ${HOME}/Downloads/awscliv2.zip -d ${HOME}/Downloads/\
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "${HOME}/Downloads/awscliv2.zip" \
+    && unzip ${HOME}/Downloads/awscliv2.zip -d ${HOME}/Downloads/ \
     && sudo ${HOME}/Downloads/aws/install \
     && rm -rf ${HOME}/Downloads/awscliv2.zip ${HOME}/Downloads/aws
 
 # Install KinD
-curl -Lo ${HOME}/.local/bin/kind \
-    https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
+curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
     && chmod +x ${HOME}/.local/bin/kind \
-    && ${HOME}/.local/bin/kind completion zsh >| \
-        ${HOME}/.oh-my-zsh/completions/_kind \
+    && ${HOME}/.local/bin/kind completion zsh >| ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
 
 stow --target=${HOME} zsh
