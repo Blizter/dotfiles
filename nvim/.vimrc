@@ -31,7 +31,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-Plug 'git@github.com:axvr/photon.vim.git'
+Plug 'mhartington/oceanic-next'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'

@@ -3,11 +3,10 @@ set -euo pipefail
 
 # Function download latest release from github api
 # https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
-github_dl(){
-    curl -s https://api.github.com/repos/$1/releases/lastest \
-        | grep -i "browser_download_url$2" \
-        | grep $3 \
-        | cut -d '"' -f 4 \
+
+github_latest_dl(){
+    curl https://api.github.com/repos/$1/releases/latest \
+        | grep -i "browser_download_url$2" | grep $3 | cut -d '"' -f 4 \
         | wget -i - -O $4
 }
 
@@ -24,28 +23,29 @@ curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
 # Install base packages
 sudo apt update && \
-sudo apt install -y git wget curl tmux autojump parallel apt-transport-https \
-                    ca-certificates gnupg fzf neovim universal-ctags \
-                    gnome-tweaks vlc stacer notepadqq virtualbox timewarrior stow \
+sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
+                    apt-transport-https ca-certificates gnupg fzf neovim \
+                    universal-ctags gnome-tweaks vlc stacer notepadqq virtualbox \
+                    timewarrior stow flatpak \
                     software-properties-common build-essential \
                     g++ gcc llvm make yarn nodejs \
                     libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
                     libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
 
-
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
+
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
     git clone https://github.com/zsh-users/zsh-completions \
         ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions
-[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ] && \
+[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k" ] && \
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-        ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+        ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Install pyenv requirements
 [ ! -d "${HOME}/.pyenv" ] && sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
                                 libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-                                libffi-dev liblzma-dev python-openssl; \
-                            curl https://pyenv.run | bash || pyenv update
+                                libffi-dev liblzma-dev python-openssl && curl https://pyenv.run | bash \
+                                || pyenv update
 
 # install poetry
 [ ! -d ${HOME}/.poetry ] && \
@@ -65,12 +65,12 @@ TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
 
 
-github_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
+github_latest_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
     && sudo chmod +x /usr/local/bin/hadolint
 
-github_dl app-outlet/app-outlet ".*deb" "linux64" ${HOME}/Downloads \
-    && sudo dpkg -i {HOME}/Downloads/app-outlet_2.0.2_amd64.deb \
-    && rm -f {HOME}/Downloads/app-outlet_2.0.2_amd64.deb
+github_latest_dl app-outlet/app-outlet ".*deb" "amd64" ${HOME}/Downloads/app-outlet_2.0.2_amd64.deb \
+    && sudo dpkg -i ${HOME}/Downloads/app-outlet_2.0.2_amd64.deb \
+    && rm -f ${HOME}/Downloads/app-outlet_2.0.2_amd64.deb
 
 # PODMAN signing keys
 source /etc/os-release
@@ -100,11 +100,11 @@ sudo apt autoclean autoremove \
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    github_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx \
+    github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx \
     && chmod +x ${HOME}/.local/bin/kubectx
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    github_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx \
+    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx \
     && chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
@@ -128,6 +128,14 @@ curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-
     && chmod +x ${HOME}/.local/bin/kind \
     && ${HOME}/.local/bin/kind completion zsh >| ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
+
+# Install Nord color theme
+## GTK
+# sudo mkdir -p /usr/share/themes \
+#     && github_latest_dl EliverLara/Nordic "" "darker$" - | \
+#         sudo tar -xjv - -C /usr/share/themes \
+#     && gsettings set org.gnome.desktop.interface gtk-theme "Nordic-darker" \
+#     && gsettings set org.gnome.desktop.wm.preferences theme "Nordic-darker"
 
 stow --target=${HOME} zsh
 stow --target=${HOME} tmux
