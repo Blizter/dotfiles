@@ -137,6 +137,8 @@ set showmatch
 set completeopt=longest,menuone
 
 " color theme Palette for text editor
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 
 " Highlight characters after 80th column
@@ -158,7 +160,7 @@ if !exists('g:airline_symbols')
 endif
 
 " Set up vim-arline and vim-airline-theme
-let g:airline_theme='deus'
+let g:airline_theme='oceanicnext'
 let g:airline#extensions#tabline#enabled = 1
 
 " unicode symbols

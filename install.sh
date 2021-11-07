@@ -61,7 +61,7 @@ sudo rm -rf /usr/local/go \
 
 [ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
 
-TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/zsh/.zshrc)
+TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" ${HOME}/.zshrc)
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
 
 
@@ -131,14 +131,11 @@ curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-
 
 # Install Nord color theme
 ## GTK
-# sudo mkdir -p /usr/share/themes \
-#     && github_latest_dl EliverLara/Nordic "" "darker$" - | \
-#         sudo tar -xjv - -C /usr/share/themes \
-#     && gsettings set org.gnome.desktop.interface gtk-theme "Nordic-darker" \
-#     && gsettings set org.gnome.desktop.wm.preferences theme "Nordic-darker"
+sudo mkdir -p /usr/share/themes \
+    && github_latest_dl EliverLara/Nordic "" "darker$" - | \
+        sudo tar -xjv - -C /usr/share/themes \
+    && gsettings set org.gnome.desktop.interface gtk-theme "Nordic-darker" \
+    && gsettings set org.gnome.desktop.wm.preferences theme "Nordic-darker"
 
-stow --target=${HOME} zsh/
-stow --target=${HOME} tmux/
-stow --target=${HOME} nvim/
-
+stow --target=${HOME} dotfiles
 echo "Done"
