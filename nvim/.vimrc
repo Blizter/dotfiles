@@ -31,8 +31,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-Plug 'mhartington/oceanic-next'
-Plug 'sheerun/vim-polyglot'
+Plug 'mhartington/oceanic-next'| Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -138,7 +137,7 @@ set showmatch
 set completeopt=longest,menuone
 
 " color theme Palette for text editor
-colorscheme photon
+colorscheme OceanicNext
 
 " Highlight characters after 80th column
 highlight OverLength term=bold cterm=bold

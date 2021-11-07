@@ -137,8 +137,8 @@ curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-
 #     && gsettings set org.gnome.desktop.interface gtk-theme "Nordic-darker" \
 #     && gsettings set org.gnome.desktop.wm.preferences theme "Nordic-darker"
 
-stow --target=${HOME} zsh
-stow --target=${HOME} tmux
-stow --target=${HOME} nvim
+stow --target=${HOME} zsh/
+stow --target=${HOME} tmux/
+stow --target=${HOME} nvim/
 
 echo "Done"
