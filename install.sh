@@ -1,6 +1,12 @@
 #! /bin/zsh
 set -euo pipefail
 
+github_latest_dl(){
+    curl https://api.github.com/repos/$1/releases/latest \
+        | grep -i "browser_download_url$2" | grep $3 | cut -d '"' -f 4 \
+        | wget -i - -O $4
+}
+
 #update the system
 sudo dnf update -y
 
@@ -11,10 +17,12 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 
 ## install the different tools
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
-&& sudo dnf install -y wget curl neovim tree mlocate git tmux autojump-zsh make ctags gnome-tweak-tool \
-                    parallel llvm fedora-workstation-repositories powerline-fonts freeglut-devel \
-                    libX11-devel libXi-devel libXmu-devel mesa-libGLU-devel podman timew stow stacer
-                    dnf-plugins-core \
+&& sudo dnf install -y git-all wget curl tmux autojump-zsh parallel \
+                    ca-certificates gnupg fzf neovim ctags tree\
+                    vlc stacer notepadqq virtualbox podman timew stow \
+                    stacer fedora-workstation-repositories dnf-plugins-core \
+                    freeglut-devel libX11-devel libXi-devel libXmu-devel \
+                    mesa-libGLU-devel \
 && sudo npm install yarn -g \
 && sudo updatedb
 
@@ -39,8 +47,7 @@ sudo rm -rf /usr/local/go \
     && go install github.com/posener/complete/gocomplete@latest
 
 TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/dotfiles/.zshrc)
-[ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && \
-    gocomplete -install -y
+[ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
 
 sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install --upgrade bpytop pip
 
@@ -56,8 +63,7 @@ mkdir -p ${HOME}/.local/bin
 
 # Kubectl signing keys
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-chmod 755 kubectl \
-&& mv kubectl ${HOME}/.local/bin
+chmod 755 kubectl && mv kubectl ${HOME}/.local/bin
 
 # Terraform signing keys
 sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
@@ -74,30 +80,29 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.re
 #install kubectl terraform azure-cli
 sudo dnf -y install terraform azure-cli
 
-# hadolint dockerfile linter
-sudo wget https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64 \
-        -P ${HOME}/Downloads/ -O ${HOME}/.local/bin/hadolint \
-    && sudo chmod +x ${HOME}/.local/bin/hadolint
+github_latest_dl app-outlet/app-outlet ".*rpm" "x86_64" ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm \
+    && sudo rpm -i ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm \
+    && rm -f ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm
 
-# Download Kubectx
+[ ! -f "${HOME}/.local/bin/hadolint" ] && \
+github_latest_dl hadolint/hadolint ".*x86_64" "Linux" ${HOME}/.local/bin/hadolint \
+    && chmod +x ${HOME}/.local/bin/hadolint
+
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    wget https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubectx \
-        -O ${HOME}/.local/bin/kubectx; \
-    chmod +x ${HOME}/.local/bin/kubectx
-
+    github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx \
+    && chmod +x ${HOME}/.local/bin/kubectx
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    wget https://github.com/ahmetb/kubectx/releases/download/v0.9.4/kubens \
-        -O ${HOME}/.local/bin/kubens; \
-    chmod +x ${HOME}/.local/bin/kubens
+    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx \
+    && chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
-mkdir -p ${HOME}/.oh-my-zsh/completions; \
-chmod -R 755 ${HOME}/.oh-my-zsh/completions; \
+mkdir -p ${HOME}/.oh-my-zsh/completions && \
+chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
 wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh \
-    -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh; \
+    -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
 wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
-    -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh; \
+    -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
 
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
@@ -114,6 +119,8 @@ curl -Lo ${HOME}/.local/bin/kind \
     && ${HOME}/.local/bin/kind completion zsh >| \
         ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
+
+# Nord theme KDE
 
 stow --target=${HOME} dotfiles
 

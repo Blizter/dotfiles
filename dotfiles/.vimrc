@@ -31,8 +31,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-Plug 'git@github.com:axvr/photon.vim.git'
-Plug 'sheerun/vim-polyglot'
+Plug 'arcticicestudio/nord-vim'| Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -138,7 +137,9 @@ set showmatch
 set completeopt=longest,menuone
 
 " color theme Palette for text editor
-colorscheme photon
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme nord
 
 " Highlight characters after 80th column
 highlight OverLength term=bold cterm=bold
@@ -149,17 +150,18 @@ set cursorline
 hi CursorLine term=bold cterm=bold
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Airline settings
+" Airline Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-
+" air-line
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'bubblegum'
-let g:airline#extentions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+
+" Set up vim-arline and vim-airline-theme
+let g:airline_theme='nord'
+let g:airline#extensions#tabline#enabled = 1
 
 " unicode symbols
 let g:airline_left_sep = '»'
