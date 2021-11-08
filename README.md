@@ -2,10 +2,10 @@
 Set of dotfiles to configure my environments. This repo is part of my decision to go further with my terminal-based workflow as explained in this [article](https://erichammel.xyz/posts/going-terminal-based/) on my blog.
 
 ## Pre-req
-1. Install zsh, set shell to zsh, then reboot by executing the following block:
+1. Install zsh, set shell to zsh, then reboot by executing the following block :
     ```bash
-    sudo apt update && sudo apt upgrade -y \
-        && sudo apt install zsh \
+    sudo dnf update -y \
+        && sudo dnf install util-linux-user zsh \
         && chsh -s $(which zsh) \
         && sudo reboot
     ```
