@@ -73,8 +73,11 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/azure-cli.repo
 
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+
 #install kubectl terraform azure-cli
-sudo dnf -y install terraform azure-cli
+dnf check-update
+sudo dnf -y install terraform azure-cli code
 
 [ ! -f "${HOME}/.local/bin/hadolint" ] && \
 github_latest_dl hadolint/hadolint ".*x86_64" "Linux" ${HOME}/.local/bin/hadolint \
@@ -84,7 +87,7 @@ github_latest_dl hadolint/hadolint ".*x86_64" "Linux" ${HOME}/.local/bin/hadolin
     github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx ; \
     chmod +x ${HOME}/.local/bin/kubectx
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx ; \
+    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubens ; \
     chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
