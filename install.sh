@@ -19,7 +19,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 && sudo dnf install -y git-core wget curl tmux autojump-zsh parallel \
                     ca-certificates gnupg fzf neovim ctags tree\
-                    vlc stacer podman timew stow go libXtst snapd\
+                    vlc stacer podman timew stow go \
                     fedora-workstation-repositories dnf-plugins-core \
                     freeglut-devel libX11-devel libXi-devel libXmu-devel \
                     mesa-libGLU-devel \
@@ -75,9 +75,6 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.re
 
 #install kubectl terraform azure-cli
 sudo dnf -y install terraform azure-cli
-mkdir -p ${HOME}/.local/share/applications
-github_latest_dl app-outlet/app-outlet ".*Outlet" "AppImage" ${HOME}/.local/share/applications/App.Outlet-2.0.2.AppImage \
-    && chmod u+x ${HOME}/.local/share/applications/App.Outlet-2.0.2.AppImage
 
 [ ! -f "${HOME}/.local/bin/hadolint" ] && \
 github_latest_dl hadolint/hadolint ".*x86_64" "Linux" ${HOME}/.local/bin/hadolint \
