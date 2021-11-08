@@ -44,10 +44,10 @@ sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 sudo rm -rf /usr/local/go \
     && wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz \
             -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
-    && go install github.com/posener/complete/gocomplete@latest
+    && /usr/local/go install github.com/posener/complete/gocomplete@latest
 
 TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/dotfiles/.zshrc)
-[ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
+[ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && ${HOME}/go/bin/gocomplete -install -y
 
 sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install --upgrade bpytop pip
 
