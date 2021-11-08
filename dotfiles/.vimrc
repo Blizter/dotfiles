@@ -31,7 +31,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-Plug 'mhartington/oceanic-next'| Plug 'sheerun/vim-polyglot'
+Plug 'arcticicestudio/nord-vim'| Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter' | Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -139,7 +139,7 @@ set completeopt=longest,menuone
 " color theme Palette for text editor
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
-colorscheme OceanicNext
+colorscheme nord
 
 " Highlight characters after 80th column
 highlight OverLength term=bold cterm=bold
@@ -160,7 +160,7 @@ if !exists('g:airline_symbols')
 endif
 
 " Set up vim-arline and vim-airline-theme
-let g:airline_theme='oceanicnext'
+let g:airline_theme='nord'
 let g:airline#extensions#tabline#enabled = 1
 
 " unicode symbols

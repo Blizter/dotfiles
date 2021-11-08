@@ -32,7 +32,7 @@ sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
                     libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
                     libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
 
-[ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
+# [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
     git clone https://github.com/zsh-users/zsh-completions \
@@ -131,11 +131,18 @@ curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-
 
 # Install Nord color theme
 ## GTK
-sudo mkdir -p /usr/share/themes \
-    && github_latest_dl EliverLara/Nordic "" "darker$" - | \
-        sudo tar -xjv - -C /usr/share/themes \
+[ ! -d "/usr/share/themes/Nordic-darker" ] && \
+    sudo mkdir -p /usr/share/themes \
+    && github_latest_dl EliverLara/Nordic "" "darker.tar.xz" ${HOME}/Downloads \
+    && sudo tar -xf ${HOME}/Downloads/Nordic-darker.tar.xz -C /usr/share/themes \
+    && rm -rf ${HOME}/Downloads/Nordic-darker.tar.xz \
     && gsettings set org.gnome.desktop.interface gtk-theme "Nordic-darker" \
     && gsettings set org.gnome.desktop.wm.preferences theme "Nordic-darker"
 
+[ ! -d "${HOME}/nord-gnome-terminal" ] && \
+    git clone https://github.com/arcticicestudio/nord-gnome-terminal.git ${HOME} \
+    && source nord-gnome-terminal/src/nord.sh
+
 stow --target=${HOME} dotfiles
+
 echo "Done"
