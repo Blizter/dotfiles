@@ -18,7 +18,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 ## install the different tools
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 && sudo dnf install -y git-all wget curl tmux autojump-zsh parallel \
-                    ca-certificates gnupg fzf neovim ctags tree\
+                    ca-certificates gnupg fzf nvim ctags tree\
                     vlc stacer notepadqq virtualbox podman timew stow \
                     stacer fedora-workstation-repositories dnf-plugins-core \
                     freeglut-devel libX11-devel libXi-devel libXmu-devel \
