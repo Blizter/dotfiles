@@ -17,9 +17,9 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 
 ## install the different tools
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
-&& sudo dnf install -y git-all wget curl tmux autojump-zsh parallel \
+&& sudo dnf install -y git-core wget curl tmux autojump-zsh parallel \
                     ca-certificates gnupg fzf neovim ctags tree\
-                    vlc stacer podman timew stow stacer go \
+                    vlc stacer podman timew stow go libXtst snapd\
                     fedora-workstation-repositories dnf-plugins-core \
                     freeglut-devel libX11-devel libXi-devel libXmu-devel \
                     mesa-libGLU-devel \
@@ -27,8 +27,6 @@ sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 && sudo updatedb \
 && go install github.com/posener/complete/gocomplete@latest
 
-
-go install github.com/posener/complete/gocomplete@latest
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
@@ -77,30 +75,28 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.re
 
 #install kubectl terraform azure-cli
 sudo dnf -y install terraform azure-cli
-
-github_latest_dl app-outlet/app-outlet ".*rpm" "x86_64" ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm \
-    && sudo rpm -i ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm \
-    && rm -f ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm
+mkdir -p ${HOME}/.local/share/applications
+github_latest_dl app-outlet/app-outlet ".*Outlet" "AppImage" ${HOME}/.local/share/applications/App.Outlet-2.0.2.AppImage \
+    && chmod u+x ${HOME}/.local/share/applications/App.Outlet-2.0.2.AppImage
 
 [ ! -f "${HOME}/.local/bin/hadolint" ] && \
 github_latest_dl hadolint/hadolint ".*x86_64" "Linux" ${HOME}/.local/bin/hadolint \
     && chmod +x ${HOME}/.local/bin/hadolint
 
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx \
-    && chmod +x ${HOME}/.local/bin/kubectx
-# Download Kubens
+    github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx ; \
+    chmod +x ${HOME}/.local/bin/kubectx
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx \
-    && chmod +x ${HOME}/.local/bin/kubens
+    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx ; \
+    chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
 mkdir -p ${HOME}/.oh-my-zsh/completions && \
-chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
 wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh \
     -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
 wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
-    -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
+    -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh \
+&& chmod -R 755 ${HOME}/.oh-my-zsh/completions
 
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
@@ -117,8 +113,6 @@ curl -Lo ${HOME}/.local/bin/kind \
     && ${HOME}/.local/bin/kind completion zsh >| \
         ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
-
-# Nord theme KDE
 
 stow --target=${HOME} dotfiles
 

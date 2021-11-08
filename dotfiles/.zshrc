@@ -124,18 +124,31 @@ KEYTIMEOUT=1
 alias vim="nvim"
 alias zshconfig="nvim ${HOME}/.zshrc"
 alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
-alias sa="sudo apt"
-alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.zprofile"
 alias mkd="mkdir -pv"
 alias docker="podman "
-
+alias watch="watch -n 1 "
+alias k="kubectl"
+alias tf="terraform"
+alias kns="kubens"
+alias kcx="kubectx"
 #autocd
 setopt autocd
 
 #autojump
 source /usr/share/autojump/autojump.zsh
 complete -o nospace -C /home/eric/go/bin/gocomplete go
+
+# kubectl completion
+source <(kubectl completion zsh)
+complete -F __start_kubectl k
+
+# Terraform completion
+complete -o nospace -C /usr/bin/terraform terraform
+complete -o nospace -C /usr/bin/terraform tf
+
+# AWS completion 
+complete -C '/usr/local/bin/aws_completer' aws
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
