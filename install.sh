@@ -44,6 +44,7 @@ sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 sudo rm -rf /usr/local/go \
     && wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz \
             -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
+    && sudo chmod +x /usr/local/go \
     && /usr/local/go install github.com/posener/complete/gocomplete@latest
 
 TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/dotfiles/.zshrc)
