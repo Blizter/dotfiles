@@ -19,13 +19,16 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 && sudo dnf install -y git-all wget curl tmux autojump-zsh parallel \
                     ca-certificates gnupg fzf neovim ctags tree\
-                    vlc stacer podman timew stow stacer \
+                    vlc stacer podman timew stow stacer go \
                     fedora-workstation-repositories dnf-plugins-core \
                     freeglut-devel libX11-devel libXi-devel libXmu-devel \
                     mesa-libGLU-devel \
 && sudo npm install yarn -g \
-&& sudo updatedb
+&& sudo updatedb \
+&& go install github.com/posener/complete/gocomplete@latest
 
+
+go install github.com/posener/complete/gocomplete@latest
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
@@ -41,12 +44,6 @@ sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
         sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils; \
     curl https://pyenv.run | bash || ${HOME}/.pyenv/bin/pyenv update
 
-sudo rm -rf /usr/local/go \
-    && wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz \
-            -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
-    && sudo chmod +x /usr/local/go \
-    && /usr/local/go install github.com/posener/complete/gocomplete@latest
-
 TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/dotfiles/.zshrc)
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && ${HOME}/go/bin/gocomplete -install -y
 
@@ -54,11 +51,11 @@ sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install -
 
 # poetry
 [ ! -d ${HOME}/.poetry ] &&
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.3; \
-   mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
-    touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
-    ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
-    poetry config virtualenvs.in-project true || ${HOME}/.poetry/bin/poetry self update 1.1.3
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - ; \
+	mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
+    	touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
+    #${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
+    #${HOME}/.poetry/bin/poetry config virtualenvs.in-project true 
 
 mkdir -p ${HOME}/.local/bin
 

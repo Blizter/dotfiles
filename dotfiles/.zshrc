@@ -140,7 +140,6 @@ complete -o nospace -C /home/eric/go/bin/gocomplete go
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
-export PATH="$HOME/.poetry/bin:$PATH"
-
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 # To customize prompt, run `p10k configure` or edit ~/Projects/dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/Projects/dotfiles/zsh/.p10k.zsh ]] || source ~/Projects/dotfiles/zsh/.p10k.zsh
