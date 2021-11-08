@@ -19,8 +19,8 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 && sudo dnf install -y git-all wget curl tmux autojump-zsh parallel \
                     ca-certificates gnupg fzf nvim ctags tree\
-                    vlc stacer notepadqq virtualbox podman timew stow \
-                    stacer fedora-workstation-repositories dnf-plugins-core \
+                    vlc stacer podman timew stow stacer \
+                    fedora-workstation-repositories dnf-plugins-core \
                     freeglut-devel libX11-devel libXi-devel libXmu-devel \
                     mesa-libGLU-devel \
 && sudo npm install yarn -g \
