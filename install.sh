@@ -52,8 +52,8 @@ sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install -
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - ; \
 	mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
     touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
-    poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
-    poetry config virtualenvs.in-project true
+    ${HOME}/.local/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
+    ${HOME}/.local/bin/poetry config virtualenvs.in-project true
 
 mkdir -p ${HOME}/.local/bin
 
