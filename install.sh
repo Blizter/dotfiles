@@ -19,7 +19,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
 && sudo dnf install -y git-core wget curl tmux autojump-zsh parallel \
                     ca-certificates gnupg fzf neovim ctags tree\
-                    vlc stacer podman timew stow go latte-dock \
+                    vlc stacer podman timew stow go latte-dock kvantum \
                     fedora-workstation-repositories dnf-plugins-core \
                     freeglut-devel libX11-devel libXi-devel libXmu-devel \
                     mesa-libGLU-devel \
