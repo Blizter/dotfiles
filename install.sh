@@ -17,14 +17,15 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 
 ## install the different tools
 sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
-&& sudo dnf install -y git-all wget curl tmux autojump-zsh parallel \
+&& sudo dnf install -y git-core wget curl tmux autojump-zsh parallel \
                     ca-certificates gnupg fzf neovim ctags tree\
-                    vlc stacer podman timew stow stacer \
+                    vlc stacer podman timew stow go latte-dock kvantum \
                     fedora-workstation-repositories dnf-plugins-core \
                     freeglut-devel libX11-devel libXi-devel libXmu-devel \
                     mesa-libGLU-devel \
 && sudo npm install yarn -g \
-&& sudo updatedb
+&& sudo updatedb \
+&& go install github.com/posener/complete/gocomplete@latest
 
 [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
@@ -41,12 +42,6 @@ sudo dnf groupinstall -y "Development Tools" "Development Libraries" \
         sqlite sqlite-devel openssl-devel xz xz-devel libffi-devel findutils; \
     curl https://pyenv.run | bash || ${HOME}/.pyenv/bin/pyenv update
 
-sudo rm -rf /usr/local/go \
-    && wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz \
-            -P ${HOME}/Downloads/ -O - | sudo tar -C /usr/local -xzf - \
-    && sudo chmod +x /usr/local/go \
-    && /usr/local/go install github.com/posener/complete/gocomplete@latest
-
 TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" $(pwd)/dotfiles/.zshrc)
 [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && ${HOME}/go/bin/gocomplete -install -y
 
@@ -54,11 +49,11 @@ sudo dnf install -y python3-devel.x86_64 python3-pip && python3 -m pip install -
 
 # poetry
 [ ! -d ${HOME}/.poetry ] &&
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --version 1.1.3; \
-   mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - ; \
+	mkdir -p ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/ ; \
     touch ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
-    ${HOME}/.poetry/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
-    poetry config virtualenvs.in-project true || ${HOME}/.poetry/bin/poetry self update 1.1.3
+    ${HOME}/.local/bin/poetry completions zsh > ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/poetry/_poetry ; \
+    ${HOME}/.local/bin/poetry config virtualenvs.in-project true
 
 mkdir -p ${HOME}/.local/bin
 
@@ -78,32 +73,30 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/azure-cli.repo
 
-#install kubectl terraform azure-cli
-sudo dnf -y install terraform azure-cli
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 
-github_latest_dl app-outlet/app-outlet ".*rpm" "x86_64" ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm \
-    && sudo rpm -i ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm \
-    && rm -f ${HOME}/Downloads/app-outlet_2.0.2.x86_64.rpm
+#install kubectl terraform azure-cli
+dnf check-update
+sudo dnf -y install terraform azure-cli code
 
 [ ! -f "${HOME}/.local/bin/hadolint" ] && \
 github_latest_dl hadolint/hadolint ".*x86_64" "Linux" ${HOME}/.local/bin/hadolint \
     && chmod +x ${HOME}/.local/bin/hadolint
 
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx \
-    && chmod +x ${HOME}/.local/bin/kubectx
-# Download Kubens
+    github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx ; \
+    chmod +x ${HOME}/.local/bin/kubectx
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx \
-    && chmod +x ${HOME}/.local/bin/kubens
+    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubens ; \
+    chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
 mkdir -p ${HOME}/.oh-my-zsh/completions && \
-chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
 wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh \
     -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
 wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
-    -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
+    -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh \
+&& chmod -R 755 ${HOME}/.oh-my-zsh/completions
 
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
@@ -120,8 +113,6 @@ curl -Lo ${HOME}/.local/bin/kind \
     && ${HOME}/.local/bin/kind completion zsh >| \
         ${HOME}/.oh-my-zsh/completions/_kind \
     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
-
-# Nord theme KDE
 
 stow --target=${HOME} dotfiles
 

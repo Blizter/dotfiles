@@ -124,12 +124,14 @@ KEYTIMEOUT=1
 alias vim="nvim"
 alias zshconfig="nvim ${HOME}/.zshrc"
 alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
-alias sa="sudo apt"
-alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.zprofile"
 alias mkd="mkdir -pv"
 alias docker="podman "
-
+alias watch="watch -n 1 "
+alias k="kubectl"
+alias tf="terraform"
+alias kns="kubens"
+alias kcx="kubectx"
 #autocd
 setopt autocd
 
@@ -137,13 +139,20 @@ setopt autocd
 source /usr/share/autojump/autojump.zsh
 complete -o nospace -C /home/eric/go/bin/gocomplete go
 
+# kubectl completion
+source <(kubectl completion zsh)
+complete -F __start_kubectl k
+
+# Terraform completion
+complete -o nospace -C /usr/bin/terraform terraform
+complete -o nospace -C /usr/bin/terraform tf
+
+# AWS completion
+complete -C '/usr/local/bin/aws_completer' aws
+
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
-export PATH="$HOME/.poetry/bin:$PATH"
-
-# To customize prompt, run `p10k configure` or edit ~/Projects/dotfiles/zsh/.p10k.zsh.
-[[ ! -f ~/Projects/dotfiles/zsh/.p10k.zsh ]] || source ~/Projects/dotfiles/zsh/.p10k.zsh
-
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
