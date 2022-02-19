@@ -4,12 +4,6 @@ set -euo pipefail
 # Function download latest release from github api
 # https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
 
-github_latest_dl(){
-    curl https://api.github.com/repos/$1/releases/latest \
-        | grep -i "browser_download_url$2" | grep $3 | cut -d '"' -f 4 \
-        | wget -i - -O $4
-}
-
 # Update the system
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
@@ -80,12 +74,16 @@ sudo apt autoclean autoremove \
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    github_latest_dl ahmetb/kubectx "" "/kubectx\"" ${HOME}/.local/bin/kubectx \
-    && chmod +x ${HOME}/.local/bin/kubectx
+    curl https://api.github.com/repos/ahmetb/kubectx/releases/latest \
+        | grep -i "browser_download_url" | grep "/kubectx\"" | cut -d '"' -f 4 \
+        | wget -i - -O ${HOME}/.local/bin/kubectx \
+    && chmod +x ~/.local/bin/kubectx
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    github_latest_dl ahmetb/kubectx "" "/kubens$\"" ${HOME}/.local/bin/kubens \
-    && chmod +x ${HOME}/.local/bin/kubens
+    curl https://api.github.com/repos/ahmetb/kubectx/releases/latest \
+        | grep -i "browser_download_url" | grep "/kubens\"" | cut -d '"' -f 4 \
+        | wget -i - -O ${HOME}/.local/bin/kubens \
+    && chmod +x ~/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
 [ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
