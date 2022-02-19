@@ -25,14 +25,11 @@ curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 sudo apt update && \
 sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
                     apt-transport-https ca-certificates gnupg fzf neovim \
-                    universal-ctags gnome-tweaks vlc stacer notepadqq virtualbox \
-                    timewarrior stow flatpak \
+                    universal-ctags timewarrior stow flatpak \
                     software-properties-common build-essential \
                     g++ gcc llvm make yarn nodejs \
                     libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
                     libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
-
-# [ ! -d "${HOME}/.config/nvim" ] && mkdir -p "${HOME}/.config/nvim"
 
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
     git clone https://github.com/zsh-users/zsh-completions \
@@ -45,24 +42,25 @@ sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
 [ ! -d "${HOME}/.pyenv" ] && sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
                                 libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
                                 libffi-dev liblzma-dev python-openssl && curl https://pyenv.run | bash \
-                                || pyenv update
+                                || ${HOME}/.pyenv/bin/pyenv update
 
 # install poetry
 [ ! -d ${HOME}/.poetry ] && \
     sudo apt install -y python3-dev python3-pip; \
         python3 -m pip install --upgrade bpytop pip; \
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
-    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
+    mkdir -p $ZSH_CUSTOM/plugins/poetry/ ;\
+    poetry completions zsh >| $ZSH_CUSTOM/plugins/poetry/_poetry ; \
     poetry config virtualenvs.in-project true || poetry self update 1.1.3
 
 # Install go and go shell completion
 sudo rm -rf /usr/local/go \
-&& wget https://golang.org/dl/go1.15.15.linux-amd64.tar.gz  -O - | sudo tar -C /usr/local -xzf -
+&& wget https://go.dev/dl/go1.17.6.linux-amd64.tar.gz  -O - | sudo tar -C /usr/local -xzf -
 
-[ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
+# [ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
 
-TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" ${HOME}/.zshrc)
-[ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
+# TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" ${HOME}/.zshrc)
+# [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
 
 
 github_latest_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
@@ -100,11 +98,11 @@ sudo apt autoclean autoremove \
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
-    github_latest_dl ahmetb/kubectx "" "kubectx$" ${HOME}/.local/bin/kubectx \
+    github_latest_dl ahmetb/kubectx "" "/kubectx\"" ${HOME}/.local/bin/kubectx \
     && chmod +x ${HOME}/.local/bin/kubectx
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
-    github_latest_dl ahmetb/kubectx "" "kubens$" ${HOME}/.local/bin/kubectx \
+    github_latest_dl ahmetb/kubectx "" "/kubens$\"" ${HOME}/.local/bin/kubens \
     && chmod +x ${HOME}/.local/bin/kubens
 
 # Kubens and kubectx zsh completion
@@ -123,11 +121,11 @@ sudo apt autoclean autoremove \
     && sudo ${HOME}/Downloads/aws/install \
     && rm -rf ${HOME}/Downloads/awscliv2.zip ${HOME}/Downloads/aws
 
-# Install KinD
-curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
-    && chmod +x ${HOME}/.local/bin/kind \
-    && ${HOME}/.local/bin/kind completion zsh >| ${HOME}/.oh-my-zsh/completions/_kind \
-    && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
+# # Install KinD
+# curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
+#     && chmod +x ${HOME}/.local/bin/kind \
+#     && ${HOME}/.local/bin/kind completion zsh >| ${HOME}/.oh-my-zsh/completions/_kind \
+#     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
 
 # Install Nord color theme
 ## GTK
