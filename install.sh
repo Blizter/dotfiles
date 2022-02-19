@@ -25,7 +25,8 @@ curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 sudo apt update && \
 sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
                     apt-transport-https ca-certificates gnupg fzf neovim \
-                    universal-ctags timewarrior stow flatpak \
+                    universal-ctags \
+                    timewarrior stow flatpak \
                     software-properties-common build-essential \
                     g++ gcc llvm make yarn nodejs \
                     libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
@@ -49,35 +50,16 @@ sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
     sudo apt install -y python3-dev python3-pip; \
         python3 -m pip install --upgrade bpytop pip; \
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
-    mkdir -p $ZSH_CUSTOM/plugins/poetry/ ;\
-    poetry completions zsh >| $ZSH_CUSTOM/plugins/poetry/_poetry ; \
-    poetry config virtualenvs.in-project true || poetry self update 1.1.3
+    mkdir -p $ZSH_CUSTOM/plugins/poetry/ ; \
+    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
+    poetry config virtualenvs.in-project true
 
 # Install go and go shell completion
 sudo rm -rf /usr/local/go \
-&& wget https://go.dev/dl/go1.17.6.linux-amd64.tar.gz  -O - | sudo tar -C /usr/local -xzf -
-
-# [ $(which gocomplete) != "${HOME}/go/bin/gocomplete" ] && go install github.com/posener/complete@latest
-
-# TEST_OUTPUT=$(grep -e "complete -o nospace -C /home/eric/go/bin/gocomplete go" ${HOME}/.zshrc)
-# [ ${TEST_OUTPUT} != "complete -o nospace -C /home/eric/go/bin/gocomplete go" ] && gocomplete -install -y
-
+&& wget https://golang.org/dl/go1.17.6.linux-amd64.tar.gz  -O - | sudo tar -C /usr/local -xzf -
 
 github_latest_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
     && sudo chmod +x /usr/local/bin/hadolint
-
-github_latest_dl app-outlet/app-outlet ".*deb" "amd64" ${HOME}/Downloads/app-outlet_2.0.2_amd64.deb \
-    && sudo dpkg -i ${HOME}/Downloads/app-outlet_2.0.2_amd64.deb \
-    && rm -f ${HOME}/Downloads/app-outlet_2.0.2_amd64.deb
-
-# PODMAN signing keys
-source /etc/os-release
-[ "$VERSION_ID" != "20.1*" ] && echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list ;\
-                                curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
-
-# Kubectl signing keys
-sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # Terraform signing keys
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
@@ -94,7 +76,7 @@ echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO 
 sudo apt autoclean autoremove \
     && sudo apt-get update \
     && sudo apt upgrade -y \
-    && sudo apt-get -y install podman kubectl terraform azure-cli
+    && sudo apt-get -y install terraform azure-cli
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
@@ -116,30 +98,10 @@ sudo apt autoclean autoremove \
 
 # AWS cli version 2 Install
 [ ! -d "/usr/local/aws-cli/v2/" ] && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "${HOME}/Downloads/awscliv2.zip" \
+    wget -O ${HOME}/Downloads/awscliv2.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \
     && unzip ${HOME}/Downloads/awscliv2.zip -d ${HOME}/Downloads/ \
     && sudo ${HOME}/Downloads/aws/install \
     && rm -rf ${HOME}/Downloads/awscliv2.zip ${HOME}/Downloads/aws
-
-# # Install KinD
-# curl -Lo ${HOME}/.local/bin/kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64 \
-#     && chmod +x ${HOME}/.local/bin/kind \
-#     && ${HOME}/.local/bin/kind completion zsh >| ${HOME}/.oh-my-zsh/completions/_kind \
-#     && chmod +x ${HOME}/.oh-my-zsh/completions/_kind
-
-# Install Nord color theme
-## GTK
-[ ! -d "/usr/share/themes/Nordic-darker" ] && \
-    sudo mkdir -p /usr/share/themes \
-    && github_latest_dl EliverLara/Nordic "" "darker.tar.xz" ${HOME}/Downloads \
-    && sudo tar -xf ${HOME}/Downloads/Nordic-darker.tar.xz -C /usr/share/themes \
-    && rm -rf ${HOME}/Downloads/Nordic-darker.tar.xz \
-    && gsettings set org.gnome.desktop.interface gtk-theme "Nordic-darker" \
-    && gsettings set org.gnome.desktop.wm.preferences theme "Nordic-darker"
-
-[ ! -d "${HOME}/nord-gnome-terminal" ] && \
-    git clone https://github.com/arcticicestudio/nord-gnome-terminal.git ${HOME} \
-    && source nord-gnome-terminal/src/nord.sh
 
 stow --target=${HOME} dotfiles
 
