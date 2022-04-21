@@ -155,5 +155,5 @@ autoload -Uz bashcompinit && bashcompinit
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ~/projects/perso/dotfiles/dotfiles/.p10k.zsh.
+[[ ! -f ~/projects/perso/dotfiles/dotfiles/.p10k.zsh ]] || source ~/projects/perso/dotfiles/dotfiles/.p10k.zsh
