@@ -124,7 +124,7 @@ alias sa="sudo apt"
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias reload="source ${HOME}/.zprofile"
 alias mkd="mkdir -pv"
-alias docker="podman "
+# alias docker="podman "
 alias watch="watch -n 1 "
 alias k=kubectl
 alias tf=terraform
@@ -153,7 +153,14 @@ complete -C '/usr/local/bin/aws_completer' aws
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
-export PATH="$HOME/.poetry/bin:$PATH"
-
 # To customize prompt, run `p10k configure` or edit ~/projects/perso/dotfiles/dotfiles/.p10k.zsh.
 [[ ! -f ~/projects/perso/dotfiles/dotfiles/.p10k.zsh ]] || source ~/projects/perso/dotfiles/dotfiles/.p10k.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/ehammel/projects/wallaroo/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ehammel/projects/wallaroo/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/ehammel/projects/wallaroo/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ehammel/projects/wallaroo/google-cloud-sdk/completion.zsh.inc'; fi

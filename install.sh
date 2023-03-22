@@ -43,7 +43,7 @@ sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
 [ ! -d ${HOME}/.poetry ] && \
     sudo apt install -y python3-dev python3-pip; \
         python3 -m pip install --upgrade bpytop pip; \
-        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -; \
+        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -; \
     mkdir -p $ZSH_CUSTOM/plugins/poetry/ ; \
     poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
     poetry config virtualenvs.in-project true
@@ -101,6 +101,6 @@ sudo apt autoclean autoremove \
     && sudo ${HOME}/Downloads/aws/install \
     && rm -rf ${HOME}/Downloads/awscliv2.zip ${HOME}/Downloads/aws
 
-stow --target=${HOME} dotfiles
+stow --restow --target=${HOME} dotfiles
 
 echo "Done"
