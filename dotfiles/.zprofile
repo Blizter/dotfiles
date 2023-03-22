@@ -21,6 +21,8 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
                                 eval "$(pyenv init -)" ; \
                                 eval "$(pyenv virtualenv-init -)"
 
+[ -d "${HOME}/.tfenv/bin" ] &&  PATH="${HOME}/.tfenv/bin:${PATH}"
+
 [ -d "${HOME}/.poetry/bin" ] && PATH="${HOME}/.poetry/bin:${PATH}"
 
 # set main editor

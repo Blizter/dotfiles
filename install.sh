@@ -55,11 +55,10 @@ sudo rm -rf /usr/local/go \
 github_latest_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
     && sudo chmod +x /usr/local/bin/hadolint
 
-# Terraform signing keys
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+#install tfenv
+git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
 
-# Microsoft sning keys
+# Microsoft signing keys
 curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | \
     sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
 AZ_REPO=$(lsb_release -cs)
@@ -70,7 +69,7 @@ echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO 
 sudo apt autoclean autoremove \
     && sudo apt-get update \
     && sudo apt upgrade -y \
-    && sudo apt-get -y install terraform azure-cli
+    && sudo apt-get -y install azure-cli
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
