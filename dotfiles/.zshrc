@@ -135,7 +135,7 @@ alias kcx=kubectx
 setopt autocd
 
 #autojump autocomplete
-source /usr/share/autojump/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 complete -o nospace -C /home/eric/go/bin/gocomplete go
 
 #kubectl autocomplete
@@ -159,8 +159,3 @@ autoload -Uz bashcompinit && bashcompinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/ehammel/projects/wallaroo/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ehammel/projects/wallaroo/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/ehammel/projects/wallaroo/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ehammel/projects/wallaroo/google-cloud-sdk/completion.zsh.inc'; fi
