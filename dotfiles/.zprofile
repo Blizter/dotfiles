@@ -34,4 +34,7 @@ export PATH=/usr/local/cuda-11.3/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 [ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"
+
