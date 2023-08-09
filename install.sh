@@ -1,11 +1,6 @@
 #! /bin/zsh
 set -euo pipefail
 
-# Function download latest release from github api
-# https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
-
-# Update the system
-sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
 ## Adding repos
 # Yarn repo
@@ -15,16 +10,8 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 # Add nodejs repositories
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
-# Install base packages
-sudo apt update && \
-sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
-                    apt-transport-https ca-certificates gnupg fzf neovim \
-                    universal-ctags \
-                    timewarrior stow flatpak \
-                    software-properties-common build-essential \
-                    g++ gcc llvm make yarn nodejs \
-                    libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
-                    libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
+brew update && \
+brew install git wget curl tmux autojump parallel fzf neovim ctags stow yarn node make pyenv pyenv-virtualenv kubectl
 
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
     git clone https://github.com/zsh-users/zsh-completions \
