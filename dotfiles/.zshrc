@@ -134,7 +134,7 @@ setopt autocd
 
 #autojump autocomplete
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-complete -o nospace -C /home/eric/go/bin/gocomplete go
+complete -o nospace -C ${GOBIN}/gocomplete go
 
 #kubectl autocomplete
 source <(kubectl completion zsh)
@@ -157,3 +157,4 @@ autoload -Uz bashcompinit && bashcompinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+autoload -U +X bashcompinit && bashcompinit
