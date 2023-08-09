@@ -17,9 +17,9 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 # pyenv python binaries
 [ -d "${HOME}/.pyenv/bin" ] &&  PYENV_ROOT="${HOME}/.pyenv"; \
                                 PATH="${PYENV_ROOT}/bin:${PATH}"; \
-                                eval "$(pyenv init --path)" ; \
                                 eval "$(pyenv init -)" ; \
-                                if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+                                eval "$(pyenv init --path)" ; \
+                                eval "$(pyenv virtualenv-init -)"
 [ -d "${HOME}/.tfenv/bin" ] &&  PATH="${HOME}/.tfenv/bin:${PATH}"
 
 [ -d "${HOME}/.poetry/bin" ] && PATH="${HOME}/.poetry/bin:${PATH}"
