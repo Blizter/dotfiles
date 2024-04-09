@@ -1,17 +1,27 @@
 #! /bin/zsh
 set -euo pipefail
 
-
-## Adding repos
-# Yarn repo
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-# Add nodejs repositories
-curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+stow --restow --target=${HOME} dotfiles
 
 brew update && \
-brew install git wget curl tmux autojump parallel fzf neovim ctags stow yarn node make pyenv pyenv-virtualenv kubectl
+brew install git wget curl tmux autojump parallel fzf \
+    neovim ctags stow yarn node make pyenv pyenv-virtualenv \
+    kubectl tfenv hadolint helm podman-desktop kind \
+    saml2aws tree 
+
+source ${HOME}/.zprofile
+
+## install python version
+pyenv install 3.11.4
+pyenv global 3.11.4
+pyenv rehash
+
+# install poetry
+[ ! -d ${HOME}/.poetry ] && \
+    curl -sSL https://install.python-poetry.org | python3 -; \
+    mkdir -p $ZSH_CUSTOM/plugins/poetry/ ; \
+    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
+    poetry config virtualenvs.in-project true
 
 [ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
     git clone https://github.com/zsh-users/zsh-completions \
@@ -19,44 +29,6 @@ brew install git wget curl tmux autojump parallel fzf neovim ctags stow yarn nod
 [ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k" ] && \
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
         ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
-
-# Install pyenv requirements
-[ ! -d "${HOME}/.pyenv" ] && sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
-                                libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-                                libffi-dev liblzma-dev python-openssl && curl https://pyenv.run | bash \
-                                || ${HOME}/.pyenv/bin/pyenv update
-
-# install poetry
-[ ! -d ${HOME}/.poetry ] && \
-    sudo apt install -y python3-dev python3-pip; \
-        python3 -m pip install --upgrade bpytop pip; \
-        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -; \
-    mkdir -p $ZSH_CUSTOM/plugins/poetry/ ; \
-    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry ; \
-    poetry config virtualenvs.in-project true
-
-# Install go and go shell completion
-sudo rm -rf /usr/local/go \
-&& wget https://golang.org/dl/go1.17.6.linux-amd64.tar.gz  -O - | sudo tar -C /usr/local -xzf -
-
-github_latest_dl hadolint/hadolint ".*x86_64" "Linux" /usr/local/bin/hadolint \
-    && sudo chmod +x /usr/local/bin/hadolint
-
-#install tfenv
-git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
-
-# Microsoft signing keys
-curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | \
-    sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
-AZ_REPO=$(lsb_release -cs)
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
-    sudo tee /etc/apt/sources.list.d/azure-cli.list
-
-# install
-sudo apt autoclean autoremove \
-    && sudo apt-get update \
-    && sudo apt upgrade -y \
-    && sudo apt-get -y install azure-cli
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
@@ -81,12 +53,12 @@ sudo apt autoclean autoremove \
         -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh && \
 
 # AWS cli version 2 Install
-[ ! -d "/usr/local/aws-cli/v2/" ] && \
-    wget -O ${HOME}/Downloads/awscliv2.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \
-    && unzip ${HOME}/Downloads/awscliv2.zip -d ${HOME}/Downloads/ \
-    && sudo ${HOME}/Downloads/aws/install \
-    && rm -rf ${HOME}/Downloads/awscliv2.zip ${HOME}/Downloads/aws
+[ ! -f "/usr/local/bin/aws" ] && \
+    curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg" \
+    && sudo installer -pkg AWSCLIV2.pkg -target / \
+    && rm AWSCLIV2.pkg
+    
+source ${HOME}/.zprofile
 
-stow --restow --target=${HOME} dotfiles
 
 echo "Done"

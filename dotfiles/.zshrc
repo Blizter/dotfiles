@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
+
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -129,6 +132,9 @@ alias tf=terraform
 alias kns=kubens
 alias kcx=kubectx
 
+alias s2a='function(){eval $(saml2aws script --shell=bash --profile=$@);}'
+alias dbx-cfg='function(){cat ~/.secrets/dbx_$@ | databricks configure --host https://mistplay-$@.cloud.databricks.com/ --profile $@}'
+alias aws2env='function(){eval $(aws configure export-credentials --profile $@ --format env);}'
 #autocd
 setopt autocd
 
@@ -139,22 +145,19 @@ complete -o nospace -C ${GOBIN}/gocomplete go
 #kubectl autocomplete
 source <(kubectl completion zsh)
 complete -F __start_kubectl k
+source <(flux completion zsh)
 
+source <(kind completion zsh)
 
 # Terraform autocomplete
-complete -o nospace -C /usr/bin/terraform terraform
-complete -o nospace -C /usr/bin/terraform tf
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+complete -o nospace -C /opt/homebrew/bin/terraform tf
 
 # aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
-
-# To customize prompt, run `p10k configure` or edit ~/projects/perso/dotfiles/dotfiles/.p10k.zsh.
-[[ ! -f ~/projects/perso/dotfiles/dotfiles/.p10k.zsh ]] || source ~/projects/perso/dotfiles/dotfiles/.p10k.zsh
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 autoload -U +X bashcompinit && bashcompinit
