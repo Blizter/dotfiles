@@ -11,8 +11,8 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 
 # go binary variables
 [ -d "/usr/local/go/bin" ] && GOPATH="${HOME}/go"; \
-                              GOBIN="${GOPATH}/bin"; \
-                              PATH="/usr/local/go/bin:${GOPATH}:${GOBIN}:${PATH}"; \
+                            GOBIN="${GOPATH}/bin"; \
+                            PATH="/usr/local/go/bin:${GOPATH}:${GOBIN}:${PATH}"; \
 
 [ -d "${HOME}/.tfenv/bin" ] &&  PATH="${HOME}/.tfenv/bin:${PATH}"
 

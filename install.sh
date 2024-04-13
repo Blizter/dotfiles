@@ -60,5 +60,4 @@ pyenv rehash
     
 source ${HOME}/.zprofile
 
-
 echo "Done"
