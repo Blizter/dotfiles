@@ -7,22 +7,21 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
 # go binary variables
-[ -d "${HOME}/.local/go/bin" ] && GOPATH="${HOME}/.local/go/"; \
-                                GOBIN="${GOPATH}/bin"; \
-                                PATH="${GOPATH}:${GOBIN}:${PATH}"; \
+[ -d "${HOME}/.local/go/bin" ] && GOPATH="${HOME}/.local/go/" && \
+                                GOBIN="${GOPATH}/bin" && \
+                                PATH="${GOPATH}:${GOBIN}:${PATH}"\
 
 # pyenv python binaries
-[ -d "${HOME}/.local/pyenv/bin" ] &&  PYENV_ROOT="${HOME}/.local/pyenv/"; \
-                                PATH="${PYENV_ROOT}/bin:${PATH}"; \
-                                eval "$(pyenv init --path)" ; \
-                                eval "$(pyenv init -)" ; \
+[ -d "${HOME}/.pyenv/bin" ] &&  PYENV_ROOT="${HOME}/.pyenv" && \
+                                PATH="${PYENV_ROOT}/bin:${PATH}" && \
+                                eval "$(pyenv init --path)" && \
+                                eval "$(pyenv init -)" && \
                                 eval "$(pyenv virtualenv-init -)"
 
-[ -d "${HOME}/.local/poetry/bin" ] && PATH="${HOME}/.local/poetry/bin:${PATH}"
+[ -d "${HOME}/.poetry/bin" ] && PATH="${HOME}/.poetry/bin:${PATH}"
 
 # set main editor
 export EDITOR="nvim"
-export MYVIMRC=${HOME}/.config/nvim/init.vim
 
 # Nvidia cuda cli tool
 export PATH=/usr/local/cuda/bin:$PATH
