@@ -8,7 +8,6 @@ set -euo pipefail
 sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
 
 # Install base packages
-sudo apt update && \
 sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
                     apt-transport-https ca-certificates \
                     gnupg fzf stow flatpak software-properties-common \
