@@ -11,10 +11,11 @@ return {
                 python = { "black", "isort" },
                 json = { "prettier" },
                 yaml = { "prettier" },
+                terraform = { "terraform-ls" },
+                markdown = { "markdown_oxide" },
             },
         },
     },
-
     {
         "williamboman/mason.nvim",
         opts = {
@@ -26,10 +27,11 @@ return {
                 "black",
                 "isort",
                 "flake8",
+                "terraform-ls",
+                "markdown_oxide",
             },
         },
     },
-
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
@@ -38,6 +40,8 @@ return {
                 "lua",
                 "vimdoc",
                 "python",
+                "terraform",
+                "markdown",
             },
         },
     },
