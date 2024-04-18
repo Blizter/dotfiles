@@ -160,4 +160,3 @@ autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-autoload -U +X bashcompinit && bashcompinit
