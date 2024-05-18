@@ -26,9 +26,13 @@ export EDITOR="nvim"
 # Nvidia cuda cli tool
 export PATH=/usr/local/cuda/bin:$PATH
 export CUDA_ROOT=/usr/local/cuda
-export PATH=/usr/local/cuda-11.3/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 
 [ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/home/ehammel/.local/share/coursier/bin"
+# <<< coursier install directory <<<
