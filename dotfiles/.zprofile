@@ -17,7 +17,6 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
                                 eval "$(pyenv init --path)" && \
                                 eval "$(pyenv init -)" && \
                                 eval "$(pyenv virtualenv-init -)"
-
 [ -d "${HOME}/.poetry/bin" ] && PATH="${HOME}/.poetry/bin:${PATH}"
 
 # set main editor
@@ -25,6 +24,7 @@ export EDITOR="nvim"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(saml2aws --completion-script-zsh)"
+eval "$(fzf --zsh)"
 
 export DOCKER_HOST='unix:///Users/eric.hammel/.local/share/containers/podman/machine/qemu/podman.sock'
 
@@ -38,3 +38,11 @@ export DOCKER_HOST='unix:///Users/eric.hammel/.local/share/containers/podman/mac
 
 [ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"
 
+
+# >>> JVM installed by coursier >>>
+export JAVA_HOME="/Users/eric.hammel/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.23%252B9/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.23_9.tar.gz/jdk-11.0.23+9/Contents/Home"
+# <<< JVM installed by coursier <<<
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/Users/eric.hammel/Library/Application Support/Coursier/bin"
+# <<< coursier install directory <<<

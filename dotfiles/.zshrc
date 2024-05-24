@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
-
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -120,20 +117,17 @@ KEYTIMEOUT=1
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias vim="nvim"
-alias zshconfig="nvim ${HOME}/.zshrc"
-alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
-alias reload="source ${HOME}/.zprofile"
 alias mkd="mkdir -pv"
-# alias docker="podman "
-alias watch="watch -n 1 "
+alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
 alias k=kubectl
-alias tf=terraform
-alias kns=kubens
 alias kcx=kubectx
+alias kns=kubens
+alias reload="source ${HOME}/.zprofile"
+alias tf=terraform
+alias vim="nvim"
+alias watch="watch -n 1 "
+alias zshconfig="nvim ${HOME}/.zshrc"
 
-alias s2a='function(){eval $(saml2aws script --shell=bash --profile=$@);}'
-alias dbx-cfg='function(){cat ~/.secrets/dbx_$@ | databricks configure --host https://mistplay-$@.cloud.databricks.com/ --profile $@}'
 alias aws2env='function(){eval $(aws configure export-credentials --profile $@ --format env);}'
 #autocd
 setopt autocd
