@@ -127,8 +127,10 @@ alias tf=terraform
 alias vim="nvim"
 alias watch="watch -n 1 "
 alias zshconfig="nvim ${HOME}/.zshrc"
+alias squash-commits="git reset --soft HEAD~$(git rev-list --count HEAD ^main)"
 
 alias aws2env='function(){eval $(aws configure export-credentials --profile $@ --format env);}'
+alias s2a='function(){eval $(saml2aws script --shell=bash --profile=$@);}'
 #autocd
 setopt autocd
 
