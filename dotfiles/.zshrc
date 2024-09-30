@@ -49,7 +49,7 @@ export UPDATE_ZSH_DAYS=5
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -83,11 +83,12 @@ HISTFILESIZE=${HOME}/.history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git
     autojump
-    zsh-completions
+    git
+    kind
     python
-    poetry
+    rye
+    zsh-completions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -117,18 +118,19 @@ KEYTIMEOUT=1
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias vim="nvim"
-alias zshconfig="nvim ${HOME}/.zshrc"
-alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
-alias sa="sudo apt"
-alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
-alias reload="source ${HOME}/.zprofile"
-alias mkd="mkdir -pv"
-alias watch="watch -n 1 "
 alias k=kubectl
-alias tf=terraform
-alias kns=kubens
 alias kcx=kubectx
+alias kns=kubens
+alias mkd="mkdir -pv"
+alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
+alias podman='podman-remote-static-linux_amd64'
+alias reload="source ${HOME}/.zprofile"
+alias sa="sudo apt"
+alias tf=terraform
+alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
+alias vim="nvim"
+alias watch="watch -n 1 "
+alias zshconfig="nvim ${HOME}/.zshrc"
 
 #autocd
 setopt autocd
@@ -137,19 +139,17 @@ setopt autocd
 source /usr/share/autojump/autojump.sh
 complete -o nospace -C /home/eric/go/bin/gocomplete go
 
-#kubectl autocomplete
-source <(kubectl completion zsh)
-complete -F __start_kubectl k
-
 # Terraform autocomplete
-complete -o nospace -C /usr/bin/terraform terraform
-complete -o nospace -C /usr/bin/terraform tf
+complete -o nospace -C /home/ehammel/.local/bin/terraform terraform
+complete -o nospace -C /home/ehammel/.local/bin/terraform tf
 
 # aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
+
+source <(kind completion zsh )
 
 # To customize prompt, run `p10k configure` or edit ~/projects/perso/dotfiles/dotfiles/.p10k.zsh.
 [[ ! -f ~/projects/perso/dotfiles/dotfiles/.p10k.zsh ]] || source ~/projects/perso/dotfiles/dotfiles/.p10k.zsh

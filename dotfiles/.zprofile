@@ -11,14 +11,8 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
                                 GOBIN="${GOPATH}/bin" && \
                                 PATH="${GOPATH}:${GOBIN}:${PATH}"\
 
-# pyenv python binaries
-[ -d "${HOME}/.pyenv/bin" ] &&  PYENV_ROOT="${HOME}/.pyenv" && \
-                                PATH="${PYENV_ROOT}/bin:${PATH}" && \
-                                eval "$(pyenv init --path)" && \
-                                eval "$(pyenv init -)" && \
-                                eval "$(pyenv virtualenv-init -)"
-
-[ -d "${HOME}/.poetry/bin" ] && PATH="${HOME}/.poetry/bin:${PATH}"
+[ -d "${HOME}/.rye" ] && source "${HOME}/.rye/env" && \
+                        PATH="${HOME}/.rye/shims:${PATH}"
 
 # set main editor
 export EDITOR="nvim"
@@ -29,10 +23,11 @@ export CUDA_ROOT=/usr/local/cuda
 export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-
-
-[ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"
+export KIND_EXPERIMENTAL_PROVIDER='podman-remote-static-linux_amd64'
 
 # >>> coursier install directory >>>
-export PATH="$PATH:/home/ehammel/.local/share/coursier/bin"
+export PATH="$PATH:/${HOME}/.local/share/coursier/bin"
 # <<< coursier install directory <<<
+
+source /${HOME}/.secrets/secrets.sh
+[ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"

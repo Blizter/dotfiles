@@ -5,7 +5,9 @@ set -euo pipefail
 # https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
 
 # Update the system
-sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade
+sudo apt update && \
+    sudo apt upgrade -y && \
+    sudo apt dist-upgrade
 
 # Install base packages
 sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
@@ -13,7 +15,7 @@ sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
                     gnupg fzf stow flatpak software-properties-common \
                     build-essential g++ gcc llvm make \
                     libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
-                    libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
+                    libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev golang-go
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
     chmod u+x nvim.appimage && mv nvim.appimage ${HOME}/.local/bin/nvim
@@ -26,22 +28,9 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
         ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
 
-# Install pyenv requirements
-[ ! -d "${HOME}/.pyenv/" ] && sudo apt install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
-                                    libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-                                    libffi-dev liblzma-dev python-openssl && \
-                                curl https://pyenv.run | bash || ${HOME}/.pyenv/bin/pyenv update
-
-# install poetry
-[ ! -d "${HOME}/.poetry" ] && \
-    sudo apt install -y python3-dev python3-pip && \
-    python3 -m pip install --upgrade pip && \
-    curl -sSL https://install.python-poetry.org | python3 - && \
-    mkdir -p $ZSH_CUSTOM/plugins/poetry/ && poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry && \
-    poetry config virtualenvs.in-project true || poetry self update
-
-# Install go and go shell completion
-wget https://golang.org/dl/go1.22.2.linux-amd64.tar.gz  -O - | sudo tar -C ${HOME}/.local/ -xzf -
+# install rye
+[ ! -d "${HOME}/.rye" ] && \
+    curl -sSf https://rye.astral.sh/get | bash
 
 wget -O ${HOME}/.local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Darwin-x86_64 \
     && sudo chmod +x ${HOME}/.local/bin/hadolint
@@ -89,6 +78,9 @@ sudo apt autoclean autoremove \
         -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
     wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
         -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
+
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+kustomize completion zsh > ~/.oh-my-zsh/completions/_kustomize
 
 stow --restow --target=${HOME} dotfiles
 echo "Done"
