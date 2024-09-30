@@ -146,13 +146,13 @@ complete -o nospace -C /home/ehammel/.local/bin/terraform tf
 # aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
 
+source <(kind completion zsh )
+source <(kustomize completion zsh )
+
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
-source <(kind completion zsh )
-
 # To customize prompt, run `p10k configure` or edit ~/projects/perso/dotfiles/dotfiles/.p10k.zsh.
 [[ ! -f ~/projects/perso/dotfiles/dotfiles/.p10k.zsh ]] || source ~/projects/perso/dotfiles/dotfiles/.p10k.zsh
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

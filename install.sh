@@ -80,7 +80,6 @@ sudo apt autoclean autoremove \
         -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
 
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
-kustomize completion zsh > ~/.oh-my-zsh/completions/_kustomize
 
 stow --restow --target=${HOME} dotfiles
 echo "Done"
