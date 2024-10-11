@@ -63,22 +63,20 @@ sudo apt autoclean autoremove \
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
     curl https://api.github.com/repos/ahmetb/kubectx/releases/latest \
         | grep -i "browser_download_url" | grep "/kubectx\"" | cut -d '"' -f 4 \
-        | wget -i - -O ${HOME}/.local/bin/kubectx \
-    && chmod +x ~/.local/bin/kubectx
+        | wget -i - -O ${HOME}/.local/bin/kubectx && \
+        chmod +x ~/.local/bin/kubectx
 # Download Kubens
 [ ! -f "${HOME}/.local/bin/kubens" ] && \
     curl https://api.github.com/repos/ahmetb/kubectx/releases/latest \
         | grep -i "browser_download_url" | grep "/kubens\"" | cut -d '"' -f 4 \
-        | wget -i - -O ${HOME}/.local/bin/kubens \
-    && chmod +x ~/.local/bin/kubens
+        | wget -i - -O ${HOME}/.local/bin/kubens && \
+        chmod +x ~/.local/bin/kubens
+
 # Kubens and kubectx zsh completion
 [ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
-    mkdir -p ${HOME}/.oh-my-zsh/completions && \
-    chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
-    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh \
-        -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
-    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh \
-        -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
+    mkdir -p ${HOME}/.oh-my-zsh/completions && chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
+    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
+    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
 
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
