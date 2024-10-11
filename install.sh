@@ -47,6 +47,7 @@ curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | \
 AZ_REPO=$(lsb_release -cs)
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
     sudo tee /etc/apt/sources.list.d/azure-cli.list
+
 sudo apt autoclean autoremove \
     && sudo apt-get update \
     && sudo apt-get install -y azure-cli && az config set auto-upgrade.enable=yes
@@ -80,6 +81,10 @@ sudo apt autoclean autoremove \
         -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
 
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+
+curl --output localstack-cli-3.8.0-linux-amd64-onefile.tar.gz --location https://github.com/localstack/localstack-cli/releases/download/v3.8.0/localstack-cli-3.8.0-linux-amd64-onefile.tar.gz && \
+    sudo tar xvzf localstack-cli-3.8.0-linux-*-onefile.tar.gz -C /usr/local/bin && \
+    rm -f localstack-cli-3.8.0-linux-*-onefile.tar.gz
 
 stow --restow --target=${HOME} dotfiles
 echo "Done"
