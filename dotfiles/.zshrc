@@ -146,8 +146,9 @@ complete -o nospace -C /home/ehammel/.local/bin/terraform tf
 # aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
 
-source <(kind completion zsh )
-source <(kustomize completion zsh )
+source <(kind completion zsh)
+source <(kustomize completion zsh)
+source <(localstack completion zsh)
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
