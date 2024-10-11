@@ -1,9 +1,6 @@
 #! /bin/zsh
 set -euo pipefail
 
-# Function download latest release from github api
-# https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
-
 # Update the system
 sudo apt update && \
     sudo apt upgrade -y && \
@@ -83,6 +80,8 @@ curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack
 curl --output localstack-cli-3.8.0-linux-amd64-onefile.tar.gz --location https://github.com/localstack/localstack-cli/releases/download/v3.8.0/localstack-cli-3.8.0-linux-amd64-onefile.tar.gz && \
     sudo tar xvzf localstack-cli-3.8.0-linux-*-onefile.tar.gz -C /usr/local/bin && \
     rm -f localstack-cli-3.8.0-linux-*-onefile.tar.gz
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 stow --restow --target=${HOME} dotfiles
 echo "Done"

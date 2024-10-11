@@ -89,6 +89,7 @@ plugins=(
     python
     rye
     zsh-completions
+    zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
