@@ -119,37 +119,43 @@ KEYTIMEOUT=1
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+## global
+alias -g mkd="mkdir -pv"
+alias -g ohmyzsh="nvim ${HOME}/.oh-my-zsh"
+alias -g podman='podman-remote-static-linux_amd64'
+alias -g reload="source ${HOME}/.zprofile"
+alias -g update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
+alias -g watch="watch -n 1 "
+
+## user specific
 alias k=kubectl
 alias kcx=kubectx
 alias kns=kubens
-alias mkd="mkdir -pv"
-alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
-alias podman='podman-remote-static-linux_amd64'
-alias reload="source ${HOME}/.zprofile"
-alias sa="sudo apt"
 alias tf=terraform
-alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade"
 alias vim="nvim"
-alias watch="watch -n 1 "
 alias zshconfig="nvim ${HOME}/.zshrc"
 
 #autocd
 setopt autocd
 
-#autojump autocomplete
+# Completions
+## autojump autocomplete
 source /usr/share/autojump/autojump.sh
 complete -o nospace -C /home/eric/go/bin/gocomplete go
 
-# Terraform autocomplete
+## Terraform autocomplete
 complete -o nospace -C /home/ehammel/.local/bin/terraform terraform
 complete -o nospace -C /home/ehammel/.local/bin/terraform tf
 
-# aws autocomplete
+## aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
 
 source <(kind completion zsh)
 source <(kustomize completion zsh)
 source <(localstack completion zsh)
+
+# syntax highlight
+source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 autoload -U compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
