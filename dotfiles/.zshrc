@@ -85,10 +85,13 @@ HISTFILESIZE=${HOME}/.history
 plugins=(
   autojump
   git
+  kind
   python
   zsh-autosuggestions
   zsh-completions
-  zsh-completions
+  terraform
+  ssh
+  ssh-agent
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -139,6 +142,7 @@ setopt autocd
 #autojump autocomplete
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 complete -o nospace -C ${GOBIN}/gocomplete go
+source <(rye self completion -s zsh)
 #kubectl autocomplete
 source <(kubectl completion zsh)
 complete -F __start_kubectl k
