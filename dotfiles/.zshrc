@@ -16,7 +16,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
+# ZSH_THEME="random"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -83,11 +83,12 @@ HISTFILESIZE=${HOME}/.history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git
-    autojump
-    zsh-completions
-    python
-    poetry
+  autojump
+  git
+  python
+  zsh-autosuggestions
+  zsh-completions
+  zsh-completions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -117,32 +118,31 @@ KEYTIMEOUT=1
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias mkd="mkdir -pv"
+alias -g k=kubectl
+alias -g kcx=kubectx
+alias -g kns=kubens
+alias -g mkd="mkdir -pv"
+alias -g reload="source ${HOME}/.zprofile"
+alias -g squash-commits="git reset --soft HEAD~$(git rev-list --count HEAD ^main)"
+alias -g tf=terraform
+alias -g vim="nvim"
+alias -g watch="watch -n 1 "
+alias aws-sso='function(){aws sso login --sso-session mistplay; eval $(aws configure export-credentials --format env);}'
+alias aws2env='function(){aws sso login --profile $@; eval $(aws configure export-credentials --profile $@ --format env);}'
+alias brew-unlink="function(){ls -1 /opt/homebrew/Cellar /opt/homebrew/Caskroom | xargs -P8 -I {} bash -c 'brew unlink {}; brew link --overwrite --force {}'}"
 alias ohmyzsh="nvim ${HOME}/.oh-my-zsh"
-alias k=kubectl
-alias kcx=kubectx
-alias kns=kubens
-alias reload="source ${HOME}/.zprofile"
-alias tf=terraform
-alias vim="nvim"
-alias watch="watch -n 1 "
 alias zshconfig="nvim ${HOME}/.zshrc"
-alias squash-commits="git reset --soft HEAD~$(git rev-list --count HEAD ^main)"
 
-alias aws2env='function(){eval $(aws configure export-credentials --profile $@ --format env);}'
-alias s2a='function(){eval $(saml2aws script --shell=bash --profile=$@);}'
 #autocd
 setopt autocd
 
 #autojump autocomplete
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 complete -o nospace -C ${GOBIN}/gocomplete go
-
 #kubectl autocomplete
 source <(kubectl completion zsh)
 complete -F __start_kubectl k
 source <(flux completion zsh)
-
 source <(kind completion zsh)
 
 # Terraform autocomplete
