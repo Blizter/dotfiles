@@ -145,7 +145,6 @@ complete -o nospace -C ${GOBIN}/gocomplete go
 source <(rye self completion -s zsh)
 #kubectl autocomplete
 source <(kubectl completion zsh)
-complete -F __start_kubectl k
 source <(flux completion zsh)
 source <(kind completion zsh)
 
