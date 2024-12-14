@@ -142,7 +142,8 @@ setopt autocd
 #autojump autocomplete
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 complete -o nospace -C ${GOBIN}/gocomplete go
-source <(rye self completion -s zsh)
+source <(uvx --generate-shell-completion zsh)
+source <(uv --generate-shell-completion zsh)
 #kubectl autocomplete
 source <(kubectl completion zsh)
 source <(flux completion zsh)
