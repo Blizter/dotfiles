@@ -140,7 +140,6 @@ alias zshconfig="nvim ${HOME}/.zshrc"
 setopt autocd
 
 #autojump autocomplete
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 complete -o nospace -C ${GOBIN}/gocomplete go
 source <(uvx --generate-shell-completion zsh)
 source <(uv --generate-shell-completion zsh)
