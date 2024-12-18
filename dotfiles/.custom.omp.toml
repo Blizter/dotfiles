@@ -92,8 +92,16 @@ type = "prompt"
   foreground = "#ffffff"
   leading_diamond = ""
   style = "diamond"
-  template = " {{.Context}}{{if .Namespace}}/{{.Namespace}}{{end}} "
+  template = " {{if .Context}}{{.Context}}{{end}}{{if .Namespace}}/{{.Namespace}}{{end}} "
   type = "kubectl"
+
+  [[blocks.segments]]
+  background = "#316ce4"
+  foreground = "#ffffff"
+  leading_diamond = ""
+  style = "diamond"
+  template = " {{ if .Version }} {{ .Version }}{{ end }}:{{ if .WorkspaceName }}{{ .WorkspaceName }}{{ end }} "
+  type = "terraform"
 
   [[blocks.segments]]
   background = "#f36943"
