@@ -4,7 +4,7 @@ set -euo pipefail
 brew update && \
 brew install git wget curl tmux parallel fzf \
     neovim ctags stow yarn node make kubectl tfenv \
-    hadolint helm kind tree golang && \
+    hadolint helm kind tree golang zoxide && \
 brew upgrade
 
 source ${PWD}/dotfiles/.zprofile
