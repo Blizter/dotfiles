@@ -9,29 +9,11 @@ type = "prompt"
   background = "#0077c2"
   foreground = "#ffffff"
   leading_diamond = "╭─"
+  trailing_diamond = ""
   style = "diamond"
-  template = " {{ .Name }} "
-  type = "shell"
-
-  [[blocks.segments]]
-  background = "#ef5350"
-  foreground = "#FFFB38"
-  style = "diamond"
-  template = "<parentBackground></>  "
-  type = "root"
-
-  [[blocks.segments]]
-  background = "#FF9248"
-  foreground = "#2d3436"
-  powerline_symbol = ""
-  style = "powerline"
-  template = "  {{ .Path }} "
+  template = " {{ .Path }} "
   type = "path"
 
-    [blocks.segments.properties]
-    folder_icon = "  "
-    home_icon = ""
-    style = "folder"
 
   [[blocks.segments]]
   background = "#FFFB38"
