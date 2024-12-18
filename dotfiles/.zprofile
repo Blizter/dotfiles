@@ -9,11 +9,7 @@ export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 # go binary variables
 [ -d "${HOME}/.local/go/bin" ] && GOPATH="${HOME}/.local/go/" && \
                                 GOBIN="${GOPATH}/bin" && \
-                                PATH="${GOPATH}:${GOBIN}:${PATH}"\
-
-[ -d "${HOME}/.rye" ] && source "${HOME}/.rye/env" && \
-                        PATH="${HOME}/.rye/shims:${PATH}"
-
+                                PATH="${GOPATH}:${GOBIN}:${PATH}"
 # set main editor
 export EDITOR="nvim"
 

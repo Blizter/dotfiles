@@ -86,8 +86,8 @@ plugins=(
     autojump
     git
     kind
+    uv
     python
-    rye
     zsh-completions
     zsh-autosuggestions
 )
@@ -150,9 +150,12 @@ complete -o nospace -C /home/ehammel/.local/bin/terraform tf
 ## aws autocomplete
 complete -C '/usr/local/bin/aws_completer' aws
 
-source <(kind completion zsh)
-source <(kustomize completion zsh)
-source <(localstack completion zsh)
+eval "$(kind completion zsh)"
+eval "$(kustomize completion zsh)"
+eval "$(localstack completion zsh)"
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
+
 
 # syntax highlight
 source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -26,8 +26,7 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
         ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # install rye
-[ ! -d "${HOME}/.rye" ] && \
-    curl -sSf https://rye.astral.sh/get | bash
+[ ! -d "${HOME}/.local/bin/uv" ] && curl -LsSf https://astral.sh/uv/install.sh | sh
 
 wget -O ${HOME}/.local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Darwin-x86_64 \
     && sudo chmod +x ${HOME}/.local/bin/hadolint
