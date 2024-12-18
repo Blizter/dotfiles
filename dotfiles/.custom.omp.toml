@@ -78,33 +78,6 @@ type = "prompt"
   type = "rust"
 
   [[blocks.segments]]
-  background = "#ffffff"
-  foreground = "#ce092f"
-  leading_diamond = " "
-  style = "diamond"
-  template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-  trailing_diamond = " "
-  type = "angular"
-
-  [[blocks.segments]]
-  background = "#1e293b"
-  foreground = "#ffffff"
-  leading_diamond = " "
-  style = "diamond"
-  template = "{{ if .Error }}{{ .Error }}{{ else }}Nx {{ .Full }}{{ end }}"
-  trailing_diamond = " "
-  type = "nx"
-
-  [[blocks.segments]]
-  background = "#ffffff"
-  foreground = "#5398c2"
-  leading_diamond = ""
-  style = "diamond"
-  template = "<#f5bf45></> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-  trailing_diamond = " "
-  type = "azfunc"
-
-  [[blocks.segments]]
   background = "#565656"
   foreground = "#faa029"
   leading_diamond = ""
