@@ -9,7 +9,6 @@ type = "prompt"
   background = "#0077c2"
   foreground = "#ffffff"
   leading_diamond = "╭─"
-  trailing_diamond = ""
   style = "diamond"
   template = " {{ .Path }} "
   type = "path"
@@ -89,10 +88,9 @@ type = "prompt"
   [[blocks.segments]]
   background = "#316ce4"
   foreground = "#ffffff"
-  leading_diamond = ""
+  leading_diamond = ""
   style = "diamond"
-  template = " {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
-  trailing_diamond = ""
+  template = " ☸️:{{.Context}}{{if .Namespace}}/{{.Namespace}}{{end}} "
   type = "kubectl"
 
   [[blocks.segments]]
@@ -117,9 +115,9 @@ type = "prompt"
   [[blocks.segments]]
   background = "#83769c"
   foreground = "#ffffff"
-  style = "powerline"
   invert_powerline = true
-  powerline_symbol = ""
+  style = "diamond"
+  trailing_diamond = ""
   template = " {{ .FormattedMs }} "
   type = "executiontime"
 
