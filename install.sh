@@ -68,6 +68,13 @@ sudo apt autoclean autoremove \
         | wget -i - -O ${HOME}/.local/bin/kubens && \
         chmod +x ~/.local/bin/kubens
 
+# Download Kubens
+[ ! -f "${HOME}/.local/bin/kubens" ] && \
+    curl https://api.github.com/repos/junegunn/fzf/releases/latest \
+        | grep -i "browser_download_url" | grep "/fzf\"" | cut -d '"' -f 4 \
+        | wget -i - -O ${HOME}/.local/bin/fzf && \
+        chmod +x ~/.local/bin/fzf
+
 # Kubens and kubectx zsh completion
 [ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
     mkdir -p ${HOME}/.oh-my-zsh/completions && chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
@@ -80,8 +87,8 @@ curl --output localstack-cli-3.8.0-linux-amd64-onefile.tar.gz --location https:/
     sudo tar xvzf localstack-cli-3.8.0-linux-*-onefile.tar.gz -C /usr/local/bin && \
     rm -f localstack-cli-3.8.0-linux-*-onefile.tar.gz
 
-git clone git@github.com:zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone git@github.com:zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+curl -s https://ohmyposh.dev/install.sh | bash -s
 
 stow --restow --target=${HOME} dotfiles
 echo "Done"

@@ -26,4 +26,3 @@ export PATH="$PATH:/${HOME}/.local/share/coursier/bin"
 # <<< coursier install directory <<<
 
 source /${HOME}/.secrets/secrets.sh
-[ -f "${HOME}/.zshrc" ] && source "${HOME}/.zshrc"
