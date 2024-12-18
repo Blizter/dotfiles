@@ -2,11 +2,18 @@
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+TPM_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/tpm/tpm.git"
 
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+  git clone git@github.com:zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$TPM_HOME" ]; then
+  mkdir -p "$(dirname $$TPM_HOME)"
+  git clone git@github.com:tmux-plugins/tpm.git "$TPM_HOME"
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -80,10 +87,8 @@ alias vim="nvim"
 alias watch="watch -n 1 "
 alias zshconfig="nvim ${HOME}/.zshrc"
 
-alias aws-sso='function(){aws sso login --sso-session mistplay; eval $(aws configure export-credentials --format env);}'
-alias aws2env='function(){aws sso login --profile $@; eval $(aws configure export-credentials --profile $@ --format env);}'
+alias aws2env='function(){aws sso login --color on --profile $@; eval $(aws configure export-credentials --profile $@ --format env);}'
 alias brew-unlink="function(){ls -1 /opt/homebrew/Cellar /opt/homebrew/Caskroom | xargs -P8 -I {} bash -c 'brew unlink {}; brew link --overwrite --force {}'}"
-
 
 #autocd
 setopt autocd
