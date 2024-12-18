@@ -2,12 +2,12 @@
 set -euo pipefail
 
 brew update && \
-brew install git wget curl tmux autojump parallel fzf \
+brew install git wget curl tmux parallel fzf \
     neovim ctags stow yarn node make kubectl tfenv \
-    hadolint helm kind tree autojump golang && \
+    hadolint helm kind tree golang && \
 brew upgrade
 
-source ${HOME}/.zprofile
+source ${PWD}/dotfiles/.zprofile
 
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-darwin-arm64 && \
     chmod +x ./kind && mv ./kind  ${HOME}/.local/bin/kind
@@ -47,7 +47,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
     rm AWSCLIV2.pkg
 
 stow --restow --target=${HOME} dotfiles
-source ${HOME}/.zprofile
 
+exec zsh
 
 echo "Done"

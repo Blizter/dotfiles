@@ -88,19 +88,20 @@ type = "prompt"
   type = "aws"
 
   [[blocks.segments]]
-  background = "#316ce4"
+  background = "#326ce5"
   foreground = "#ffffff"
   leading_diamond = ""
   style = "diamond"
-  template = " {{if .Context}}{{.Context}}{{end}}{{if .Namespace}}/{{.Namespace}}{{end}} "
+  template = ' {{ replaceP ".*/" .Context "" }}/{{if .Namespace}}{{.Namespace}}{{else}}default{{end}} '
   type = "kubectl"
 
   [[blocks.segments]]
-  background = "#316ce4"
+  background = "#7b42bc"
   foreground = "#ffffff"
+  fetch_version = true
   leading_diamond = ""
   style = "diamond"
-  template = " {{ if .Version }} {{ .Version }}{{ end }}:{{ if .WorkspaceName }}{{ .WorkspaceName }}{{ end }} "
+  template = " {{ .WorkspaceName }}{{ if .Version }} :{{ .Version }}{{ end }} "
   type = "terraform"
 
   [[blocks.segments]]
@@ -163,7 +164,3 @@ type = "prompt"
     ]
     background = "transparent"
     template = " "
-
-  [upgrade]
-    notice = true
-    auto = true

@@ -106,7 +106,6 @@ complete -C '/usr/local/bin/aws_completer' aws
 
 eval "$(kind completion zsh)"
 eval "$(kustomize completion zsh)"
-eval "$(localstack completion zsh)"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 eval "$(zoxide init --cmd cd zsh)"
