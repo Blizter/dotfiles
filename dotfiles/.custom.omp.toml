@@ -1,9 +1,11 @@
-"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+# "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
 version = 3
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [[blocks]]
-alignment = "left"
-type = "prompt"
+  alignment = "left"
+  type = "prompt"
+  newline = true
 
   [[blocks.segments]]
   background = "#0077c2"
@@ -90,7 +92,7 @@ type = "prompt"
   foreground = "#ffffff"
   leading_diamond = ""
   style = "diamond"
-  template = " ☸️:{{.Context}}{{if .Namespace}}/{{.Namespace}}{{end}} "
+  template = " {{.Context}}{{if .Namespace}}/{{.Namespace}}{{end}} "
   type = "kubectl"
 
   [[blocks.segments]]
@@ -145,3 +147,15 @@ type = "prompt"
 
     [blocks.segments.properties]
     always_enabled = true
+
+  [transient_prompt]
+    foreground_templates = [
+    "{{if gt .Code 0}}#ef5350{{end}}",
+    "{{if eq .Code 0}}white{{end}}",
+    ]
+    background = "transparent"
+    template = " "
+
+  [upgrade]
+    notice = true
+    auto = true
