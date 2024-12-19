@@ -1,6 +1,8 @@
 #! /bin/zsh
 set -euo pipefail
 
+[ ! -d "${HOME}/.local/bin" ] && mkdir -p ${HOME}/.local/bin
+
 # Update the system
 sudo apt update && \
     sudo apt upgrade -y && \
@@ -9,15 +11,26 @@ sudo apt update && \
 # Install base packages
 sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
                     apt-transport-https ca-certificates \
-                    gnupg fzf stow flatpak software-properties-common \
-                    build-essential g++ gcc llvm make \
+                    gnupg stow flatpak software-properties-common \
+                    build-essential g++ gcc llvm make unzip \
                     libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
                     libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev golang-go
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
     chmod u+x nvim.appimage && mv nvim.appimage ${HOME}/.local/bin/nvim
 
-# install rye
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+curl -s https://ohmyposh.dev/install.sh | bash -s
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-amd64 && chmod +x ./kind &&  mv kind ${HOME}/.local/bin/kind
+
+git clone --depth 1 https://github.com/junegunn/fzf.git $FZF_HOME && $FZF_HOME/install
+
 [ ! -d "${HOME}/.local/bin/uv" ] && curl -LsSf https://astral.sh/uv/install.sh | sh
 
 wget -O ${HOME}/.local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Darwin-x86_64 \
@@ -25,8 +38,8 @@ wget -O ${HOME}/.local/bin/hadolint https://github.com/hadolint/hadolint/release
 
 #install tfenv
 rm -rf ${HOME}/.local/tfenv && \
-    git clone --depth=1 https://github.com/tfutils/tfenv.git ${HOME}/.local/tfenv && \
-    ls ${HOME}/.local/tfenv/bin/ | xargs -I '%' ln -fs ${HOME}/.local/tfenv/bin/% ${HOME}/.local/bin/%
+    git clone --depth=1 https://github.com/tfutils/tfenv.git ${HOME}/.local/share/tfenv && \
+    ls ${HOME}/.local/share/tfenv/bin/ | xargs -I '%' ln -fs ${HOME}/.local/share/tfenv/bin/% ${HOME}/.local/bin/%
 
 # install azure CLI
 # Microsoft signing keys
@@ -69,15 +82,13 @@ sudo apt autoclean autoremove \
         chmod +x ~/.local/bin/fzf
 
 # Kubens and kubectx zsh completion
-curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash &&
+    chmod +x kustomize && mv kustomize ~/.local/bin
 
 curl --output localstack-cli-3.8.0-linux-amd64-onefile.tar.gz --location https://github.com/localstack/localstack-cli/releases/download/v3.8.0/localstack-cli-3.8.0-linux-amd64-onefile.tar.gz && \
     sudo tar xvzf localstack-cli-3.8.0-linux-*-onefile.tar.gz -C /usr/local/bin && \
     rm -f localstack-cli-3.8.0-linux-*-onefile.tar.gz
 
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-curl -s https://ohmyposh.dev/install.sh | bash -s
-
-stow --restow --target=${HOME} dotfiles
+stow --restow --target=${HOME} dotfiles/
 
 echo "Done"

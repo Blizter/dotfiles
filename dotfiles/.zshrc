@@ -3,18 +3,12 @@
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-eval "$(oh-my-posh init zsh --config ${HOME}/projects/personal/dotfiles/dotfiles/.custom.omp.toml)"
+eval "$(oh-my-posh init zsh --config ${HOME}/.custom.omp.toml)"
 # eval "$(oh-my-posh init zsh)"
 
 # Add in zsh plugins
@@ -94,3 +88,5 @@ eval "$(uvx --generate-shell-completion zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
 eval "$(oh-my-posh completion zsh)"
+
+. "$HOME/.local/bin/env"

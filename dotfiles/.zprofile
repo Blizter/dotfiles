@@ -25,4 +25,6 @@ export KIND_EXPERIMENTAL_PROVIDER='podman-remote-static-linux_amd64'
 export PATH="$PATH:/${HOME}/.local/share/coursier/bin"
 # <<< coursier install directory <<<
 
-source /${HOME}/.secrets/secrets.sh
+export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+export FZF_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/fzf/"
+export SECRETS_HOME="${HOME}/.local/secrets/"
