@@ -23,9 +23,10 @@ if [ ! -d "$ZINIT_HOME" ]; then
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+if [ ! -f "${HOME}/.local/bin/nvim" ]; then
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
     chmod u+x nvim.appimage && mv nvim.appimage ${HOME}/.local/bin/nvim
-
+fi
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 curl -s https://ohmyposh.dev/install.sh | bash -s
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-amd64 && chmod +x ./kind &&  mv kind ${HOME}/.local/bin/kind
