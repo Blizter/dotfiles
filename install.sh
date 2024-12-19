@@ -17,14 +17,6 @@ sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
     chmod u+x nvim.appimage && mv nvim.appimage ${HOME}/.local/bin/nvim
 
-[ ! -d "${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions" ] && \
-    git clone https://github.com/zsh-users/zsh-completions \
-        ${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions
-
-[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k" ] && \
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-        ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
-
 # install rye
 [ ! -d "${HOME}/.local/bin/uv" ] && curl -LsSf https://astral.sh/uv/install.sh | sh
 
@@ -40,6 +32,7 @@ rm -rf ${HOME}/.local/tfenv && \
 # Microsoft signing keys
 curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | \
     sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+
 AZ_REPO=$(lsb_release -cs)
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
     sudo tee /etc/apt/sources.list.d/azure-cli.list
@@ -69,18 +62,13 @@ sudo apt autoclean autoremove \
         chmod +x ~/.local/bin/kubens
 
 # Download Kubens
-[ ! -f "${HOME}/.local/bin/kubens" ] && \
+[ ! -f "${HOME}/.local/bin/fzf" ] && \
     curl https://api.github.com/repos/junegunn/fzf/releases/latest \
         | grep -i "browser_download_url" | grep "/fzf\"" | cut -d '"' -f 4 \
         | wget -i - -O ${HOME}/.local/bin/fzf && \
         chmod +x ~/.local/bin/fzf
 
 # Kubens and kubectx zsh completion
-[ ! -d "${HOME}/.oh-my-zsh/completion" ] && \
-    mkdir -p ${HOME}/.oh-my-zsh/completions && chmod -R 755 ${HOME}/.oh-my-zsh/completions && \
-    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubectx.zsh -O ${HOME}/.oh-my-zsh/completions/_kubectx.zsh && \
-    wget https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/_kubens.zsh -O ${HOME}/.oh-my-zsh/completions/_kubens.zsh
-
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
 curl --output localstack-cli-3.8.0-linux-amd64-onefile.tar.gz --location https://github.com/localstack/localstack-cli/releases/download/v3.8.0/localstack-cli-3.8.0-linux-amd64-onefile.tar.gz && \
@@ -91,4 +79,5 @@ curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh 
 curl -s https://ohmyposh.dev/install.sh | bash -s
 
 stow --restow --target=${HOME} dotfiles
+
 echo "Done"
