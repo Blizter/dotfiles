@@ -6,11 +6,12 @@ set -euo pipefail
 # Update the system
 sudo apt update && \
     sudo apt upgrade -y && \
-    sudo apt dist-upgrade
+    sudo apt dist-upgrade && \
+    sudo add-apt-repository universe
 
 # Install base packages
 sudo apt install -y --fix-broken git wget curl tmux autojump parallel \
-                    apt-transport-https ca-certificates \
+                    apt-transport-https ca-certificates libfuse2t64 \
                     gnupg stow flatpak software-properties-common \
                     build-essential g++ gcc llvm make unzip \
                     libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
