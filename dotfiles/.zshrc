@@ -7,9 +7,9 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
+source "$HOME/.local/bin/env"
 
 eval "$(oh-my-posh init zsh --config ${HOME}/.custom.omp.toml)"
-# eval "$(oh-my-posh init zsh)"
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -52,7 +52,6 @@ setopt hist_find_no_dups
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
@@ -88,5 +87,3 @@ eval "$(uvx --generate-shell-completion zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
 eval "$(oh-my-posh completion zsh)"
-
-. "$HOME/.local/bin/env"
