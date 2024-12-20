@@ -557,13 +557,13 @@
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=0
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=3
   # Show duration of the last command if takes at least this many seconds.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
   # Show this many fractional digits. Zero means round to seconds.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_CONTENT_EXPANSION='${$((P9K_COMMAND_DURATION_SECONDS < 1 ? int(1000 * P9K_COMMAND_DURATION_SECONDS) : -1)):/-1/$P9K_CONTENT}${${$((P9K_COMMAND_DURATION_SECONDS < 1)):/1/ms}:/0/}'
   # Custom prefix.
   # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='took '
 
@@ -757,14 +757,14 @@
   typeset -g POWERLEVEL9K_RANGER_BACKGROUND=0
   # Custom icon.
   # typeset -g POWERLEVEL9K_RANGER_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ####################[ yazi: yazi shell (https://github.com/sxyazi/yazi) ]#####################
   # Yazi shell color.
   typeset -g POWERLEVEL9K_YAZI_FOREGROUND=3
   typeset -g POWERLEVEL9K_YAZI_BACKGROUND=0
   # Custom icon.
   # typeset -g POWERLEVEL9K_YAZI_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ######################[ nnn: nnn shell (https://github.com/jarun/nnn) ]#######################
   # Nnn shell color.
   typeset -g POWERLEVEL9K_NNN_FOREGROUND=0

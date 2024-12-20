@@ -5,9 +5,10 @@ brew update && \
 brew install git wget curl tmux parallel fzf \
     neovim ctags stow yarn node make kubectl tfenv \
     hadolint helm kind tree golang zoxide && \
+
 brew upgrade
 
-source ${PWD}/dotfiles/.zprofile
+source ${PWD}/dotfiles/.zshenv
 
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-darwin-arm64 && \
     chmod +x ./kind && mv ./kind  ${HOME}/.local/bin/kind

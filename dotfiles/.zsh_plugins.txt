@@ -34,3 +34,4 @@ ohmyzsh/ohmyzsh path:plugins/kubectx
 ohmyzsh/ohmyzsh path:plugins/python
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/terraform
+ohmyzsh/ohmyzsh path:plugins/kind
