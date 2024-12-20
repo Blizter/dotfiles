@@ -31,7 +31,7 @@ curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh 
 curl -s https://ohmyposh.dev/install.sh | bash -s
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-amd64 && chmod +x ./kind &&  mv kind ${HOME}/.local/bin/kind
 
-git clone --depth 1 https://github.com/junegunn/fzf.git $FZF_HOME && $FZF_HOME/install
+git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.local/share/fzf/ && ${HOME}/.local/share/fzf/install
 
 [ ! -d "${HOME}/.local/bin/uv" ] && curl -LsSf https://astral.sh/uv/install.sh | sh
 
