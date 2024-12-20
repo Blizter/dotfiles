@@ -1,0 +1,8 @@
+#! /bin/zsh
+
+# Source anything in .zshrc.d.
+for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
+  # Ignore tilde files.
+  [[ $_rc:t != '~'* ]] && source "$_rc"
+done
+unset _rc
