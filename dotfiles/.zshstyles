@@ -1,5 +1,11 @@
 #! /bin/zsh
 setopt globdots
+
+# Available completion styles: gremlin, ohmy, prez, zshzoo
+# You can add your own too. To see all available completion styles
+# run 'compstyle -l'
+zstyle ':plugin:ez-compinit' 'compstyle' 'ohmy'
+
 # Completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
