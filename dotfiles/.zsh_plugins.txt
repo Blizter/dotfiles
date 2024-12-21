@@ -8,6 +8,7 @@ mattmc3/ez-compinit
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
+marlonrichert/zsh-hist
 Aloxaf/fzf-tab
 
 # Completion styles

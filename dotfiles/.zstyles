@@ -1,5 +1,10 @@
 #! /bin/zsh
 setopt globdots
+
+# bind-key to accept and executre autosuggest, unbind arrow
+bindkey '^ ' autosuggest-accept
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
+
 # Available completion styles: gremlin, ohmy, prez, zshzoo
 # You can add your own too. To see all available completion styles
 # run 'compstyle -l'

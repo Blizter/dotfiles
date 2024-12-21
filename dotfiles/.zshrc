@@ -28,5 +28,9 @@ antidote load
 # Source anything in .zshrc.d.
 load-secrets
 source-zshrcd
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd delete-failed-history
+
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh

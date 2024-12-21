@@ -1,6 +1,6 @@
-HISTSIZE=100000
+HISTSIZE=120000
 HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
+SAVEHIST=100000
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory

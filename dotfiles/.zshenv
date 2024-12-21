@@ -6,7 +6,6 @@
 # NOTE: .zshenv needs to live at ~/.zshenv, not in $ZDOTDIR!
 set -o emacs
 
-typeset -gU path fpath
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Set ZDOTDIR if you want to re-home Zsh.
