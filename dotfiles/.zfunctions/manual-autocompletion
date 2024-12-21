@@ -1,0 +1,9 @@
+#! /bin/zsh
+
+[ ! -d "${HOME}/.local/completions" ] && mkdir -p ${HOME}/.local/completions
+
+[ ! -f "${HOME}/.local/completions/_zellij" ] && \
+  zellij setup --generate-completion zsh > ${HOME}/.local/completions/_zellij
+
+fpath=(${HOME}/.local/completions $fpath)
+

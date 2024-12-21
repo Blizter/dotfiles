@@ -18,7 +18,7 @@ export SECRETS_HOME="${HOME}/.local/secrets/"
 
 # Preferred editor for local and remote sessions
 # export /bin and /usr/bin to PATH in order to avoid unwanted errors
-export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
+export PATH="/usr/bin:/usr/local/bin:/bin:/snap/bin:${PATH}"
 
 # set PATH so it includes user's private bin if it exists
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"

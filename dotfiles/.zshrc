@@ -28,7 +28,7 @@ antidote load
 # Source anything in .zshrc.d.
 load-secrets
 source-zshrcd
-
+manual-autocompletion
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd delete-failed-history
 

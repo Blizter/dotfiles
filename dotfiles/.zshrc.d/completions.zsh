@@ -9,5 +9,5 @@ eval "$(kustomize completion zsh)"
 eval "$(localstack completion zsh)"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
-eval "$(zellij setup --generate-auto-start zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+

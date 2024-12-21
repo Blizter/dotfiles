@@ -18,6 +18,8 @@ sudo apt install -y --fix-broken \
   libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
   libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev golang-go
 
+sudo snap install btop tree
+
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
