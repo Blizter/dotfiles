@@ -8,7 +8,6 @@ alias reload="exec zsh"
 alias tf=terraform
 alias vim="nvim"
 alias watch="watch -n 1 "
-alias zshconfig="nvim ${HOME}/.zshrc"
 
 alias aws2env='function(){aws sso login --color on --profile $@; eval $(aws configure export-credentials --profile $@ --format env);}'
 alias brew-unlink="function(){ls -1 /opt/homebrew/Cellar /opt/homebrew/Caskroom | xargs -P8 -I {} bash -c 'brew unlink {}; brew link --overwrite --force {}'}"
