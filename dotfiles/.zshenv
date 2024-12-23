@@ -7,9 +7,9 @@ set -o emacs
 
 typeset -gU path fpath
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(/opt/homebrew/bin/brew shellenv)"
 # set main editor
 export EDITOR="nvim"
+export KUBE_EDITOR="nvim"
 export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
