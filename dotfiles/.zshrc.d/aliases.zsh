@@ -9,3 +9,4 @@ alias tf=terraform
 alias vim="nvim"
 alias watch="watch -n 1"
 alias zshconfig="nvim ${HOME}/.zshrc"
+alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
