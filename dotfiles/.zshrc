@@ -9,6 +9,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Lazy-load (autoload) Zsh function files from a directory.
 ZFUNCDIR=$HOME/.zfunctions
 fpath=($ZFUNCDIR $fpath)
@@ -25,11 +27,13 @@ fi
 # Create an amazing Zsh config using antidote plugins.
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
+
 # load secrets
 load-secrets
 source-zshrcd
 manual-autocompletion
 
+# Only keep successful commands in history
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd delete-failed-history
 
