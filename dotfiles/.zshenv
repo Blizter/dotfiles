@@ -36,7 +36,7 @@ export CUDA_ROOT=/usr/local/cuda
 export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-export KIND_EXPERIMENTAL_PROVIDER='podman-remote-static-linux_amd64'
+export KIND_EXPERIMENTAL_PROVIDER='podman'
 
 # >>> coursier install directory >>>
 export PATH="$PATH:/${HOME}/.local/share/coursier/bin"
