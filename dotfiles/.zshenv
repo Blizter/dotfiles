@@ -24,9 +24,9 @@ export PATH="/usr/bin:/usr/local/bin:/bin:/snap/bin:${PATH}"
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
 # go binary variables
-[ -d "${HOME}/.local/go/bin" ] && GOPATH="${HOME}/.local/go/" && \
-                                GOBIN="${GOPATH}/bin" && \
-                                PATH="${GOPATH}:${GOBIN}:${PATH}"
+[ -d "${HOME}/go/bin" ] && eval "$(go env)" && \
+  GOBIN="${GOPATH}/bin" && \
+  PATH="${GOPATH}:${GOBIN}:${PATH}"
 # set main editor
 export EDITOR="nvim"
 

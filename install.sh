@@ -16,10 +16,13 @@ sudo apt install -y --fix-broken \
   gnupg stow flatpak software-properties-common \
   build-essential g++ gcc llvm make unzip \
   libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
-  libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev golang-go
+  libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
 
 sudo snap install btop tree
 
+#Install ppa
+sudo add-apt-repository ppa:longsleep/golang-backports && \
+sudo apt-get update && sudo apt-get install golang-go
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
@@ -104,9 +107,35 @@ sudo apt autoclean autoremove \
     | wget -i - -O ${HOME}/.local/bin/fzf && \
     chmod +x ~/.local/bin/fzf
 
-# Kubens and kubectx zsh completion
+# Cilium CLI
+CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
+CLI_ARCH=amd64
+curl -L --fail --remote-name-all https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
+sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz ${HOME}/.local/bin/
+rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
+
+#Flux CLI
+curl -s https://fluxcd.io/install.sh | sudo FLUX_VERSION=2.5.0 bash
+
+#Tanka
+curl -Lo ${HOME}/.local/bin/tk https://github.com/grafana/tanka/releases/latest/download/tk-linux-amd64 && \
+chmod 755 ${HOME}/.local/bin/tk
+
+#Jsonnet
+curl -Lo ${HOME}/.local/bin/jb https://github.com/jsonnet-bundler/jsonnet-bundler/releases/latest/download/jb-linux-amd64 && \
+chmod 755 ${HOME}/.local/bin/jb
+
+#Kubens and kubectx zsh completion
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash &&
   chmod +x kustomize && mv kustomize ~/.local/bin
+
+# Cue Language & Timoni
+go install cuelang.org/go/cmd/cue@latest
+go install github.com/stefanprodan/timoni/cmd/timoni@latest
+
+# wget $(curl https://api.github.com/repos/stefanprodan/timoni/releases/latest | \
+#   jq -r '.assets[] | select(.browser_download_url | contains ("linux_arm64")) | .browser_download_url') -O ${HOME}/.local/bin/timoni && \
+# chmod 744 ${HOME}/.local/bin/timoni
 
 curl --output localstack-cli-3.8.0-linux-amd64-onefile.tar.gz \
     --location https://github.com/localstack/localstack-cli/releases/download/v3.8.0/localstack-cli-3.8.0-linux-amd64-onefile.tar.gz && \
