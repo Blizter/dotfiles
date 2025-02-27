@@ -133,10 +133,6 @@ curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack
 go install cuelang.org/go/cmd/cue@latest
 go install github.com/stefanprodan/timoni/cmd/timoni@latest
 
-# wget $(curl https://api.github.com/repos/stefanprodan/timoni/releases/latest | \
-#   jq -r '.assets[] | select(.browser_download_url | contains ("linux_arm64")) | .browser_download_url') -O ${HOME}/.local/bin/timoni && \
-# chmod 744 ${HOME}/.local/bin/timoni
-
 curl --output localstack-cli-3.8.0-linux-amd64-onefile.tar.gz \
     --location https://github.com/localstack/localstack-cli/releases/download/v3.8.0/localstack-cli-3.8.0-linux-amd64-onefile.tar.gz && \
   sudo tar xvzf localstack-cli-3.8.0-linux-*-onefile.tar.gz -C /usr/local/bin && \
