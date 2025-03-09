@@ -14,15 +14,14 @@ sudo apt install -y --fix-broken \
   git wget curl tmux autojump parallel \
   apt-transport-https ca-certificates libfuse2t64 \
   gnupg stow flatpak software-properties-common \
-  build-essential g++ gcc llvm make unzip \
+  build-essential g++ gcc llvm make unzip snapd \
   libglu1-mesa libfreeimage3 libxi-dev libx11-dev \
   libxmu-dev freeglut3-dev libglu1-mesa-dev libfreeimage-dev
 
 sudo snap install btop tree
+sudo snap install go --classic
+sudo snap install nvim --classic
 
-#Install ppa
-sudo add-apt-repository ppa:longsleep/golang-backports && \
-sudo apt-get update && sudo apt-get install golang-go
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
