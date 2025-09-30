@@ -3,7 +3,6 @@ alias kcx=kubectx
 alias kns=kubens
 alias ls='ls --color'
 alias mkd="mkdir -pv"
-alias podman="podman-remote-static-linux_amd64"
 alias reload="exec zsh"
 alias tf=terraform
 alias vim="nvim"
