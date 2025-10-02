@@ -9,3 +9,4 @@ alias vim="nvim"
 alias watch="watch -n 1"
 alias zshconfig="nvim ${HOME}/.zshrc"
 alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
+alias cursor='/mnt/c/Users/erich/AppData/Local/Programs/cursor/resources/app/bin/cursor'

@@ -37,7 +37,11 @@ export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export KIND_EXPERIMENTAL_PROVIDER='podman'
+export DOCKER_HOST='unix:///home/ehammel/.local/share/containers/podman/machine/qemu/podman.sock'
 
 # >>> coursier install directory >>>
 export PATH="$PATH:/${HOME}/.local/share/coursier/bin"
 # <<< coursier install directory <<<
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
