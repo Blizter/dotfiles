@@ -8,17 +8,18 @@ set -o emacs
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
 # Set ZDOTDIR if you want to re-home Zsh.
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_RUNTIME_DIR="/run/user/1001"
 export FZF_BASE="${XDG_DATA_HOME:-${HOME}/.local/share}/fzf/bin"
 
 export SECRETS_HOME="${HOME}/.local/secrets/"
+export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+export DOCKER_HOST="unix:$XDG_RUNTIME_DIR/podman/podman.sock"
 
-# Preferred editor for local and remote sessions
-# export /bin and /usr/bin to PATH in order to avoid unwanted errors
-export PATH="/usr/bin:/usr/local/bin:/bin:/snap/bin:${PATH}"
 
 # set PATH so it includes user's private bin if it exists
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
@@ -29,19 +30,3 @@ export PATH="/usr/bin:/usr/local/bin:/bin:/snap/bin:${PATH}"
   PATH="${GOPATH}:${GOBIN}:${PATH}"
 # set main editor
 export EDITOR="nvim"
-
-# Nvidia cuda cli tool
-export PATH=/usr/local/cuda/bin:$PATH
-export CUDA_ROOT=/usr/local/cuda
-export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-export KIND_EXPERIMENTAL_PROVIDER='podman'
-export DOCKER_HOST='unix:///home/ehammel/.local/share/containers/podman/machine/qemu/podman.sock'
-
-# >>> coursier install directory >>>
-export PATH="$PATH:/${HOME}/.local/share/coursier/bin"
-# <<< coursier install directory <<<
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
