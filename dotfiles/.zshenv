@@ -13,7 +13,7 @@ set -o emacs
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-export XDG_RUNTIME_DIR="/run/user/1001"
+export XDG_RUNTIME_DIR="/run/user/1000"
 export FZF_BASE="${XDG_DATA_HOME:-${HOME}/.local/share}/fzf/bin"
 
 export SECRETS_HOME="${HOME}/.local/secrets/"
