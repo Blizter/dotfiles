@@ -4,7 +4,6 @@ complete -o nospace -C /home/ehammel/.local/bin/terraform tf
 complete -o nospace -C /home/eric/go/bin/gocomplete go
 complete -o nospace -C /home/ehammel/.local/bin/tk tk
 
-
 eval "$(kind completion zsh)"
 eval "$(kubectl completion zsh)"
 eval "$(kustomize completion zsh)"
@@ -16,3 +15,4 @@ eval "$(cilium completion zsh)"
 eval "$(flux completion zsh)"
 eval "$(timoni completion zsh)"
 eval "$(cue completion zsh)"
+eval "$(tailscale completion zsh)"
