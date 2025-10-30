@@ -39,7 +39,8 @@ export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRAR
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 export KIND_EXPERIMENTAL_PROVIDER='podman'
-export DOCKER_HOST='unix:///home/ehammel/.local/share/containers/podman/machine/qemu/podman.sock'
+export PODMAN_SOCK="/home/ehammel/.local/share/containers/podman/machine/qemu/podman.sock"
+export DOCKER_HOST="unix://${PODMAN_SOCK}"
 
 export PATH=${PATH}:"/mnt/c/Program Files/Microsoft VS Code/bin"
 
