@@ -10,7 +10,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 # Available completion styles: gremlin, ohmy, prez, zshzoo
 # You can add your own too. To see all available completion styles
 # run 'compstyle -l'
-zstyle ':plugin:ez-compinit' 'compstyle' 'ohmyzsh'
+zstyle ':plugin:ez-compinit' 'compstyle' 'ohmy'
 
 # Completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
