@@ -14,6 +14,8 @@ wget -qO- https://astral.sh/uv/install.sh | sh
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash && \
 chmod +x kustomize && mv kustomize ${HOME}/.local/bin/kustomize && 
 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
     curl https://api.github.com/repos/ahmetb/kubectx/releases/latest \
