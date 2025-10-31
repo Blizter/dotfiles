@@ -16,6 +16,7 @@ export EDITOR="nvim"
 export KUBE_EDITOR="nvim"
 export PATH="${PATH}:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
+
 export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 

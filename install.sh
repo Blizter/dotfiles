@@ -34,7 +34,7 @@ chmod +x kustomize && mv kustomize ${HOME}/.local/bin/kustomize &&
     rm AWSCLIV2.pkg
 
 exec zsh && \
-  cd ${HOME}/Projects/dotfiles/ && \
-  stow --restow --target=${HOME} dotfiles
+  stow --restow --target=${HOME} \
+    "${HOME}/Projects/dotfiles/dotfiles/dotfiles"
 
 echo "Done"
