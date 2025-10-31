@@ -12,10 +12,9 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
-export SECRETS_HOME="${HOME}/.local/secrets"
-
 export EDITOR="nvim"
 export KUBE_EDITOR="nvim"
+export PATH="${PATH}:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
 export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
