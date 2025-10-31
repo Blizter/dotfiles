@@ -2,19 +2,17 @@
 set -euo pipefail
 
 brew update && \
-brew install git wget curl tmux parallel fzf \
-    neovim ctags stow yarn node make kubectl tfenv \
-    hadolint helm kind tree golang zoxide && \
-
+brew install git wget curl tmux parallel fzf podman \
+    opencode stow make kubectl tfenv brew install font-caskaydia-mono-nerd-font && \
+    hadolint helm kind tree golang zoxide fluxcd/tap/flux neovim && \
 brew upgrade
 
 source ${PWD}/dotfiles/.zshenv
 
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-darwin-arm64 && \
-    chmod +x ./kind && mv ./kind  ${HOME}/.local/bin/kind
-
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
-    chmod u+x nvim.appimage && mv nvim.appimage ${HOME}/.local/bin/nvim
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+wget -qO- https://astral.sh/uv/install.sh | sh
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash && \
+chmod +x kustomize && mv kustomize ${HOME}/.local/bin/kustomize && 
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \
@@ -35,8 +33,8 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     sudo installer -pkg AWSCLIV2.pkg -target / && \
     rm AWSCLIV2.pkg
 
-stow --restow --target=${HOME} dotfiles
-
-exec zsh
+exec zsh && \
+  cd ${HOME}/Projects/dotfiles/ && \
+  stow --restow --target=${HOME} dotfiles
 
 echo "Done"
