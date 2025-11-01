@@ -35,7 +35,19 @@ fi
   git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.local/share/fzf/ && \
   ${HOME}/.local/share/fzf/install
 
-stow --restow --target=${HOME} dotfiles/
-source ${HOME}/.zshrc
+if [ ! -f "$(which kubectl)" ]; then
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${ARCH}/kubectl"
+  
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${ARCH}/kubectl.sha256"
+  echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 
+  chmod +x kubectl
+  sudo mv kubectl /usr/local/bin/kubectl
+fi
+
+exec zsh && \
+  stow --restow --target=${HOME} \
+    "${HOME}/Projects/dotfiles/dotfiles/dotfiles"
+
+source ${HOME}/.zshrc
 echo "Done"

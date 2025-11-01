@@ -1,12 +1,10 @@
 alias k=kubectl
-alias kcx=kubectx
-alias kns=kubens
 alias ls='ls --color'
+alias ll='ls -la --color'
 alias mkd="mkdir -pv"
 alias reload="exec zsh"
-alias tf=terraform
+alias restow="exec zsh"
 alias vim="nvim"
 alias watch="watch -n 1"
-alias zshconfig="nvim ${HOME}/.zshrc"
 alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
-alias cursor='/mnt/c/Users/erich/AppData/Local/Programs/cursor/resources/app/bin/cursor'
+alias zshconfig="nvim ${HOME}/.zshrc"
