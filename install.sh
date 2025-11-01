@@ -4,8 +4,10 @@ set -euo pipefail
 brew update && \
 brew install git wget curl tmux parallel fzf podman \
     opencode stow make kubectl tfenv brew install font-caskaydia-mono-nerd-font && \
-    hadolint helm kind tree golang zoxide fluxcd/tap/flux neovim && \
+    hadolint helm kind tree golang zoxide fluxcd/tap/flux neovim maccy && \
 brew upgrade
+
+brew install --cask betterdisplay
 
 source ${PWD}/dotfiles/.zshenv
 
