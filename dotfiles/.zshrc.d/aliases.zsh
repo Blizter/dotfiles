@@ -1,9 +1,9 @@
 alias k=kubectl
 alias ls='ls --color'
-alias ll='ls -la --color'
+alias ll='ls -lha --color'
 alias mkd="mkdir -pv"
 alias reload="exec zsh"
-alias restow="exec zsh"
+alias restow="stow -R -d ${HOME}/Projects/dotfiles -t ${HOME} dotfiles"
 alias vim="nvim"
 alias watch="watch -n 1"
 alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'

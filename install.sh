@@ -45,9 +45,7 @@ if [ ! -f "$(which kubectl)" ]; then
   sudo mv kubectl /usr/local/bin/kubectl
 fi
 
-exec zsh && \
-  stow --restow --target=${HOME} \
-    "${HOME}/Projects/dotfiles/dotfiles/dotfiles"
+stow -R -d ${HOME}/Projects/dotfiles -t ${HOME} dotfiles
 
 source ${HOME}/.zshrc
 echo "Done"
