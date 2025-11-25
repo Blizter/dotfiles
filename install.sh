@@ -51,6 +51,10 @@ fi
     | wget -i - -O ${HOME}/.local/bin/kubens && \
     chmod +x ~/.local/bin/kubens
 
+[[ ! -f "${HOME}/.local/bin/kind" ]] && \
+  wget -c https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64 -O ${HOME}/.local/bin/kind && \
+  chmod +x ${HOME}/.local/bin/kind
+
 #Kubens and kubectx zsh completion
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash && \
   chmod +x kustomize && mv kustomize ~/.local/bin

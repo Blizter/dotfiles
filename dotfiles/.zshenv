@@ -7,7 +7,7 @@
 set -o emacs
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export SECRETS_HOME="${HOME}/.local/secrets/"
+export SECRETS_HOME="${HOME}/.local/secrets"
 
 # Set ZDOTDIR if you want to re-home Zsh.
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
