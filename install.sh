@@ -51,6 +51,10 @@ fi
     | wget -i - -O ${HOME}/.local/bin/kubens && \
     chmod +x ~/.local/bin/kubens
 
+[ ! -f "${HOME}/.local/bin/sops" ] && \
+  SOPS_LATEST_VERSION=$(curl -s "https://api.github.com/repos/getsops/sops/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+') && \
+  curl -LO https://github.com/getsops/sops/releases/download/v${SOPS_LATEST_VERSION}/sops-v${SOPS_LATEST_VERSION}.linux.amd64 &&
+  mv sops-v${SOPS_LATEST_VERSION}.linux.amd64 ${HOME}/.local/bin/sops && chmod +x ${HOME}/.local/bin/sops 
 [[ ! -f "${HOME}/.local/bin/kind" ]] && \
   wget -c https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64 -O ${HOME}/.local/bin/kind && \
   chmod +x ${HOME}/.local/bin/kind
