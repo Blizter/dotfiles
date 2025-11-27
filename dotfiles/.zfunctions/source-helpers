@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+[[ ! -d ${HELPERS_HOME} ]] && mkdir -p ${HELPERS_HOME}
+
+for _helper in ${HELPERS_HOME}/*(N); do
+  # Ignore tilde files.
+  [[ $_helper:t != '~'* ]] && source "$_helper"
+done
+unset _helper

@@ -5,3 +5,4 @@
 fpath=(${HOME}/.local/completions $fpath)
 
 source /usr/share/google-cloud-sdk/completion.zsh.inc
+source ${HOME}/.local/share/asdf/asdf.sh

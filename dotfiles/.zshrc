@@ -26,11 +26,12 @@ fi
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
 # Source anything in .zshrc.d.
-load-secrets
 source-zshrcd
+load-secrets
 manual-autocompletion
+
+eval "$(zoxide init --cmd cd zsh)"
 
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
-
 

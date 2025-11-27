@@ -34,8 +34,8 @@ fi
 [ ! -f "${HOME}/.local/bin/uv" ] && curl -LsSf https://astral.sh/uv/install.sh | sh
 
 #install tfenv
-[ ! -d "${HOME}/local/share/.tfenv" ] && \
-  git clone --depth=1 https://github.com/tfutils/tfenv.git ~/local/share/.tfenv
+[ ! -d "${HOME}/.local/share/tfenv" ] && \
+  git clone --depth=1 https://github.com/tfutils/tfenv.git ${HOME}/.local/share/tfenv
 
 # Download Kubectx
 [ ! -f "${HOME}/.local/bin/kubectx" ] && \

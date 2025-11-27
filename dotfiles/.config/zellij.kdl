@@ -1,3 +1,0 @@
-on_force_close "quit"
-default_shell "zsh"
-themes "nord"
