@@ -7,6 +7,9 @@ set -o emacs
 
 typeset -gU path fpath
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export SECRETS_HOME="${HOME}/.local/secrets"
+export HELPERS_HOME="${HOME}/.local/helpers"
+
 # set main editor
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}

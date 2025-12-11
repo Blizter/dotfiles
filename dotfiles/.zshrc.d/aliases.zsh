@@ -12,7 +12,7 @@ alias ll='ls -lha --color'
 alias mkd="mkdir -pv"
 
 alias reload="exec zsh"
-alias restow="stow -R -d ${HOME}/Projects/dotfiles -t ${HOME} dotfiles"
+alias restow="stow -R -d ${HOME}/Projects/personal/dotfiles -t ${HOME} dotfiles"
 
 alias tf=terraform
 alias vim="nvim"

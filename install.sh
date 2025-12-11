@@ -1,13 +1,13 @@
 #! /bin/zsh
 set -euo pipefail
 
-brew update && \
-brew install git wget curl tmux parallel fzf podman \
-    opencode stow make kubectl tfenv brew install font-caskaydia-mono-nerd-font && \
-    hadolint helm kind tree golang zoxide fluxcd/tap/flux neovim maccy && \
-brew upgrade
+# brew update && \
+# brew install git wget curl tmux parallel fzf podman \
+#     opencode stow make kubectl tfenv font-caskaydia-mono-nerd-font \
+#     hadolint helm kind tree golang zoxide fluxcd/tap/flux neovim maccy && \
+# brew upgrade
 
-brew install --cask betterdisplay
+# brew install --cask betterdisplay
 
 source ${PWD}/dotfiles/.zshenv
 
@@ -39,6 +39,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 exec zsh && \
   stow --restow --target=${HOME} \
-    "${HOME}/Projects/dotfiles/dotfiles/dotfiles"
+    "${HOME}/Projects/personal/dotfiles/dotfiles/dotfiles"
 
 echo "Done"
