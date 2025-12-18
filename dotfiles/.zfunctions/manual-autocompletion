@@ -2,6 +2,3 @@
 
 [ ! -d "${HOME}/.local/completions" ] && mkdir -p ${HOME}/.local/completions
 fpath=(${HOME}/.local/completions $fpath)
-
-source /opt/homebrew/Caskroom/gcloud-cli/latest/google-cloud-sdk/completion.zsh.inc
-source /opt/homebrew/Caskroom/gcloud-cli/latest/google-cloud-sdk/path.zsh.inc

@@ -20,7 +20,7 @@ export KUBE_EDITOR="nvim"
 export PATH="${PATH}:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
 
-export PATH="/usr/bin:/usr/local/bin:/bin:${PATH}"
+export PATH="/usr/bin:/usr/local/bin:/bin:/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
 # Set ZDOTDIR if you want to re-home Zsh.
