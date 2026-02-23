@@ -17,3 +17,7 @@ source /opt/homebrew/Caskroom/gcloud-cli/latest/google-cloud-sdk/path.zsh.inc
 source <(kind completion zsh)
 source <(kustomize completion zsh)
 source <(kubectl completion zsh)
+
+
+mkdir -p "${ZDOTDIR:-$HOME/.asdf}/completions"
+asdf completion zsh > "${ZDOTDIR:-$HOME/.asdf}/completions/_asdf"
