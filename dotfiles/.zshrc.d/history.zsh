@@ -2,6 +2,7 @@ HISTSIZE=120000
 HISTFILE=~/.zsh_history
 SAVEHIST=100000
 HISTDUP=erase
+export HISTTIMEFORMAT="%F %T "
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
