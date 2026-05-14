@@ -8,6 +8,8 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+# To customize prompt, run `p10k configure` or edit .p10k.zsh.
+[[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -35,5 +37,5 @@ manual-autocompletion
 source-helpers
 
 fpath=(${ZDOTDIR:-$HOME/.asdf}/completions $fpath)
-# To customize prompt, run `p10k configure` or edit .p10k.zsh.
-[[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
+
+. "$HOME/.local/share/../bin/env"

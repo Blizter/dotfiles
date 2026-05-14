@@ -17,9 +17,9 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
 export EDITOR="nvim"
 export KUBE_EDITOR="nvim"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:${PATH}"
 export PATH="${PATH}:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
+export PATH="/opt/homebrew/share/google-cloud-sdk/bin:${PATH}"
 export PATH="/usr/bin:/usr/local/bin:/bin:/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
@@ -28,9 +28,10 @@ export DOCKER_HOST="unix:///var/folders/mz/t19fw02s2pxbhjzbbzcjfj0r0000gn/T/podm
 export FZF_BASE="${XDG_DATA_HOME:-${HOME}/.local/share}/fzf/bin"
 
 [ -d "${HOME}/.krew/" ] && export PATH="${KREW_ROOT:-$HOME/.krew}/bin:${PATH}"
-[ -d "${HOME}/.local/go/bin" ] && GOPATH="${HOME}/go/" && \
+[ -f "${HOME}/.kube/config" ] && export PATH="$HOME/.kube/config:${PATH}"
+[ -f "/opt/homebrew/bin/go" ] && GOPATH="${HOME}/go" && \
                                 GOBIN="${GOPATH}/bin" && \
                                 PATH="${GOPATH}:${GOBIN}:${PATH}"
 
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
