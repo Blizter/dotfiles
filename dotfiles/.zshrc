@@ -30,11 +30,10 @@ fi
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
 
-# load secrets
-load-secrets
 source-zshrcd
 manual-autocompletion
 source-helpers
+# read-secret
 
 fpath=(${ZDOTDIR:-$HOME/.asdf}/completions $fpath)
 
