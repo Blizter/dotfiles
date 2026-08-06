@@ -36,3 +36,4 @@ ohmyzsh/ohmyzsh path:plugins/python
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/terraform
 ohmyzsh/ohmyzsh path:plugins/kind
+ohmyzsh/ohmyzsh path:plugins/direnv conditional:has-direnv

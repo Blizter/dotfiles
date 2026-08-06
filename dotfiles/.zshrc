@@ -8,6 +8,8 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+# To customize prompt, run `p10k configure` or edit .p10k.zsh.
+[[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -28,12 +30,12 @@ fi
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
 antidote load
 
-# load secrets
-load-secrets
 source-zshrcd
 manual-autocompletion
 source-helpers
+load-secrets
 
-fpath=(${ZDOTDIR:-$HOME/.asdf}/completions $fpath)
-# To customize prompt, run `p10k configure` or edit .p10k.zsh.
-[[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+
+# uv's env shim
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
