@@ -24,8 +24,6 @@ export PATH="/usr/bin:/usr/local/bin:/bin:/opt/homebrew/opt/coreutils/libexec/gn
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
 # Set ZDOTDIR if you want to re-home Zsh.
-# export DOCKER_HOST="unix://${XDG_DATA_HOME:-${HOME}/.local/share}/containers/podman/machine/qemu/podman.sock"
-export DOCKER_HOST='unix:///var/folders/mx/_ydtjt5n0_s9gzjzyvgq1qf40000gn/T/podman/podman-machine-default-api.sock'
 export FZF_BASE="${XDG_DATA_HOME:-${HOME}/.local/share}/fzf/bin"
 
 [ -d "${HOME}/.krew/" ] && export PATH="${KREW_ROOT:-$HOME/.krew}/bin:${PATH}"

@@ -9,6 +9,7 @@ eval "$(uv --generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(flux completion zsh)"
+eval "$(plumber completion zsh)"
 
 source /opt/homebrew/Caskroom/gcloud-cli/latest/google-cloud-sdk/completion.zsh.inc
 source /opt/homebrew/Caskroom/gcloud-cli/latest/google-cloud-sdk/path.zsh.inc
