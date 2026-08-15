@@ -35,4 +35,4 @@ ohmyzsh/ohmyzsh path:plugins/kubectx
 ohmyzsh/ohmyzsh path:plugins/python
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/kind
-ohmyzsh/ohmyzsh path:plugins/direnv
+ohmyzsh/ohmyzsh path:plugins/direnv conditional:has-direnv

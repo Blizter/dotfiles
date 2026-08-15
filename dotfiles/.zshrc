@@ -36,6 +36,7 @@ source-zshrcd
 manual-autocompletion
 source-helpers
 
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 
-
-. "$HOME/.local/bin/env"
+# uv's env shim
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"

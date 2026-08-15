@@ -24,14 +24,12 @@ export PATH="/usr/bin:/usr/local/bin:/bin:/opt/homebrew/opt/coreutils/libexec/gn
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
 # Set ZDOTDIR if you want to re-home Zsh.
-export DOCKER_HOST="unix:///var/folders/mz/t19fw02s2pxbhjzbbzcjfj0r0000gn/T/podman/podman-machine-default-api.sock"
 export FZF_BASE="${XDG_DATA_HOME:-${HOME}/.local/share}/fzf/bin"
 
 [ -d "${HOME}/.krew/" ] && export PATH="${KREW_ROOT:-$HOME/.krew}/bin:${PATH}"
-[ -f "${HOME}/.kube/config" ] && export PATH="$HOME/.kube/config:${PATH}"
 [ -f "/opt/homebrew/bin/go" ] && GOPATH="${HOME}/go" && \
                                 GOBIN="${GOPATH}/bin" && \
-                                PATH="${GOPATH}:${GOBIN}:${PATH}"
+                                PATH="${GOBIN}:${PATH}"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

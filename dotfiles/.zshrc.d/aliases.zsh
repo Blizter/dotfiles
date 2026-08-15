@@ -6,7 +6,8 @@ alias brew-unlink="function(){ls -1 /opt/homebrew/Cellar /opt/homebrew/Caskroom 
 alias k=kubectl
 alias kcx=kubectx
 alias kns=kubens
-alias tf=tofu
+# tf -> tofu if present, else terraform (whichever this env provides).
+(( $+commands[tofu] )) && alias tf=tofu || alias tf=terraform
 
 alias ls='ls --color'
 alias ll='ls -lha --color'
