@@ -14,7 +14,7 @@ source ${PWD}/dotfiles/.zshenv
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 wget -qO- https://astral.sh/uv/install.sh | sh
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash && \
-chmod +x kustomize && mv kustomize ${HOME}/.local/bin/kustomize && 
+chmod +x kustomize && mv kustomize ${HOME}/.local/bin/kustomize &&
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
