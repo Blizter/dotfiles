@@ -6,6 +6,7 @@ alias brew-unlink="function(){ls -1 /opt/homebrew/Cellar /opt/homebrew/Caskroom 
 alias k=kubectl
 alias kcx=kubectx
 alias kns=kubens
+alias tf=tofu
 
 alias ls='ls --color'
 alias ll='ls -lha --color'
@@ -14,7 +15,6 @@ alias mkd="mkdir -pv"
 alias reload="exec zsh"
 alias restow="stow -R -d ${HOME}/Projects/personal/dotfiles -t ${HOME} dotfiles"
 
-alias tf=terraform
 alias vim="nvim"
 alias watch="watch -n 1 "
 alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
